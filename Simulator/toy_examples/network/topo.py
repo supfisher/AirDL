@@ -1,6 +1,6 @@
 import networkx as nx
 import torch.distributed as dist
-
+##TODO: Should I define a class called Node with node attributes?
 
 class Topo(nx.Graph):
     """
@@ -62,28 +62,41 @@ class Topo(nx.Graph):
         return [k for k, v in dict(self.nodes(data='type', default='client')).items() if v is 'client']
 
     @property
-    def personal_clients(self):
-        """
-        :return: Clients ids on this computing node
-        """
-        return list(set(self.clients).intersection(set(self.rank[dist.get_rank()])))
+    def rank(self):
+        return dist.get_rank()
 
     @property
-    def rank(self):
-        return self.__dict__['rank']
+    def partitioned(self):
+        """
+        :return: A list with the indices being the rank,
+                    and the values being the nodes on that rank
+        """
+        return self.__dict__['partitioned']
 
     def partition(self, world_size=None):
         """
             Partition the topo clients and servers into a distributed version
             default group is the group.world
         """
-
         if world_size is None:
             world_size = dist.get_world_size()
-        rank = [[] for _ in range(world_size)]
+        partitioned = [[] for _ in range(world_size)]
         for i, node in enumerate(self.nodes):
             if 'rank' not in self.nodes[node].keys():
                 self.nodes[node]['rank'] = i % world_size
-                rank[i % world_size] += [node]
-                self.__dict__['rank'] = rank
+                partitioned[i % world_size] += [node]
+            else:
+                partitioned[self.nodes[node]['rank']] += [node]
+        self.__dict__['partitioned'] = partitioned
 
+    @property
+    def nodes_on_device(self):
+        return [node for node in self.nodes if self.nodes[node]['rank'] == dist.get_rank()]
+
+    @property
+    def client_on_device(self):
+        return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'client']
+
+    @property
+    def server_on_device(self):
+        return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']

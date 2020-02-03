@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
-from wireless import Gaussian
+from wireless import *
 from torch.optim.lr_scheduler import StepLR
 
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
@@ -79,11 +79,12 @@ def main():
         dict = yaml.load(f)
     topo.load_from_dict(dict)
     print(topo)
+    print(topo.nodes)
+    for node in topo.nodes:
+        print(topo.nodes[node])
     print('rank: ', topo.rank)
     print("server: ", topo.servers)
     print("client: ", topo.clients)
-
-
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -120,14 +121,10 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
     model = Net().to(device)
-    # optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
-
-    # model_p = ModelParallel(model, topo, Qos=Gaussian())
-    model_p = ModelParallel(model, topo=topo, Qos=Gaussian())
-
+    qos = Gaussian()
+    model_p = ModelParallel(model, topo=topo, QoS=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss)
-    # optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
     # scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
     for epoch in range(1, args.epochs + 1):
@@ -141,6 +138,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
     # class Buffer:
     #     def __init__(self, _data):
@@ -163,48 +161,26 @@ if __name__ == "__main__":
     #             _d += d+10
     #
     #
-    # import threading
-    # class Send(threading.Thread):
-    #     def __init__(self, data, dst):
-    #         self.data = data
-    #         self.dst = dst
-    #         super(Send, self).__init__()
-    #         # self.run()
-    #
-    #     def run(self):
-    #         w = dist.isend(self.data, dst=self.dst)
-    #         w.wait()
-    #
-    # class Receive(threading.Thread):
-    #     def __init__(self, data, dst):
-    #         self.data = data
-    #         self.src = dst
-    #         super(Receive, self).__init__()
-    #         # self.run()
-    #
-    #     def run(self):
-    #         w = dist.irecv(self.data, src=self.src)
-    #         w.wait()
-    #
     # import torch.distributed as dist
     #
     # dist.init_process_group(backend='mpi')
-    # a = torch.ones([30,30])*10
-    # b = torch.ones([30,30])*-100
-    # c, d = torch.rand([30,30]), torch.rand([30,30])
+    # a = torch.ones([300,300,300])*10
+    # b = torch.ones([300,300,300])*-100
+    # c, d = torch.rand([300,300,300]), torch.rand([300,300,300])
     # buff = Buffer(c)
-    # sender = [Send(a, 0), Send(b, 0)]
+    # sender = [dist.isend(a, dst=0), dist.isend(b, dst=0)]
     #
-    # recevicer = [Receive(buff.set_data(c), 0), Receive(buff.set_data(d), 0)]
+    # recevicer = [dist.irecv(c, src=0), dist.irecv(d, 0)]
+    # worker = sender+recevicer
+    # flag = False
+    # while flag is False:
+    #     flag = True
+    #     for w in worker:
+    #         flag &= w.is_completed()
     #
-    # for s in sender:
-    #     s.run()
-    # for r in recevicer:
-    #     r.run()
-    # # print(c)
-    # # print(d)
-    # print(buff.data)
-    #
+    # print(c[0][0][0])
+    # print(d[0][0][0])
+
 
 
     # import copy
