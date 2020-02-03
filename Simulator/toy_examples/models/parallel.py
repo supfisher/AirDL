@@ -67,8 +67,6 @@ class ModelParallel(ObjectParallel):
     def __call__(self, data, *input, **kwargs):
         data = data.split([int(len(data) / self.len_client) for _ in range(self.len_client)], dim=0)
 
-        self.buff.register()
-
-        self.distributed.gather_scatter(async_flag=False)
+        self.distributed.gather_scatter(async_flag=True)
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]

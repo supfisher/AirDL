@@ -64,7 +64,7 @@ class Buffer(DataBase):
         super(Buffer, self).__init__(data)
 
     def register(self):
-        self.count = 1
+        self.count = 0
 
     def update_avg(self, avg_list, new_list):
         return [torch.div(avg * self.count + new, self.count + 1) for avg, new in zip(avg_list, new_list)]
@@ -131,6 +131,38 @@ class Distributed:
                     if sender_type == 'client':
                         self.buff.gather_fn(node_self)
 
+    def gather(self):
+        self.communicate(self.buff.data, sender_type='client')
+
+    def scatter(self):
+        self.communicate(self.buff.data, sender_type='server')
+
+    def clients_work(self, data, clients):
+        client_worker = []
+        for client in clients:
+            for adj in self.nodes[client]['adj'].keys():
+                socket = (self.nodes[client]['rank'], client,
+                          self.nodes[adj]['rank'], adj)
+                client_worker += self.isend(data, socket=socket)
+                client_worker += self.irecv(data, socket=socket)
+        return client_worker
+
+    def servers_work(self, data, servers, async_flag, gather_fn):
+        for server in servers:
+            for adj in self.nodes[server]['adj'].keys():
+                socket = (self.nodes[server]['rank'], server,
+                          self.nodes[adj]['rank'], adj)
+                self.recv(data, socket=socket)
+                gather_fn(server)
+                if async_flag:
+                    self.send(data, socket=socket)
+        if not async_flag:
+            for server in servers:
+                for adj in self.nodes[server]['adj'].keys():
+                    socket = (self.nodes[server]['rank'], server,
+                              self.nodes[adj]['rank'], adj)
+                    self.send(data, socket=socket)
+
     def sync_gather_scatter(self):
         client_worker = []
         for client in self.client_on_device:
@@ -158,13 +190,6 @@ class Distributed:
         for w in client_worker:
             w.wait()
 
-
-    def gather(self):
-        self.communicate(self.buff.data, sender_type='client')
-
-    def scatter(self):
-        self.communicate(self.buff.data, sender_type='server')
-
     def async_gather_scatter(self):
         client_worker = []
         for client in self.client_on_device:
@@ -189,11 +214,10 @@ class Distributed:
 
     def gather_scatter(self, async_flag):
         self.buff.register()
-        if async_flag:
-            self.async_gather_scatter()
-        else:
-            self.gather()
-            self.scatter()
+        client_worker = self.clients_work(self.buff.data, self.client_on_device)
+        self.servers_work(self.buff.data, self.server_on_device, async_flag, self.buff.gather_fn)
+        for w in client_worker:
+            w.wait()
         self.group.update()
 
 class Group:
@@ -257,11 +281,11 @@ if __name__ == "__main__":
     distributed = Distributed(buff, group)
 
     buff.register()
-    distributed.async_gather_scatter()
+    distributed.gather_scatter(True)
     print("1: ", buff.data)
 
     buff.register()
-    distributed.sync_gather_scatter()
+    distributed.gather_scatter(False)
     print("2: ", buff.data)
 
 
