@@ -36,19 +36,17 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
-        data, target = data.split([64, 64], dim=0), target.split([64, 64], dim=0)
         optimizer.zero_grad()
         output = model(data)
         if output is not None:
             loss = criterion(output, target)
-            for l in loss:
-                l.backward()
+            loss.backward()
             optimizer.step()
             if batch_idx % args.log_interval == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]'.format(
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                     100. * batch_idx / len(train_loader)))
-                print("loss: ", list([l.item() for l in loss]))
+                print("loss: ", list(loss.item()))
 
 
 
@@ -60,7 +58,7 @@ def test(args, model, criterion, device, test_loader):
         for data, target in test_loader:
             data, target = data.to(device), target.to(device)
             output = model(data)
-            test_loss += criterion(output, target, reduction='sum').item()  # sum up batch loss
+            test_loss = criterion(output, target, reduction='sum').item()  # sum up batch loss
             pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
             correct += pred.eq(target.view_as(pred)).sum().item()
 
@@ -124,12 +122,12 @@ def main():
     qos = Gaussian()
     model_p = ModelParallel(model, topo=topo, QoS=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
-    criterion = CriterionParallel(F.nll_loss)
+    criterion = CriterionParallel(F.nll_loss, topo=topo)
 
     # scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
     for epoch in range(1, args.epochs + 1):
         train(args, model_p, criterion, device, train_loader, optimizer, epoch)
-        test(args, model_p, criterion, device, test_loader)
+        # test(args, model_p, criterion, device, test_loader)
         # scheduler.step()
 
     if args.save_model:
@@ -138,93 +136,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-    # class Buffer:
-    #     def __init__(self, _data):
-    #         self._data = _data
-    #
-    #     @property
-    #     def data(self):
-    #         return self._data+1
-    #
-    #     @data.setter
-    #     def data(self, value):
-    #         self._data = value
-    #
-    #     def set_data(self, value):
-    #         self.update(value)
-    #         return self._data
-    #
-    #     def update(self, data):
-    #         for _d, d in zip(self._data, data):
-    #             _d += d+10
-    #
-    #
-    # import torch.distributed as dist
-    #
-    # dist.init_process_group(backend='mpi')
-    # a = torch.ones([300,300,300])*10
-    # b = torch.ones([300,300,300])*-100
-    # c, d = torch.rand([300,300,300]), torch.rand([300,300,300])
-    # buff = Buffer(c)
-    # sender = [dist.isend(a, dst=0), dist.isend(b, dst=0)]
-    #
-    # recevicer = [dist.irecv(c, src=0), dist.irecv(d, 0)]
-    # worker = sender+recevicer
-    # flag = False
-    # while flag is False:
-    #     flag = True
-    #     for w in worker:
-    #         flag &= w.is_completed()
-    #
-    # print(c[0][0][0])
-    # print(d[0][0][0])
-
-
-
-    # import copy
-    # class A:
-    #     def __init__(self, a=None):
-    #         self.a = a
-    #
-    #     def test(self, a=10):
-    #         self.a = a
-    #         print("A: ", self.a)
-    #
-    # class B:
-    #     class ListCall:
-    #         def __init__(self, list_fn):
-    #             self.list_fn = list_fn
-    #
-    #         def __call__(self, *args, **kwargs):
-    #             for fn in self.list_fn:
-    #                 fn(*args, **kwargs)
-    #
-    #     def __init__(self, A=None):
-    #         self.A = [copy.deepcopy(A()) for _ in range(3)]
-    #         for key in dir(A):
-    #             if '__' not in key:
-    #                 value = self.ListCall([getattr(a, key) for a in self.A])
-    #                 setattr(self, key, value)
-    #
-    #
-    #     def run(self, list_fn):
-    #         for fn in list_fn:
-    #             fn()
-    #         return self.empty
-    #
-    #     def empty(self, *args, **kwargs):
-    #         pass
-    #
-    # test = A().test
-    # print(A.__dict__)
-    # print(test.__code__)
-    # print(dir(test.__code__))
-    # print(test.__code__.co_argcount)
-    #
-    #
-    # b = B(A)
-    # print("after initial")
-    # b.test(11)
-    # getattr(b, 'test')(12)

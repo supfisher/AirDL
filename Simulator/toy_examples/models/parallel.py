@@ -30,15 +30,17 @@ class OptimizerParallel(ObjectParallel):
 
 
 class CriterionParallel(ObjectParallel):
-    def __init__(self, criterion):
-        self.criterion = [copy.deepcopy(criterion) for _ in range(2)]
+    def __init__(self, criterion, topo):
+        self.len_client = len(topo.client_on_device)
+        self.criterion = [copy.deepcopy(criterion) for _ in range(self.len_client)]
         super(CriterionParallel, self).__init__(self.criterion)
 
-    def __call__(self, data, target, *args, **kwargs):
+    def __call__(self, output, target, *args, **kwargs):
+        target = target.split([int(len(target)/self.len_client) for _ in range(self.len_client)], dim=0)
         loss_list = []
-        for d, t, criterion in zip(data, target, self.criterion):
+        for d, t, criterion in zip(output, target, self.criterion):
             loss_list.append(criterion(d, t, *args, **kwargs))
-        return loss_list
+        return ObjectParallel(loss_list)
 
 
 from .distributed import Distributed, Buffer, Group
@@ -50,7 +52,7 @@ class ModelParallel(ObjectParallel):
     """
     def __init__(self, module, topo, QoS=None, debug=True):
         self.debug = debug
-
+        self.len_client = len(topo.client_on_device)
         self.module = {node: copy.deepcopy(module) for _, node in enumerate(topo.partitioned[dist.get_rank()])}
 
         data_dict = {node: list(param.data for param in m.parameters())
@@ -63,6 +65,8 @@ class ModelParallel(ObjectParallel):
         super(ModelParallel, self).__init__(list(self.module.values()))
 
     def __call__(self, data, *input, **kwargs):
+        data = data.split([int(len(data) / self.len_client) for _ in range(self.len_client)], dim=0)
+
         self.buff.register()
 
         self.distributed.gather_scatter(async_flag=False)
