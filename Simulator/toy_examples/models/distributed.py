@@ -1,4 +1,8 @@
 import copy
+<<<<<<< HEAD
+=======
+import torch
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 import torch.distributed as dist
 
 
@@ -25,8 +29,12 @@ class PackData:
 
 
 class DataBase:
+<<<<<<< HEAD
     def __init__(self, data=None, qos=None):
         self.topo = qos.topo_temp
+=======
+    def __init__(self, data=None):
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         self._data = data
         self._mem = copy.deepcopy(self._data) ## maintains a history of data
 
@@ -49,6 +57,7 @@ class DataBase:
     def mem(self, _mem):
         self._mem = _mem
 
+<<<<<<< HEAD
     @property
     def nodes(self):
         return self.topo.nodes
@@ -65,6 +74,8 @@ class DataBase:
     def servers_on_device(self):
         return [node for node in self.nodes_on_device if self.topo.nodes[node]['type'] == 'server']
 
+=======
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
     def register(self, *args, **kwargs):
         raise NotImplementedError
 
@@ -76,6 +87,7 @@ class DataBase:
 
 
 class Buffer(DataBase):
+<<<<<<< HEAD
     def __init__(self, data, qos):
         super(Buffer, self).__init__(data, qos)
         self.qos = qos
@@ -84,6 +96,13 @@ class Buffer(DataBase):
     def register(self):
         self.qos.update()
         self.count = 1
+=======
+    def __init__(self, data):
+        super(Buffer, self).__init__(data)
+
+    def register(self):
+        self.count = 0
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
     def update_avg(self, avg_list, new_list):
         return [torch.div(avg * self.count + new, self.count + 1) for avg, new in zip(avg_list, new_list)]
@@ -98,6 +117,7 @@ class Buffer(DataBase):
 
 
 class Distributed:
+<<<<<<< HEAD
     def __init__(self, buff):
         self.buff = buff
         self.nodes = self.buff.nodes
@@ -105,6 +125,17 @@ class Distributed:
         self.clients_on_device = self.buff.clients_on_device
         self.servers_on_device = self.buff.servers_on_device
         self.rank = self.buff.topo.rank
+=======
+    def __init__(self, buff, group):
+        self.buff = buff
+        self.group = group
+
+        self.nodes = self.group.nodes
+        self.nodes_on_device = self.group.nodes_on_device
+        self.client_on_device = self.group.client_on_device
+        self.server_on_device = self.group.server_on_device
+        self.rank = self.group.topo.rank
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
     def isend(self, data_dict, socket, **kwargs):
         (self_rank, self_node, dst_rank, dst_node) = socket
@@ -182,7 +213,11 @@ class Distributed:
 
     def sync_gather_scatter(self):
         client_worker = []
+<<<<<<< HEAD
         for client in self.clients_on_device:
+=======
+        for client in self.client_on_device:
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
             for adj in self.nodes[client]['adj'].keys():
                 socket = (self.nodes[client]['rank'], client,
                           self.nodes[adj]['rank'], adj)
@@ -190,7 +225,11 @@ class Distributed:
 
                 client_worker += self.irecv(self.buff.data, socket=socket)
 
+<<<<<<< HEAD
         for server in self.servers_on_device:
+=======
+        for server in self.server_on_device:
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
             for adj in self.nodes[server]['adj'].keys():
                 socket = (self.nodes[server]['rank'], server,
                           self.nodes[adj]['rank'], adj)
@@ -198,7 +237,11 @@ class Distributed:
                 ##TODO: Process received data
                 self.buff.gather_fn(server)
 
+<<<<<<< HEAD
         for server in self.servers_on_device:
+=======
+        for server in self.server_on_device:
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
             for adj in self.nodes[server]['adj'].keys():
                 socket = (self.nodes[server]['rank'], server,
                           self.nodes[adj]['rank'], adj)
@@ -209,7 +252,11 @@ class Distributed:
 
     def async_gather_scatter(self):
         client_worker = []
+<<<<<<< HEAD
         for client in self.clients_on_device:
+=======
+        for client in self.client_on_device:
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
             for adj in self.nodes[client]['adj'].keys():
                 socket = (self.nodes[client]['rank'], client,
                           self.nodes[adj]['rank'], adj)
@@ -217,7 +264,11 @@ class Distributed:
 
                 client_worker += self.irecv(self.buff.data, socket=socket)
 
+<<<<<<< HEAD
         for server in self.servers_on_device:
+=======
+        for server in self.server_on_device:
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
             for adj in self.nodes[server]['adj'].keys():
                 socket = (self.nodes[server]['rank'], server,
                           self.nodes[adj]['rank'], adj)
@@ -230,6 +281,7 @@ class Distributed:
             w.wait()
 
     def gather_scatter(self, async_flag):
+<<<<<<< HEAD
         client_worker = self.clients_work(self.buff.data, self.clients_on_device)
         self.servers_work(self.buff.data, self.servers_on_device, async_flag, self.buff.gather_fn)
         for w in client_worker:
@@ -237,6 +289,49 @@ class Distributed:
         ## must have it to update temorary values and update qos
         self.buff.register()
 
+=======
+        self.buff.register()
+        client_worker = self.clients_work(self.buff.data, self.client_on_device)
+        self.servers_work(self.buff.data, self.server_on_device, async_flag, self.buff.gather_fn)
+        for w in client_worker:
+            w.wait()
+        self.group.update()
+
+class Group:
+    def __init__(self, topo, qos):
+        self.topo = topo
+        self.qos = qos
+        self.topo_ = None
+        self.update()
+
+    def update(self):
+        import random
+        removed_nodes = []
+        nodes = list(self.topo.nodes)
+        ## TODO: generate random removed nodes according qos
+        for node in nodes:
+            if random.uniform(0, 1) > 0.5:
+                removed_nodes.append(node)
+
+        self.topo_ = copy.deepcopy(self.topo)
+        # self.topo_.remove_nodes_from(removed_nodes)
+
+    @property
+    def nodes(self):
+        return self.topo_.nodes
+
+    @property
+    def nodes_on_device(self):
+        return list(set(self.topo.partitioned[dist.get_rank()]).intersection(set(self.nodes)))
+
+    @property
+    def client_on_device(self):
+        return [node for node in self.nodes_on_device if self.topo.nodes[node]['type'] == 'client']
+
+    @property
+    def server_on_device(self):
+        return [node for node in self.nodes_on_device if self.topo.nodes[node]['type'] == 'server']
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
 
 if __name__ == "__main__":
@@ -258,12 +353,19 @@ if __name__ == "__main__":
     #     data = {'c2': torch.ones(3)}
     # elif dist.get_rank()==2:
     #     data = {'c3': torch.ones(3)*4}
+<<<<<<< HEAD
     from .wireless.qos import QoS
 
     qos = QoS(topo, qos=None)
     buff = Buffer(data, qos)
 
     distributed = Distributed(buff)
+=======
+
+    buff = Buffer(data)
+    group = Group(topo, qos=None)
+    distributed = Distributed(buff, group)
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
     buff.register()
     distributed.gather_scatter(True)

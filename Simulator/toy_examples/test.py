@@ -60,6 +60,7 @@ class DataBase:
 
 
 class Buffer(DataBase):
+<<<<<<< HEAD
     def __init__(self, data, group):
         super(Buffer, self).__init__(data)
         self.group = group
@@ -67,6 +68,12 @@ class Buffer(DataBase):
 
     def register(self):
         self.group.update()
+=======
+    def __init__(self, data):
+        super(Buffer, self).__init__(data)
+
+    def register(self):
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         self.count = 1
 
     def update_avg(self, avg_list, new_list):
@@ -82,9 +89,15 @@ class Buffer(DataBase):
 
 
 class Distributed:
+<<<<<<< HEAD
     def __init__(self, buff):
         self.buff = buff
         self.group = buff.group
+=======
+    def __init__(self, buff, group):
+        self.buff = buff
+        self.group = group
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
         self.nodes = self.group.nodes
         self.nodes_on_device = self.group.nodes_on_device
@@ -216,13 +229,21 @@ class Distributed:
             w.wait()
 
     def gather_scatter(self, async_flag):
+<<<<<<< HEAD
+=======
+        self.buff.register()
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         client_worker = self.clients_work(self.buff.data, self.client_on_device)
         self.servers_work(self.buff.data, self.server_on_device, async_flag, self.buff.gather_fn)
         for w in client_worker:
             w.wait()
+<<<<<<< HEAD
         self.buff.register()
 
 
+=======
+        self.group.update()
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
 class Group:
     def __init__(self, topo, qos):
@@ -280,6 +301,7 @@ if __name__ == "__main__":
     # elif dist.get_rank()==2:
     #     data = {'c3': torch.ones(3)*4}
 
+<<<<<<< HEAD
     group = Group(topo, qos=None)
     buff = Buffer(data, group)
 
@@ -290,6 +312,15 @@ if __name__ == "__main__":
     print("1: ", buff.data)
 
     buff.register()
+=======
+    buff = Buffer(data)
+    group = Group(topo, qos=None)
+    distributed = Distributed(buff, group)
+
+    distributed.gather_scatter(True)
+    print("1: ", buff.data)
+
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
     distributed.gather_scatter(False)
     print("2: ", buff.data)
 

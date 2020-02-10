@@ -43,26 +43,43 @@ class CriterionParallel(ObjectParallel):
         return ObjectParallel(loss_list)
 
 
+<<<<<<< HEAD
 from .distributed import Distributed, Buffer
 from .wireless.qos import QoS
+=======
+from .distributed import Distributed, Buffer, Group
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
 
 class ModelParallel(ObjectParallel):
     """
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
+<<<<<<< HEAD
     def __init__(self, module, topo, debug=True):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
+=======
+    def __init__(self, module, topo, QoS=None, debug=True):
+        self.debug = debug
+        self.len_client = len(topo.client_on_device)
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         self.module = {node: copy.deepcopy(module) for _, node in enumerate(topo.partitioned[dist.get_rank()])}
 
         data_dict = {node: list(param.data for param in m.parameters())
                      for node, m in self.module.items()}
 
+<<<<<<< HEAD
         self.qos = QoS(topo=topo)
         self.buff = Buffer(data_dict, self.qos)
 
         self.distributed = Distributed(self.buff)
+=======
+        self.buff = Buffer(data_dict)
+
+        self.group = Group(topo=topo, qos=QoS)
+        self.distributed = Distributed(self.buff, self.group)
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         super(ModelParallel, self).__init__(list(self.module.values()))
 
     def __call__(self, data, *input, **kwargs):

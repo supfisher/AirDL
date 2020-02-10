@@ -91,6 +91,7 @@ class Topo(nx.Graph):
 
     @property
     def nodes_on_device(self):
+<<<<<<< HEAD
         return self.partitioned[self.rank]
 
     @property
@@ -99,4 +100,14 @@ class Topo(nx.Graph):
 
     @property
     def servers_on_device(self):
+=======
+        return [node for node in self.nodes if self.nodes[node]['rank'] == dist.get_rank()]
+
+    @property
+    def client_on_device(self):
+        return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'client']
+
+    @property
+    def server_on_device(self):
+>>>>>>> f1f8859b9b920cb550fcfc5d2f71146177bca459
         return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']
