@@ -31,7 +31,7 @@ class OptimizerParallel(ObjectParallel):
 
 class CriterionParallel(ObjectParallel):
     def __init__(self, criterion, topo):
-        self.len_client = len(topo.client_on_device)
+        self.len_client = len(topo.clients_on_device)
         self.criterion = [copy.deepcopy(criterion) for _ in range(self.len_client)]
         super(CriterionParallel, self).__init__(self.criterion)
 
@@ -44,14 +44,13 @@ class CriterionParallel(ObjectParallel):
 
 
 from .distributed import Distributed, Buffer
-from .wireless.qos import QoSDemo
 
 class ModelParallel(ObjectParallel):
     """
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
-    def __init__(self, module, topo, debug=True):
+    def __init__(self, module, topo, QoS=None, debug=True):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
@@ -60,7 +59,7 @@ class ModelParallel(ObjectParallel):
         data_dict = {node: list(param.data for param in m.parameters())
                      for node, m in self.module.items()}
 
-        self.qos = QoSDemo(topo=topo)
+        self.qos = QoS(topo=topo)
         self.buff = Buffer(data_dict, self.qos)
 
         self.distributed = Distributed(self.buff)

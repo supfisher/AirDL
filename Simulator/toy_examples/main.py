@@ -7,7 +7,6 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
-from wireless import *
 from torch.optim.lr_scheduler import StepLR
 
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
@@ -119,8 +118,7 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
     model = Net().to(device)
-    qos = Gaussian()
-    model_p = ModelParallel(model, topo=topo, QoS=qos)
+    model_p = ModelParallel(model, topo=topo, QoS=QoSDemo)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)
 

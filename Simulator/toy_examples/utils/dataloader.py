@@ -9,7 +9,7 @@ class DataParallel(DataLoader):
         self.dataset = dataset
         self.topo = topo
         if 'batch_size' in kwargs.keys():
-            kwargs['batch_size'] *= len(self.topo.client_on_device)
+            kwargs['batch_size'] *= len(self.topo.clients_on_device)
 
         super(DataParallel, self).__init__(dataset, *args, **kwargs)
 

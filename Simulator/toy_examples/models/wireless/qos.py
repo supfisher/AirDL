@@ -39,4 +39,7 @@ class QoSDemo(QoS):
                 removed_nodes.append(node)
 
         self.topo = copy.deepcopy(self.topo_origin)
+
+        # TODO:这里不仅要把节点删去，还要删去其他点与找个点相邻的点
         self.topo.remove_nodes_from(removed_nodes)
+

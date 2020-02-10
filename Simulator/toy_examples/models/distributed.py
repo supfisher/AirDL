@@ -1,4 +1,5 @@
 import copy
+import torch
 import torch.distributed as dist
 
 
@@ -30,6 +31,7 @@ class DataBase:
         self.topo = qos.topo
         self._data = data
         self._mem = copy.deepcopy(self._data) ## maintains a history of data
+        self.register()
 
     @property
     def data(self):
@@ -49,6 +51,10 @@ class DataBase:
     @mem.setter
     def mem(self, _mem):
         self._mem = _mem
+
+    @property
+    def rank(self):
+        return self.topo.rank
 
     @property
     def nodes(self):
@@ -79,7 +85,6 @@ class DataBase:
 class Buffer(DataBase):
     def __init__(self, data, qos):
         super(Buffer, self).__init__(data, qos)
-        self.register()
 
     def register(self):
         self.qos.update()
@@ -104,7 +109,7 @@ class Distributed:
         self.nodes_on_device = self.buff.nodes_on_device
         self.clients_on_device = self.buff.clients_on_device
         self.servers_on_device = self.buff.servers_on_device
-        self.rank = self.buff.topo.rank
+        self.rank = self.buff.rank
 
     def isend(self, data_dict, socket, **kwargs):
         (self_rank, self_node, dst_rank, dst_node) = socket
