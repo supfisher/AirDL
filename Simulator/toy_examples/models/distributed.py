@@ -28,10 +28,13 @@ class PackData:
 class DataBase:
     def __init__(self, data=None, qos=None):
         self.qos = qos
-        self.topo = qos.topo
         self._data = data
         self._mem = copy.deepcopy(self._data) ## maintains a history of data
-        self.register()
+        # self.register()
+
+    @property
+    def topo(self):
+        return self.qos.topo
 
     @property
     def data(self):
@@ -62,15 +65,15 @@ class DataBase:
 
     @property
     def nodes_on_device(self):
-        return list(set(self.topo.partitioned[self.topo.rank]).intersection(set(self.nodes)))
+        return self.topo.nodes_on_device
 
     @property
     def clients_on_device(self):
-        return [node for node in self.nodes_on_device if self.topo.nodes[node]['type'] == 'client']
+        return self.topo.clients_on_device
 
     @property
     def servers_on_device(self):
-        return [node for node in self.nodes_on_device if self.topo.nodes[node]['type'] == 'server']
+        return self.topo.servers_on_device
 
     def register(self, *args, **kwargs):
         raise NotImplementedError
@@ -87,7 +90,7 @@ class Buffer(DataBase):
         super(Buffer, self).__init__(data, qos)
 
     def register(self):
-        self.qos.update()
+        self.qos()
         self.count = 1
 
     def update_avg(self, avg_list, new_list):
@@ -105,11 +108,16 @@ class Buffer(DataBase):
 class Distributed:
     def __init__(self, buff):
         self.buff = buff
-        self.nodes = self.buff.nodes
-        self.nodes_on_device = self.buff.nodes_on_device
-        self.clients_on_device = self.buff.clients_on_device
-        self.servers_on_device = self.buff.servers_on_device
-        self.rank = self.buff.rank
+        self.register()
+
+    def register(self):
+        self.buff.register()
+        self.topo = self.buff.topo
+        self.nodes = self.topo.nodes
+        self.nodes_on_device = self.topo.nodes_on_device
+        self.clients_on_device = self.topo.clients_on_device
+        self.servers_on_device = self.topo.servers_on_device
+        self.rank = self.topo.rank
 
     def isend(self, data_dict, socket, **kwargs):
         (self_rank, self_node, dst_rank, dst_node) = socket
@@ -240,7 +248,7 @@ class Distributed:
         for w in client_worker:
             w.wait()
         ## must have it to update temporary values and update qos
-        self.buff.register()
+        self.register()
 
 
 if __name__ == "__main__":

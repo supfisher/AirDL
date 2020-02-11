@@ -89,6 +89,33 @@ class Topo(nx.Graph):
                 partitioned[self.nodes[node]['rank']] += [node]
         self.__dict__['partitioned'] = partitioned
 
+    def remove_adj_from(self, nodes, edges):
+        for node in self.nodes:
+            for adj_node in set(self.nodes[node]['adj']).intersection(set(nodes)):
+                del self.nodes[node]['adj'][adj_node]
+
+        for edge in edges:
+            from_node, to_node = edge
+            if from_node in self.nodes:
+                if to_node in self.nodes[from_node]['adj']:
+                    del self.nodes[from_node]['adj'][to_node]
+            if to_node in self.nodes:
+                if from_node in self.nodes[to_node]['adj']:
+                    del self.nodes[to_node]['adj'][from_node]
+
+    def remove(self, nodes, edges):
+        """
+            :param nodes: required removed nodes
+            :param edges: required removed edges
+            :return: topo object, in which nodes are deleted and adjacent nodes are also deleted.
+        """
+        nodes = list(nodes)
+        #TODO: Should make it clear
+        self.remove_nodes_from(nodes)
+        self.remove_edges_from(edges)
+        self.remove_adj_from(nodes, edges)
+        self.partitioned[self.rank] = list(set(self.partitioned[self.rank]).difference(set(nodes)))
+
     @property
     def nodes_on_device(self):
         return self.partitioned[self.rank]
@@ -99,4 +126,4 @@ class Topo(nx.Graph):
 
     @property
     def servers_on_device(self):
-        return [node for node in self.nodes if self.nodes[node]['rank'] == dist.get_rank()]
+        return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']

@@ -50,7 +50,7 @@ class ModelParallel(ObjectParallel):
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
-    def __init__(self, module, topo, QoS=None, debug=True):
+    def __init__(self, module, topo, QoS, debug=True):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
