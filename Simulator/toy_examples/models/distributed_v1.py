@@ -149,34 +149,98 @@ class Distributed:
         for w in worker:
             w.wait()
 
+    def communicate(self, data_dict, sender_type):
+        for node_self in self.nodes_on_device:
+            for node_adj in self.nodes[node_self]['adj'].keys():
+                socket = (self.nodes[node_self]['rank'], node_self,
+                          self.nodes[node_adj]['rank'], node_adj)
+                if self.nodes[node_self]['type'] == sender_type:
+                    self.send(data_dict, socket=socket)
+                else:
+                    self.recv(data_dict, socket=socket)
+                    if sender_type == 'client':
+                        self.buff.gather_fn(node_self)
+
+    def gather(self):
+        self.communicate(self.buff.data, sender_type='client')
+
+    def scatter(self):
+        self.communicate(self.buff.data, sender_type='server')
+
     def clients_work(self, data, clients):
         client_worker = []
         for client in clients:
-            for adj in self.topo.out_links(client):
+            for adj in self.nodes[client]['adj'].keys():
                 socket = (self.nodes[client]['rank'], client,
                           self.nodes[adj]['rank'], adj)
                 client_worker += self.isend(data, socket=socket)
-            for adj in self.topo.in_links(client):
-                socket = (self.nodes[client]['rank'], client,
-                          self.nodes[adj]['rank'], adj)
                 client_worker += self.irecv(data, socket=socket)
         return client_worker
 
     def servers_work(self, data, servers, async_flag, gather_fn):
         for server in servers:
-            for adj in self.topo.in_links(server):
+            for adj in self.nodes[server]['adj'].keys():
                 socket = (self.nodes[server]['rank'], server,
                           self.nodes[adj]['rank'], adj)
                 self.recv(data, socket=socket)
                 gather_fn(server)
-                if async_flag and adj in self.topo.out_links(server):
+                if async_flag:
                     self.send(data, socket=socket)
         if not async_flag:
             for server in servers:
-                for adj in self.topo.out_links(server):
+                for adj in self.nodes[server]['adj'].keys():
                     socket = (self.nodes[server]['rank'], server,
                               self.nodes[adj]['rank'], adj)
                     self.send(data, socket=socket)
+
+    def sync_gather_scatter(self):
+        client_worker = []
+        for client in self.clients_on_device:
+            for adj in self.nodes[client]['adj'].keys():
+                socket = (self.nodes[client]['rank'], client,
+                          self.nodes[adj]['rank'], adj)
+                client_worker += self.isend(self.buff.data, socket=socket)
+
+                client_worker += self.irecv(self.buff.data, socket=socket)
+
+        for server in self.servers_on_device:
+            for adj in self.nodes[server]['adj'].keys():
+                socket = (self.nodes[server]['rank'], server,
+                          self.nodes[adj]['rank'], adj)
+                self.recv(self.buff.data, socket=socket)
+                ##TODO: Process received data
+                self.buff.gather_fn(server)
+
+        for server in self.servers_on_device:
+            for adj in self.nodes[server]['adj'].keys():
+                socket = (self.nodes[server]['rank'], server,
+                          self.nodes[adj]['rank'], adj)
+                self.send(self.buff.data, socket=socket)
+
+        for w in client_worker:
+            w.wait()
+
+    def async_gather_scatter(self):
+        client_worker = []
+        for client in self.clients_on_device:
+            for adj in self.nodes[client]['adj'].keys():
+                socket = (self.nodes[client]['rank'], client,
+                          self.nodes[adj]['rank'], adj)
+                client_worker += self.isend(self.buff.data, socket=socket)
+
+                client_worker += self.irecv(self.buff.data, socket=socket)
+
+        for server in self.servers_on_device:
+            for adj in self.nodes[server]['adj'].keys():
+                socket = (self.nodes[server]['rank'], server,
+                          self.nodes[adj]['rank'], adj)
+                self.recv(self.buff.data, socket=socket)
+                ##TODO: Process received data
+                self.buff.gather_fn(server)
+                self.send(self.buff.data, socket=socket)
+
+        for w in client_worker:
+            w.wait()
 
     def gather_scatter(self, async_flag):
         client_worker = self.clients_work(self.buff.data, self.clients_on_device)

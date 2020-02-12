@@ -1,8 +1,9 @@
 import networkx as nx
 import torch.distributed as dist
-##TODO: Should I define a class called Node with node attributes?
 
-class Topo(nx.Graph):
+
+##TODO: Change the inherint from Graph to DiGraph
+class Topo(nx.DiGraph):
     """
         This is a base class for build network topology and it inherients from
         n.graph base class, thus has all the features of nx.graph
@@ -45,6 +46,33 @@ class Topo(nx.Graph):
 
         # default edge
 
+    def in_links(self, node):
+        """
+            return the input links given a node
+        """
+        return self.predecessors(node)
+
+    def out_links(self, node):
+        """
+            return the output links given a node
+        """
+        return self.successors(node)
+
+    @property
+    def in_graph(self):
+        """
+            return a dict with nodes being the key and its
+            in_links being the corresponding values.
+        """
+        return {node: list(self.in_links(node)) for node in self.nodes}
+
+    @property
+    def out_graph(self):
+        """
+            return a dict with nodes being the key and its
+            out_links being the corresponding values.
+        """
+        return {node: list(self.out_links(node)) for node in self.nodes}
 
     @property
     def servers(self):
@@ -99,14 +127,11 @@ class Topo(nx.Graph):
             if from_node in self.nodes:
                 if to_node in self.nodes[from_node]['adj']:
                     del self.nodes[from_node]['adj'][to_node]
-            if to_node in self.nodes:
-                if from_node in self.nodes[to_node]['adj']:
-                    del self.nodes[to_node]['adj'][from_node]
 
     def remove(self, nodes, edges):
         """
             :param nodes: required removed nodes
-            :param edges: required removed edges
+            :param edges: required removed directed edges
             :return: topo object, in which nodes are deleted and adjacent nodes are also deleted.
         """
         nodes = list(nodes)
@@ -127,3 +152,4 @@ class Topo(nx.Graph):
     @property
     def servers_on_device(self):
         return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']
+

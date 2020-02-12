@@ -1,6 +1,6 @@
 c1:
   energy: 10
-  adj:
+  adj: ## adj: the out-links of adjacent nodes.
     c3:
       channel: Gaussian
 c2:
@@ -16,4 +16,5 @@ c3:
       channel: Gaussian
     c2:
       channel: Gaussian
+
 

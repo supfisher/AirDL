@@ -43,7 +43,7 @@ class CriterionParallel(ObjectParallel):
         return ObjectParallel(loss_list)
 
 
-from .distributed import Distributed, Buffer
+from .distributed_v1 import Distributed, Buffer
 
 class ModelParallel(ObjectParallel):
     """

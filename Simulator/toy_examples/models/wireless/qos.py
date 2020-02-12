@@ -67,4 +67,5 @@ class QoSDemo(QoS):
             for adj in self.topo_origin.nodes[node]['adj'].keys():
                 if random.uniform(0, 1) > 0.5:
                     removed_edges.append((node, adj))
+
         return removed_edges
