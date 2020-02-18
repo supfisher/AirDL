@@ -1,4 +1,4 @@
-from network import Topo
+from network import *
 import yaml
 from models import *
 from utils import *
@@ -121,4 +121,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    topo = Topo()
+    with open('./data/simple_graph.yaml', 'r') as f:
+        dict = yaml.load(f)
+    topo.load_from_dict(dict)
+    qos = QoSDemo(topo)
+    for i in range(3):
+        qos()
+        print("qos topo: ", qos.topo)

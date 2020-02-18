@@ -91,7 +91,18 @@ class Topo(nx.DiGraph):
 
     @property
     def rank(self):
+        """
+            In a distributed task, it returns the rank id of current computing machine
+        """
         return dist.get_rank()
+
+    @property
+    def monitor_rank(self):
+        """
+        :return: During each round of training, the computing machine whose rank is monitor_rank will
+                update the effective topology and broadcast the removed nodes and edges to other ranks.
+        """
+        return 0
 
     @property
     def partitioned(self):
@@ -135,6 +146,7 @@ class Topo(nx.DiGraph):
             :return: topo object, in which nodes are deleted and adjacent nodes are also deleted.
         """
         nodes = list(nodes)
+        edges = list(edges)
         #TODO: Should make it clear
         self.remove_nodes_from(nodes)
         self.remove_edges_from(edges)

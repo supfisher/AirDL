@@ -1,5 +1,4 @@
 import copy
-import torch
 import torch.distributed as dist
 
 
@@ -206,7 +205,7 @@ if __name__ == "__main__":
     #     data = {'c2': torch.ones(3)}
     # elif dist.get_rank()==2:
     #     data = {'c3': torch.ones(3)*4}
-    from .wireless.qos import QoS
+    from Simulator.toy_examples.network.qos import QoS
 
     qos = QoS(topo, qos=None)
     buff = Buffer(data, qos)
