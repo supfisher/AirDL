@@ -1,20 +1,53 @@
-c1:
-  energy: 10
-  adj: ## adj: the out-links of adjacent nodes.
-    c3:
-      channel: Gaussian
-c2:
-  energy: 20
-  adj:
-    c3:
-      channel: Gaussian
-c3:
+c0:
   type: server
-  energy: 30
+  energy: !!float
+          inf
+  send_P: !!float
+          1e-1
+  recv_P: !!float
+          1e-1
+  cal_P:  !!float
+          1e-1
   adj:
     c1:
       channel: Gaussian
     c2:
       channel: Gaussian
+    c3:
+      channel: Gaussian
+c1:
+  energy: 10
+  send_P: !!float
+          1e-1
+  recv_P: !!float
+          1e-1
+  cal_P:  !!float
+          1e-1
+  adj: ## adj: the out-links of adjacent nodes.
+    c0:
+      channel: Gaussian
+c2:
+  energy: 20
+  send_P: !!float
+          1e-1
+  recv_P: !!float
+          1e-1
+  cal_P:  !!float
+          1e-1
+  adj:
+    c0:
+      channel: Gaussian
+c3:
+  energy: 20
+  send_P: !!float
+          1e-1
+  recv_P: !!float
+          1e-1
+  cal_P:  !!float
+          1e-1
+  adj:
+    c0:
+      channel: Gaussian
+
 
 

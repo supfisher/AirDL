@@ -1,2 +1,2 @@
-from .topo import Topo
+from .topo import *
 from .qos import *

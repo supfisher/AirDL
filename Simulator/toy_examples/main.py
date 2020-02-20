@@ -70,25 +70,23 @@ def test(args, model, criterion, device, test_loader):
 
 def main():
     # Training settings
-    print("test")
-    topo = Topo()
-    with open('./data/simple_graph.yaml', 'r') as f:
-        dict = yaml.load(f)
-    topo.load_from_dict(dict)
-    print(topo)
-    print(topo.nodes)
-    for node in topo.nodes:
-        print(topo.nodes[node])
-    print('rank: ', topo.rank)
-    print("server: ", topo.servers)
-    print("client: ", topo.clients)
-
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
     torch.manual_seed(args.seed)
 
     device = torch.device("cuda" if use_cuda else "cpu")
+
+    model = Net().to(device)
+
+    # topo = Topo(model)
+    # with open('./data/simple_graph.yaml', 'r') as f:
+    #     dict = yaml.load(f)
+    # topo.load_from_dict(dict)
+
+    topo = RandTopo(model, 'static', 5)
+
+    print(topo)
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
 
@@ -105,8 +103,8 @@ def main():
                            transforms.Normalize((0.1307,), (0.3081,))
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
-    model = Net().to(device)
-    model_p = ModelParallel(model, topo=topo, QoS=QoSDemo)
+
+    model_p = ModelParallel(topo=topo, QoS=QoSDemo)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)
 
@@ -121,12 +119,14 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    topo = Topo()
-    with open('./data/simple_graph.yaml', 'r') as f:
-        dict = yaml.load(f)
-    topo.load_from_dict(dict)
-    qos = QoSDemo(topo)
-    for i in range(3):
-        qos()
-        print("qos topo: ", qos.topo)
+    main()
+    # model = Net()
+    # topo = Topo(model)
+    # with open('./data/simple_graph.yaml', 'r') as f:
+    #     dict = yaml.load(f)
+    # topo.load_from_dict(dict)
+    #
+    # qos = QoSDemo(topo)
+    # for i in range(3):
+    #     qos()
+    #     print("qos topo: ", qos.topo)

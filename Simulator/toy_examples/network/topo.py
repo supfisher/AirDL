@@ -1,16 +1,20 @@
 import networkx as nx
 import torch.distributed as dist
+import numpy as np
+
+##TODO: We should consider about multiple cells, but only one FL server.
+# TODO: Therefore, we should use a tag to indicate which computing device
+# TODO:  belonging to which cell.
 
 
-##TODO: Change the inherint from Graph to DiGraph
 class Topo(nx.DiGraph):
     """
         This is a base class for build network topology and it inherients from
-        n.graph base class, thus has all the features of nx.graph
+        nx.graph base class, thus has all the features of it.
     """
-    def __init__(self, **kwargs):
-        super(Topo, self).__init__(**kwargs)
-
+    def __init__(self, model, *args, **kwargs):
+        super(Topo, self).__init__()
+        self.model = model
         dist.init_process_group(backend='mpi')
 
     def __str__(self):
@@ -19,6 +23,13 @@ class Topo(nx.DiGraph):
             msg += "  --name: %s, --attrs: %s \n" % (str(node), self.nodes[node])
             msg += "  --adjcency: %s \n" % (self.adj[node])
         return msg
+
+    def count_parameters_in_MB(self, model):
+        return np.sum(np.prod(v.size()) for name, v in model.named_parameters() if "auxiliary" not in name) / 1e6
+
+    @property
+    def model_size(self):
+        return self.count_parameters_in_MB(self.model)
 
     def load_from_dict(self, dict):
         """
@@ -38,13 +49,24 @@ class Topo(nx.DiGraph):
 
     def defaults(self):
         """
-            If some attributes are not registered, make it defaults.
+            It checks whether some attributes have not registered,
+            If so, give them some default values.
         """
-        # default type
-        for k, v in dict(self.nodes(data='type', default='client')).items():
-            self.nodes[k]['type'] = v
+        for data, default in self.defaults_dict:
+            for k, v in dict(self.nodes(data=data, default=default)).items():
+                self.nodes[k][data] = v
 
-        # default edge
+    @property
+    def defaults_dict(self):
+        data = {
+            'type': 'client',
+            'send_P': 1e-4,
+            'recv_P': 1e-4,
+            'cal_P': 1e-4,
+            'energy': 30,
+            'movable': False
+        }
+        return data.items()
 
     def in_links(self, node):
         """
@@ -165,3 +187,55 @@ class Topo(nx.DiGraph):
     def servers_on_device(self):
         return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']
 
+    def set_node(self, node, attr):
+        """
+            Update the node property given the node id and the attr,
+            where attr is a dict.
+        """
+        for k, v in attr.items():
+            self.nodes[node][k] = v
+
+    def report(self):
+        """
+            Make a report about the QoS output.
+        """
+        ##TODO: should make a standard output report
+        print(self.__iter__())
+
+
+class RandTopo(Topo):
+    """
+        This is a class inherient from Topo,
+    """
+    def __init__(self, model, rand_method, *args, **kwargs):
+        super(RandTopo, self).__init__(model, *args, **kwargs)
+        self.args = args
+        self.load_from_dict(self.load_dict[rand_method])
+
+    @property
+    def load_dict(self):
+        return {
+            'static': self.static_clients(self.args[0])
+        }
+
+    def static_clients(self, n_clients):
+        dict = {'c0':{
+                        'type': 'server',
+                        'energy': float('inf'),
+                        'movable': False,
+                        'adj': {}
+                        }
+                }
+        for i in range(n_clients):
+            client_name = 'c'+str(i+1)
+            dict[client_name] = {
+                                    'type': 'client',
+                                    'adj': {
+                                            'c0': {
+                                                    'channel': 'Gaussian'
+                                            }
+                                    }
+                                 }
+            dict['c0']['adj'][client_name] = {'channel': 'Gaussian'}
+
+        return dict

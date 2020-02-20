@@ -43,18 +43,19 @@ class CriterionParallel(ObjectParallel):
         return ObjectParallel(loss_list)
 
 
-from .distributed_v1 import Distributed, Buffer
+from .distributed import Distributed, Buffer
+
 
 class ModelParallel(ObjectParallel):
     """
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
-    def __init__(self, module, topo, QoS, debug=True):
+    def __init__(self, topo, QoS, debug=True):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
-        self.module = {node: copy.deepcopy(module) for _, node in enumerate(topo.partitioned[dist.get_rank()])}
+        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.partitioned[dist.get_rank()])}
 
         data_dict = {node: list(param.data for param in m.parameters())
                      for node, m in self.module.items()}
@@ -66,9 +67,18 @@ class ModelParallel(ObjectParallel):
 
         super(ModelParallel, self).__init__(list(self.module.values()))
 
-    def __call__(self, data, *input, **kwargs):
+    def __call__(self, data, *args, **kwargs):
         data = data.split([int(len(data) / self.len_client) for _ in range(self.len_client)], dim=0)
 
         self.distributed.gather_scatter(async_flag=True)
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
+
+    def stop_condition(self):
+        """
+            This function checks whether the stop conditions satisfy.
+            And it should return the user-defined QoS values
+        """
+        ##TODO: As the illustration
+
+        return None
