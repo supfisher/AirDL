@@ -48,18 +48,23 @@ class QoS:
         """
         raise NotImplementedError
 
+    @classmethod
+    def broadcast(cls, tensor, src=0):
+        if dist.is_initialized():
+            dist.broadcast(tensor, src=src)
+
     def broadcast_removed_nodes(self):
         self.removed_nodes = torch.zeros(len(self.topo.nodes))
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_nodes = self.remove_nodes()
-        dist.broadcast(self.removed_nodes, src=self.topo.monitor_rank)
+        self.broadcast(self.removed_nodes, src=self.topo.monitor_rank)
         return self.nodes_from(self.removed_nodes)
 
     def broadcast_removed_edges(self):
         self.removed_edges = torch.zeros(len(self.topo.edges))
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_edges = self.remove_edges()
-        dist.broadcast(self.removed_edges, src=self.topo.monitor_rank)
+        self.broadcast(self.removed_edges, src=self.topo.monitor_rank)
         return self.edges_from(self.removed_edges)
 
     def update(self, *args, **kwargs):

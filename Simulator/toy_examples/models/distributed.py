@@ -1,5 +1,6 @@
 import copy
 import torch.distributed as dist
+import torch
 
 
 class PackData:

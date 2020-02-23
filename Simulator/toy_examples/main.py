@@ -84,7 +84,7 @@ def main():
     #     dict = yaml.load(f)
     # topo.load_from_dict(dict)
 
-    topo = RandTopo(model, 'static', 5)
+    topo = RandTopo(model, backend=None, rand_method=('static', 5))
 
     print(topo)
 

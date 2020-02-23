@@ -1,6 +1,4 @@
 import copy
-import torch.distributed as dist
-
 
 class ListFn:
     """
@@ -55,7 +53,7 @@ class ModelParallel(ObjectParallel):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
-        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.partitioned[dist.get_rank()])}
+        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.nodes_on_device)}
 
         data_dict = {node: list(param.data for param in m.parameters())
                      for node, m in self.module.items()}

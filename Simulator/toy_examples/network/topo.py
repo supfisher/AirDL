@@ -1,4 +1,5 @@
 import networkx as nx
+
 import torch.distributed as dist
 import numpy as np
 
@@ -12,10 +13,10 @@ class Topo(nx.DiGraph):
         This is a base class for build network topology and it inherients from
         nx.graph base class, thus has all the features of it.
     """
-    def __init__(self, model, *args, **kwargs):
+    def __init__(self, model, backend=None, *args, **kwargs):
         super(Topo, self).__init__()
         self.model = model
-        dist.init_process_group(backend='mpi')
+        self.init_process_group(backend)
 
     def __str__(self):
         msg = 'node: \n'
@@ -26,6 +27,28 @@ class Topo(nx.DiGraph):
 
     def count_parameters_in_MB(self, model):
         return np.sum(np.prod(v.size()) for name, v in model.named_parameters() if "auxiliary" not in name) / 1e6
+
+    def init_process_group(self, backend=None):
+        """
+            ##TODO: It is only checked with openmpi, gloo and nccl needs to be implemented
+        """
+        if backend is None:
+            if dist.is_mpi_available():
+                dist.init_process_group(backend='mpi')
+                return 'mpi'
+            else:
+                return None
+
+        else:
+            dist.init_process_group(backend=backend)
+
+    @property
+    def is_multiprocess(self):
+        """
+            It checks whether uses a multiprocess method
+        """
+        ##TODO: should check whether use multiprocess
+        return False
 
     @property
     def model_size(self):
@@ -116,7 +139,10 @@ class Topo(nx.DiGraph):
         """
             In a distributed task, it returns the rank id of current computing machine
         """
-        return dist.get_rank()
+        if dist.is_initialized():
+            return dist.get_rank()
+        else:
+            return 0
 
     @property
     def monitor_rank(self):
@@ -140,14 +166,19 @@ class Topo(nx.DiGraph):
             default group is the group.world
         """
         if world_size is None:
-            world_size = dist.get_world_size()
+            world_size = dist.get_world_size() if self.is_multiprocess else 1
         partitioned = [[] for _ in range(world_size)]
+
         for i, node in enumerate(self.nodes):
-            if 'rank' not in self.nodes[node].keys():
-                self.nodes[node]['rank'] = i % world_size
-                partitioned[i % world_size] += [node]
+            if self.is_multiprocess:
+                if 'rank' not in self.nodes[node].keys():
+                    self.nodes[node]['rank'] = i % world_size
+                    partitioned[i % world_size] += [node]
+                else:
+                    partitioned[self.nodes[node]['rank']] += [node]
             else:
-                partitioned[self.nodes[node]['rank']] += [node]
+                self.nodes[node]['rank'] = 0
+                partitioned[0] += [node]
         self.__dict__['partitioned'] = partitioned
 
     def remove_adj_from(self, nodes, edges):
@@ -207,15 +238,15 @@ class RandTopo(Topo):
     """
         This is a class inherient from Topo,
     """
-    def __init__(self, model, rand_method, *args, **kwargs):
-        super(RandTopo, self).__init__(model, *args, **kwargs)
-        self.args = args
-        self.load_from_dict(self.load_dict[rand_method])
+    def __init__(self, model, backend=None, rand_method=('static', 5), *args, **kwargs):
+        super(RandTopo, self).__init__(model, backend, *args, **kwargs)
+        self.rand_method = rand_method
+        self.load_from_dict(self.load_dict[rand_method[0]])
 
     @property
     def load_dict(self):
         return {
-            'static': self.static_clients(self.args[0])
+            'static': self.static_clients(self.rand_method[1])
         }
 
     def static_clients(self, n_clients):
