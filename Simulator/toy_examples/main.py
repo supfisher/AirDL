@@ -86,7 +86,7 @@ def main():
 
     device = torch.device("cuda" if use_cuda else "cpu")
 
-    model = Net().to(device)
+    model = Net()
 
     # topo = Topo(model)
     # with open('./data/simple_graph.yaml', 'r') as f:
@@ -94,7 +94,7 @@ def main():
     # topo.load_from_dict(dict)
 
 
-    topo = RandTopo(model, backend=None, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
+    topo = RandTopo(model, backend='gloo', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
                     rand_method=('static', 5))
     print(topo)
 

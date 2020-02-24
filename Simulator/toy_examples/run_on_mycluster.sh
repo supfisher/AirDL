@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --ntasks-per-node=3
+#SBATCH --ntasks-per-node=2
 #SBATCH -N 1
 #SBATCH -J toy
 #SBATCH -o logs/toy.out
@@ -11,4 +11,4 @@
 #OpenMP settings:
 
 
-mpirun -np 3 --mca btl_tcp_if_include enp97s0f1 python ./main.py
+mpirun -np 2 --mca btl_tcp_if_include enp97s0f1 python ./main.py --dist_url='tcp://10.68.170.167:8091'

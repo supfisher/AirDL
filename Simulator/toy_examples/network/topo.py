@@ -42,7 +42,7 @@ class Topo(nx.DiGraph):
             ##TODO: It is only checked with openmpi, gloo and nccl needs to be implemented
         """
         if dist.is_available():
-            if backend is 'mpi':
+            if str.lower(backend) == 'mpi':
                 if dist.is_mpi_available():
                     dist.init_process_group(backend='mpi')
                     logger.info("System use MPI backend...")
@@ -51,7 +51,7 @@ class Topo(nx.DiGraph):
                     logger.error("MPI seems not implemented...\n Code will break down...")
                     sys.exit()
 
-            elif backend is 'gloo':
+            elif str.lower(backend) == 'gloo':
                 if dist.is_gloo_available():
 
                     ### ******************************************************************
@@ -66,7 +66,7 @@ class Topo(nx.DiGraph):
                         rank = comm.Get_rank() + 1
                         size = comm.Get_size() + 1
                     ### ******************************************************************
-
+                    print("world size: ", size, "rank:", rank )
                     dist.init_process_group(backend='gloo', init_method=dist_url,
                             world_size=size, rank=rank)
                     logger.info("System use GLOO backend...")
@@ -74,8 +74,7 @@ class Topo(nx.DiGraph):
                 else:
                     logger.error("GLOO seems not implemented...\n Code will break down...")
                     sys.exit()
-            else:
-                return None
+            return None
 
     @property
     def is_multiprocess(self):
