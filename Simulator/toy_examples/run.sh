@@ -8,5 +8,7 @@
 ## the world size in run.sh.
 
 
-sbatch run_on_ibex.sh
-python ./main.py --rank 0 --world_size 2 --dist_url='tcp://10.109.58.61:8091'
+sbatch run_on_ibex.sh ## Sometimes it may take a long time to assign a node. Therefore, make sure
+#the resources is assigned to you before calling next command
+
+python ./main.py --rank 0 --world_size 2 --dist_url='tcp://10.68.170.167:8091'
