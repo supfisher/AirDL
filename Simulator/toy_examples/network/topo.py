@@ -1,7 +1,11 @@
 import networkx as nx
-
 import torch.distributed as dist
 import numpy as np
+import sys
+import time
+from .logging import logger
+
+
 
 ##TODO: We should consider about multiple cells, but only one FL server.
 # TODO: Therefore, we should use a tag to indicate which computing device
@@ -13,14 +17,19 @@ class Topo(nx.DiGraph):
         This is a base class for build network topology and it inherients from
         nx.graph base class, thus has all the features of it.
     """
-    def __init__(self, model, backend=None, *args, **kwargs):
+    def __init__(self, model, backend=None, rank=0, size=1, dist_url=None, *args, **kwargs):
         super(Topo, self).__init__()
         self.model = model
-        self.init_process_group(backend)
+        self.global_initialer()
+        self.init_process_group(backend, rank, size, dist_url)
+
+
+    def global_initialer(self):
+        self.start_time = time.time()
 
     def __str__(self):
-        msg = 'node: \n'
-        for node in self.nodes:
+        msg = "My rank is %d \n" % self.rank + 'I have nodes on my device: %s \n' % str(self.nodes_on_device)
+        for node in self.nodes_on_device:
             msg += "  --name: %s, --attrs: %s \n" % (str(node), self.nodes[node])
             msg += "  --adjcency: %s \n" % (self.adj[node])
         return msg
@@ -28,19 +37,45 @@ class Topo(nx.DiGraph):
     def count_parameters_in_MB(self, model):
         return np.sum(np.prod(v.size()) for name, v in model.named_parameters() if "auxiliary" not in name) / 1e6
 
-    def init_process_group(self, backend=None):
+    def init_process_group(self, backend=None, rank=0, size=1, dist_url=None):
         """
             ##TODO: It is only checked with openmpi, gloo and nccl needs to be implemented
         """
-        if backend is None:
-            if dist.is_mpi_available():
-                dist.init_process_group(backend='mpi')
-                return 'mpi'
+        if dist.is_available():
+            if backend is 'mpi':
+                if dist.is_mpi_available():
+                    dist.init_process_group(backend='mpi')
+                    logger.info("System use MPI backend...")
+                    return 'mpi'
+                else:
+                    logger.error("MPI seems not implemented...\n Code will break down...")
+                    sys.exit()
+
+            elif backend is 'gloo':
+                if dist.is_gloo_available():
+
+                    ### ******************************************************************
+                    """
+                        This part of code is only temporary. Because Pytorch gloo doesn't 
+                        automatically assign a rank to each process. We use mpi4py to get a 
+                        rank for it, otherwise, we need assign a rank by hand.
+                    """
+                    if rank != 0:
+                        from mpi4py import MPI
+                        comm = MPI.COMM_WORLD
+                        rank = comm.Get_rank() + 1
+                        size = comm.Get_size() + 1
+                    ### ******************************************************************
+
+                    dist.init_process_group(backend='gloo', init_method=dist_url,
+                            world_size=size, rank=rank)
+                    logger.info("System use GLOO backend...")
+                    return 'gloo'
+                else:
+                    logger.error("GLOO seems not implemented...\n Code will break down...")
+                    sys.exit()
             else:
                 return None
-
-        else:
-            dist.init_process_group(backend=backend)
 
     @property
     def is_multiprocess(self):
@@ -48,7 +83,7 @@ class Topo(nx.DiGraph):
             It checks whether uses a multiprocess method
         """
         ##TODO: should check whether use multiprocess
-        return False
+        return dist.is_initialized()
 
     @property
     def model_size(self):
@@ -69,6 +104,7 @@ class Topo(nx.DiGraph):
 
         self.partition()
         self.defaults()
+        logger.info(self)
 
     def defaults(self):
         """
@@ -143,6 +179,10 @@ class Topo(nx.DiGraph):
             return dist.get_rank()
         else:
             return 0
+
+    @property
+    def time(self):
+        return time.time()
 
     @property
     def monitor_rank(self):
@@ -238,8 +278,8 @@ class RandTopo(Topo):
     """
         This is a class inherient from Topo,
     """
-    def __init__(self, model, backend=None, rand_method=('static', 5), *args, **kwargs):
-        super(RandTopo, self).__init__(model, backend, *args, **kwargs)
+    def __init__(self, model, backend=None, rank=0, size=1, dist_url=None, rand_method=('static', 5), *args, **kwargs):
+        super(RandTopo, self).__init__(model, backend, rank, size, dist_url, *args, **kwargs)
         self.rand_method = rand_method
         self.load_from_dict(self.load_dict[rand_method[0]])
 
@@ -268,5 +308,5 @@ class RandTopo(Topo):
                                     }
                                  }
             dict['c0']['adj'][client_name] = {'channel': 'Gaussian'}
-
         return dict
+

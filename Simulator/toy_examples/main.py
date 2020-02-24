@@ -25,10 +25,19 @@ parser.add_argument('--no-cuda', action='store_true', default=False,
 parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
-                    help='how many batches to wait before logging training status')
-
+                    help='how many batches to wait before .logging training status')
 parser.add_argument('--save-model', action='store_true', default=False,
                     help='For Saving the current Model')
+
+
+parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
+                    help='For Saving the current Model')
+parser.add_argument('--rank', default=1, type=int,
+                    help="Currently, we only support the backend of mpi and gloo,You don't need "
+                         "to care about it if using mpi. However, you have to assert it to be 0"
+                         "on your master process.")
+parser.add_argument('--world_size', default=2, type=int,
+                    help="The total number of processes.")
 
 
 def train(args, model, criterion, device, train_loader, optimizer, epoch):
@@ -84,8 +93,9 @@ def main():
     #     dict = yaml.load(f)
     # topo.load_from_dict(dict)
 
-    topo = RandTopo(model, backend=None, rand_method=('static', 5))
 
+    topo = RandTopo(model, backend=None, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
+                    rand_method=('static', 5))
     print(topo)
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
@@ -120,13 +130,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # model = Net()
-    # topo = Topo(model)
-    # with open('./data/simple_graph.yaml', 'r') as f:
-    #     dict = yaml.load(f)
-    # topo.load_from_dict(dict)
-    #
-    # qos = QoSDemo(topo)
-    # for i in range(3):
-    #     qos()
-    #     print("qos topo: ", qos.topo)
+

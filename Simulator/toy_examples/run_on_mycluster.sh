@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --ntasks-per-node=1
-#SBATCH -N 3
+#SBATCH --ntasks-per-node=3
+#SBATCH -N 1
 #SBATCH -J toy
 #SBATCH -o logs/toy.out
 #SBATCH -e logs/toy.err

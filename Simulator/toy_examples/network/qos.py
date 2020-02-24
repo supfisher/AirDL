@@ -1,6 +1,7 @@
 import copy
 import torch.distributed as dist
 from .channel import *
+from .logging import logger
 
 
 class QoS:
@@ -58,14 +59,18 @@ class QoS:
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_nodes = self.remove_nodes()
         self.broadcast(self.removed_nodes, src=self.topo.monitor_rank)
-        return self.nodes_from(self.removed_nodes)
+        removed_nodes = list(self.nodes_from(self.removed_nodes))
+        logger.info("My rank is %d, removed_nodes: %s" % (self.topo.rank, str(removed_nodes)))
+        return removed_nodes
 
     def broadcast_removed_edges(self):
         self.removed_edges = torch.zeros(len(self.topo.edges))
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_edges = self.remove_edges()
         self.broadcast(self.removed_edges, src=self.topo.monitor_rank)
-        return self.edges_from(self.removed_edges)
+        removed_edges = list(self.edges_from(self.removed_edges))
+        logger.info("My rank is %d, removed_edges: %s" % (self.topo.rank, str(removed_edges)))
+        return removed_edges
 
     def update(self, *args, **kwargs):
         self.topo = copy.deepcopy(self.topo_origin)

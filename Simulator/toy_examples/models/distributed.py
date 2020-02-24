@@ -171,6 +171,16 @@ class Distributed:
                 gather_fn(server)
                 if async_flag and adj in self.topo.out_links(server):
                     self.send(data, socket=socket)
+
+        ## for those clients donot send data to server successfully,
+        ## we broadcast it with the final averaged data
+        if async_flag:
+            for server in servers:
+                for adj in set(self.topo.out_links(server)).difference(set(self.topo.in_links(server))):
+                    socket = (self.nodes[server]['rank'], server,
+                              self.nodes[adj]['rank'], adj)
+                    self.send(data, socket=socket)
+
         if not async_flag:
             for server in servers:
                 for adj in self.topo.out_links(server):
@@ -185,41 +195,4 @@ class Distributed:
             w.wait()
         ## must have it to update temporary values and update qos
         self.register()
-
-
-if __name__ == "__main__":
-    import torch
-    from network import Topo
-    import yaml
-
-    topo = Topo()
-    with open('./data/simple_graph.yaml', 'r') as f:
-        dict = yaml.load(f)
-    topo.load_from_dict(dict)
-
-    data = {'c1': torch.zeros(3), 'c2': torch.ones(3), 'c3': torch.ones(3)*4}
-    # data = None
-    #
-    # if dist.get_rank()==0:
-    #     data = {'c1': torch.zeros(3)}
-    # elif dist.get_rank()==1:
-    #     data = {'c2': torch.ones(3)}
-    # elif dist.get_rank()==2:
-    #     data = {'c3': torch.ones(3)*4}
-    from Simulator.toy_examples.network.qos import QoS
-
-    qos = QoS(topo, qos=None)
-    buff = Buffer(data, qos)
-
-    distributed = Distributed(buff)
-
-    buff.register()
-    distributed.gather_scatter(True)
-    print("1: ", buff.data)
-
-    buff.register()
-    distributed.gather_scatter(False)
-    print("2: ", buff.data)
-
-
 

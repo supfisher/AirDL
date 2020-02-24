@@ -1,4 +1,5 @@
 import copy
+import torch
 
 class ListFn:
     """
@@ -53,10 +54,12 @@ class ModelParallel(ObjectParallel):
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
-        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.nodes_on_device)}
+        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.clients_on_device)}
 
         data_dict = {node: list(param.data for param in m.parameters())
                      for node, m in self.module.items()}
+        for server in topo.servers_on_device:
+            data_dict[server] = list(torch.zeros_like(param.data) for param in topo.model.parameters())
 
         self.qos = QoS(topo=topo)
         self.buff = Buffer(data_dict, self.qos)
