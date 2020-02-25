@@ -54,8 +54,9 @@ class DataParallel:
 
     def __init__(self, dataset, topo, *args, **kwargs):
         self.dataset = dataset
-        partition = DataPartitioner(dataset, topo.clients_partitioned, seed=topo.seed)
+        partition = DataPartitioner(self.dataset, topo.clients_partitioned, seed=topo.seed)
         self.datasets = partition.on(topo.rank)
+
         self.dataloaders = [DataLoader(dataset, *args, **kwargs) for dataset in self.datasets]
 
     def __iter__(self):
@@ -71,4 +72,4 @@ class DataParallel:
         return torch.stack(xs), torch.stack(ys)
 
     def __len__(self):
-        return len(self.dataset)
+        return sum(len(d) for d in self.dataloaders)
