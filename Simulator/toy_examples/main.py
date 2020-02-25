@@ -55,6 +55,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                     epoch, batch_idx * len(data), len(train_loader.dataset),
                     100. * batch_idx / len(train_loader)))
                 print("loss: ", list(loss.item()))
+                print("report: ", args.topo.report)
 
 
 
@@ -101,7 +102,7 @@ def main():
     """
     topo = RandTopo(model, backend='none', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
                     rand_method=('static', 5))
-    print(topo)
+    args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
 

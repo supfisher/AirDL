@@ -7,6 +7,51 @@ from .logging import logger
 import random
 
 
+class StandardReport:
+    def __init__(self, energy_cost=0, time_cost=0, **kwargs):
+        """
+        :param energy_cost: Total energy cost by clients
+        :param time_cost: Total time cost by communication
+        :param kwargs: other parameters
+        """
+        self.start_time = time.time()
+        self.global_initializer(**kwargs)
+        self.energy_cost = energy_cost
+        self.time_cost = time_cost
+
+    def global_initializer(self, **kwargs):
+        """
+            It initialize some global parameters.
+        """
+        self.__dict__.update(kwargs)
+
+    @property
+    def keys(self):
+        return self.__dict__.keys()
+
+    def __call__(self, key, value, method='plus'):
+        assert method in ['minus', 'plus', 'reset']
+        if key in self.keys:
+            if method == 'reset':
+                self.__dict__[key] = value
+            elif method == 'minus':
+                self.__dict__[key] -= value
+            elif method == 'plus':
+                self.__dict__[key] += value
+        else:
+            self.__dict__.update({key: value})
+
+    def __str__(self):
+        """
+            It gives out the standard report by print function
+            The running_time means the total time used by the simulator
+        """
+        msg = '\nrunning_time: %s \n'%(time.time() - self.start_time)
+        for k, v in self.__dict__.items():
+            if k != 'start_time':
+                msg += '%s: %s\n' % (k, v)
+        return msg
+
 
 ##TODO: We should consider about multiple cells, but only one FL server.
 # TODO: Therefore, we should use a tag to indicate which computing device
@@ -21,12 +66,8 @@ class Topo(nx.DiGraph):
     def __init__(self, model, backend=None, rank=0, size=1, dist_url=None, *args, **kwargs):
         super(Topo, self).__init__()
         self.model = model
-        self.global_initialer()
+        self.report = StandardReport(**kwargs)
         self.init_process_group(backend, rank, size, dist_url)
-
-
-    def global_initialer(self):
-        self.start_time = time.time()
 
     def __str__(self):
         msg = "My rank is %d \n" % self.rank + 'I have nodes on my device: %s \n' % str(self.nodes_on_device)
@@ -42,6 +83,9 @@ class Topo(nx.DiGraph):
         """
             ##TODO: It is only checked with openmpi, gloo and nccl needs to be implemented
         """
+        if backend is None:
+            return None
+
         if dist.is_available():
             if str.lower(backend) == 'mpi':
                 if dist.is_mpi_available():
@@ -75,7 +119,6 @@ class Topo(nx.DiGraph):
                 else:
                     logger.error("GLOO seems not implemented...\n Code will break down...")
                     sys.exit()
-            return None
 
     @property
     def is_multiprocess(self):
@@ -111,18 +154,19 @@ class Topo(nx.DiGraph):
             It checks whether some attributes have not registered,
             If so, give them some default values.
         """
-        for data, default in self.defaults_dict:
+        for data, default in self.defaults_data_dict:
             for k, v in dict(self.nodes(data=data, default=default)).items():
                 self.nodes[k][data] = v
 
     @property
-    def defaults_dict(self):
+    def defaults_data_dict(self):
         data = {
             'type': 'client',
             'send_P': 1e-4,
             'recv_P': 1e-4,
             'cal_P': 1e-4,
             'energy': 30,
+            'energy_cost': 0,
             'movable': False
         }
         return data.items()
@@ -274,12 +318,6 @@ class Topo(nx.DiGraph):
     def seed(self):
         return random.randint(100,100000)
 
-    def report(self):
-        """
-            Make a report about the QoS output.
-        """
-        ##TODO: should make a standard output report
-        print(self.__iter__())
 
 
 class RandTopo(Topo):

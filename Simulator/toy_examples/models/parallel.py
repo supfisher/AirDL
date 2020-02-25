@@ -35,10 +35,9 @@ class CriterionParallel(ObjectParallel):
         super(CriterionParallel, self).__init__(self.criterion)
 
     def __call__(self, output, target, *args, **kwargs):
-        # target = target.split([int(len(target)/self.len_client) for _ in range(self.len_client)], dim=0)
-        loss_list = []
-        for d, t, criterion in zip(output, target, self.criterion):
-            loss_list.append(criterion(d, t, *args, **kwargs))
+        loss_list = list(map(lambda d, t, criterion: criterion(d, t, *args, **kwargs), output, target, self.criterion))
+        # for d, t, criterion in zip(output, target, self.criterion):
+        #     loss_list.append(criterion(d, t, *args, **kwargs))
         return ObjectParallel(loss_list)
 
 
@@ -69,7 +68,6 @@ class ModelParallel(ObjectParallel):
         super(ModelParallel, self).__init__(list(self.module.values()))
 
     def __call__(self, data, *args, **kwargs):
-        # data = data.split([int(len(data) / self.len_client) for _ in range(self.len_client)], dim=0)
 
         self.distributed.gather_scatter(async_flag=True)
 

@@ -15,20 +15,27 @@ class ChannelBase:
         """
             It calculates the energy consumed given the node and the reason
         """
-        value = self.topo.nodes[node]['energy']
-        value -= self.topo.nodes[node][key]*self.topo.model_size
-        return {'energy': value}
+        energy = self.topo.nodes[node]['energy']
+        energy_cost = self.topo.nodes[node][key]*self.topo.model_size
+        energy -= energy_cost
+        energy_cost += self.topo.nodes[node]['energy_cost']
+        return {'energy': energy, 'energy_cost': energy_cost}
 
     def check_energy(self, node):
         for key in ['send_P', 'recv_P', 'cal_P']:
-            self.topo.set_node(node=node, attr=self._cal_E(node, key))
-        return self.topo.nodes[node]['energy']
+            E = self._cal_E(node, key)
+        self.topo.set_node(node=node, attr=E)
+        return E
 
     def remove_nodes(self):
         removed_nodes = torch.zeros(len(self.topo.nodes))
         for i, node in enumerate(self.topo.nodes):
-            if self.check_energy(node) <= 0:
+            checked_energy = self.check_energy(node)
+            if checked_energy['energy'] <= 0:
                 removed_nodes[i] = 1
+
+            self.topo.report('energy_cost', checked_energy['energy_cost'], 'plus')
+
         return removed_nodes
 
 
@@ -72,6 +79,7 @@ class Channel(ChannelBase):
 
     def remove_edges(self, *args, **kwargs):
         removed_edges = torch.zeros(self.N)
+        time_cost = []
         for eta in range(self.N):
             d = (self.delta + self.d0) / 2
             PR_bar = self.PT * self.phi * (self.d0 / d) ** self.alpha
@@ -81,8 +89,12 @@ class Channel(ChannelBase):
             SNR = self.PT * G / self.N0
             Rate = self.B * log2(1 + SNR)
             Latency = self.S / Rate
+            time_cost.append(Latency)
             if Latency > self.epsilon:
                 removed_edges[eta] = 1
+
+        self.topo.report('time_cost', max(time_cost), 'plus')
+
         return removed_edges
 
 
