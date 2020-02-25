@@ -67,3 +67,424 @@ I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5']
 2020-02-24 12:13:21,444 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c3'), ('c4', 'c0')]
 2020-02-24 12:13:22,254 - Simulator - INFO - My rank is 0, removed_nodes: []
 2020-02-24 12:13:22,255 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c3'), ('c1', 'c0'), ('c2', 'c0'), ('c5', 'c0')]
+2020-02-25 06:06:36,851 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 06:07:19,243 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 06:07:32,717 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 06:14:04,010 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 06:15:50,162 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 06:22:42,374 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:04:03,791 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:09:45,108 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:10:17,899 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:10:45,176 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:10:59,499 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:17:23,898 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:17:45,788 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:18:58,677 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:20:07,998 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:20:30,331 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:21:53,841 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:22:55,908 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:23:48,563 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:26:37,302 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:26:37,567 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:26:37,568 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c3'), ('c0', 'c4'), ('c1', 'c0'), ('c2', 'c0')]
+2020-02-25 07:26:37,697 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:26:37,698 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c5'), ('c1', 'c0'), ('c2', 'c0'), ('c3', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:00,816 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:27:01,083 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:01,084 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c5'), ('c2', 'c0')]
+2020-02-25 07:27:01,242 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:01,242 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c4'), ('c1', 'c0'), ('c3', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:02,060 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:02,060 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c4'), ('c1', 'c0'), ('c3', 'c0')]
+2020-02-25 07:27:02,825 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:02,826 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c3'), ('c1', 'c0'), ('c2', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:03,558 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:03,559 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c4'), ('c1', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:04,323 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:04,323 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c5', 'c0')]
+2020-02-25 07:27:05,088 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:05,089 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c3'), ('c0', 'c5'), ('c4', 'c0')]
+2020-02-25 07:27:05,841 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:05,842 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c4'), ('c1', 'c0'), ('c2', 'c0'), ('c3', 'c0')]
+2020-02-25 07:27:06,566 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:06,566 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c4'), ('c0', 'c5'), ('c3', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:07,297 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:07,297 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c5'), ('c2', 'c0'), ('c3', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:08,013 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:08,014 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c1', 'c0'), ('c3', 'c0'), ('c4', 'c0')]
+2020-02-25 07:27:08,726 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:08,727 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c4'), ('c0', 'c5'), ('c1', 'c0'), ('c2', 'c0'), ('c4', 'c0')]
+2020-02-25 07:27:09,439 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:09,439 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c3'), ('c2', 'c0')]
+2020-02-25 07:27:10,213 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:10,214 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c4'), ('c3', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:10,927 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:10,928 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c1', 'c0'), ('c2', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:11,632 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:11,633 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c3'), ('c0', 'c4'), ('c0', 'c5'), ('c2', 'c0'), ('c3', 'c0')]
+2020-02-25 07:27:12,355 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:12,356 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c5'), ('c3', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:13,073 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:13,073 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c5'), ('c1', 'c0'), ('c2', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:13,786 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:13,787 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c2', 'c0'), ('c5', 'c0')]
+2020-02-25 07:27:14,515 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:14,516 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c4'), ('c3', 'c0'), ('c4', 'c0')]
+2020-02-25 07:27:15,245 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:15,246 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c5'), ('c2', 'c0'), ('c3', 'c0')]
+2020-02-25 07:27:16,009 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:16,010 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c1', 'c0'), ('c2', 'c0'), ('c3', 'c0')]
+2020-02-25 07:27:16,740 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:27:16,741 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c5'), ('c1', 'c0'), ('c2', 'c0'), ('c4', 'c0')]
+2020-02-25 07:29:12,311 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:29:12,563 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:12,564 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c4'), ('c0', 'c5'), ('c2', 'c0'), ('c4', 'c0')]
+2020-02-25 07:29:12,694 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:12,695 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c4'), ('c3', 'c0'), ('c5', 'c0')]
+2020-02-25 07:29:13,456 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:13,457 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c4'), ('c0', 'c5'), ('c1', 'c0'), ('c3', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:29:14,172 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:14,172 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c3'), ('c0', 'c4'), ('c3', 'c0')]
+2020-02-25 07:29:14,908 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:14,908 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c2'), ('c0', 'c4'), ('c1', 'c0'), ('c3', 'c0'), ('c5', 'c0')]
+2020-02-25 07:29:15,629 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:15,629 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c3'), ('c1', 'c0'), ('c4', 'c0'), ('c5', 'c0')]
+2020-02-25 07:29:16,360 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:16,361 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c3'), ('c1', 'c0'), ('c4', 'c0')]
+2020-02-25 07:29:17,082 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:17,083 - Simulator - INFO - My rank is 0, removed_edges: [('c5', 'c0')]
+2020-02-25 07:29:17,822 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:17,822 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c4'), ('c0', 'c5'), ('c1', 'c0'), ('c4', 'c0')]
+2020-02-25 07:29:18,549 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:18,550 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c4', 'c0')]
+2020-02-25 07:29:19,294 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:19,295 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c3'), ('c0', 'c5'), ('c1', 'c0'), ('c3', 'c0'), ('c4', 'c0')]
+2020-02-25 07:29:20,033 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:20,034 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c5'), ('c5', 'c0')]
+2020-02-25 07:29:45,473 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 07:29:45,729 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 07:29:45,730 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c2'), ('c0', 'c4'), ('c2', 'c0'), ('c4', 'c0')]

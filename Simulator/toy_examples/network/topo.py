@@ -4,6 +4,7 @@ import numpy as np
 import sys
 import time
 from .logging import logger
+import random
 
 
 
@@ -199,6 +200,10 @@ class Topo(nx.DiGraph):
         """
         return self.__dict__['partitioned']
 
+    @property
+    def clients_partitioned(self):
+        return list(map(lambda nodes: set(nodes).difference(self.servers), self.partitioned))
+
     def partition(self, world_size=None):
         """
             Partition the topo clients and servers into a distributed version
@@ -264,6 +269,10 @@ class Topo(nx.DiGraph):
         """
         for k, v in attr.items():
             self.nodes[node][k] = v
+
+    @property
+    def seed(self):
+        return random.randint(100,100000)
 
     def report(self):
         """

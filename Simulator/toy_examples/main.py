@@ -99,7 +99,7 @@ def main():
         For using 'gloo', you need to follow the guideline in run.sh
         For using None, it is running on a single CPU. 
     """
-    topo = RandTopo(model, backend='gloo', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
+    topo = RandTopo(model, backend='none', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
                     rand_method=('static', 5))
     print(topo)
 
