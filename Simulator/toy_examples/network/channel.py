@@ -18,7 +18,6 @@ class ChannelParams:
         d0 % Reference distance
         delta % Cell service radius (spatial distribution range of clients)
         B % Uniform bandwidth
-        S % Packet size
         PT % Transmit power in watt: 100W=20dBW; 1000W=30dBW.
         phi % Combined antenna gain
 
@@ -37,7 +36,6 @@ class ChannelParams:
         self.epsilon = 0.1
         self.d0 = 3.5
         self.delta = 100
-        self.S = 1
         self.phi = 1
         self.__dict__.update(kwargs)
 
@@ -48,8 +46,7 @@ class ChannelParams:
     def gaussian_params(self):
         param_dict = {
             'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 3.5,
-            'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100,
-            'S': 1, 'phi': 1
+            'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
         return param_dict.items()
 
@@ -131,9 +128,8 @@ class ChannelDemo(Channel):
         :param topo:
         :param kwargs: It left an input interface for the self-defined channel params
                     The channel params should wirte like as following:
-                    {'B': 312.5e3, 'T': 300, 'm': 1, 'sigma': 3.5,
-                    'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100,
-                    'S': 1, 'phi': 1}
+                    {'B': 312.5e3, 'T': 300, 'm': 1, 'sigma': 3.5, 'alpha': 3,
+                    'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1}
                     You can give an dict.items() as input.
         """
         super(ChannelDemo, self).__init__(topo)
