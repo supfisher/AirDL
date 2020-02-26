@@ -115,7 +115,7 @@ class Channel(ChannelBase):
             G = gamrnd(self.m, omega / self.m)
             SNR = PT * G / self.N0
             Rate = self.B * log2(1 + SNR)
-            Latency = self.S / Rate
+            Latency = self.model_size / Rate
             time_cost.append(Latency)
             if Latency > self.epsilon:
                 removed_edges[i] = 1
