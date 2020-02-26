@@ -2,6 +2,58 @@ from .mathwork import *
 import torch
 import numpy as np
 
+
+class ChannelParams:
+    """
+        % Setting wireless environment parameters *********************************
+        N0 % Average noise power
+        m % Fading figure
+        sigma % Shadowing figure
+        alpha % Path loss exponent
+        % *************************************************************************
+
+        % Setting system configuration parameters *********************************
+        N % Number of total clients
+        epsilon % Preset time window
+        d0 % Reference distance
+        delta % Cell service radius (spatial distribution range of clients)
+        B % Uniform bandwidth
+        S % Packet size
+        PT % Transmit power in watt: 100W=20dBW; 1000W=30dBW.
+        phi % Combined antenna gain
+
+        % *************************************************************************
+
+    """
+
+    def __init__(self, **kwargs):
+        self.kb = 1.380649e-23  ## Boltzmann constant
+        self.T = 300  ## Temperatur in Kelvin
+        self.B = 312.5e3
+        self.N0 = self.kb * self.B * self.T
+        self.m = 1
+        self.sigma = 3.5
+        self.alpha = 3
+        self.epsilon = 0.1
+        self.d0 = 3.5
+        self.delta = 100
+        self.S = 1
+        self.phi = 1
+        self.__dict__.update(kwargs)
+
+    def update(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+    @property
+    def gaussian_params(self):
+        param_dict = {
+            'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 3.5,
+            'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100,
+            'S': 1, 'phi': 1
+        }
+        return param_dict.items()
+
+
 class ChannelBase:
     """
         This is base class for the nodes qos properties.
@@ -10,19 +62,22 @@ class ChannelBase:
     """
     def __init__(self, topo):
         self.topo = topo
+        self.nodes = self.topo.nodes
+        self.edges = self.topo.edges
+        self.model_size = self.topo.model_size
 
     def _cal_E(self, node, key):
         """
             It calculates the energy consumed given the node and the reason
         """
-        energy = self.topo.nodes[node]['energy']
-        energy_cost = self.topo.nodes[node][key]*self.topo.model_size
+        energy = self.nodes[node]['energy']
+        energy_cost = self.nodes[node][key]*self.model_size
         energy -= energy_cost
-        energy_cost += self.topo.nodes[node]['energy_cost']
+        energy_cost += self.nodes[node]['energy_cost']
         return {'energy': energy, 'energy_cost': energy_cost}
 
     def check_energy(self, node):
-        for key in ['send_P', 'recv_P', 'cal_P']:
+        for key in ['com_P', 'cal_P']:
             E = self._cal_E(node, key)
         self.topo.set_node(node=node, attr=E)
         return E
@@ -40,58 +95,30 @@ class ChannelBase:
 
 
 class Channel(ChannelBase):
-    """
-        % Setting wireless environment parameters *********************************
-        N0=1; % Average noise power
-        m=1; % Fading figure
-        sigma=1; % Shadowing figure
-        alpha=2; % Path loss exponent
-        % *************************************************************************
 
-        % Setting system configuration parameters *********************************
-        N=100; % Number of total clients
-        epsilon=1; % Preset time window
-        d0=1; % Reference distance
-        delta=100; % Cell service radius (spatial distribution range of clients)
-        B=1; % Uniform bandwidth
-        S=1; % Packet size
-        PT=100;% Transmit power in watt: 100W=20dBW; 1000W=30dBW.
-        phi=1; % Combined antenna gain
+    def __init__(self, topo, **kwargs):
+        params = ChannelParams().gaussian_params
+        self.__dict__.update(params)
+        self.__dict__.update(kwargs)
 
-        % *************************************************************************
-    """
-
-    def __init__(self, topo, N0=1, m=1, sigma=1, alpha=2, N=100,
-                 epsilon=1, d0=1, delta=100, B=1, S=1, PT=100, phi=1, *args, **kwargs):
-        self.N0 = N0
-        self.m = m
-        self.sigma = sigma
-        self.alpha = alpha
-        self.N = N
-        self.epsilon = epsilon
-        self.d0 = d0
-        self.delta = delta
-        self.B = B
-        self.S = S
-        self.PT = PT
-        self.phi = phi
         super(Channel, self).__init__(topo)
 
-    def remove_edges(self, *args, **kwargs):
-        removed_edges = torch.zeros(self.N)
+    def remove_edges(self):
+        removed_edges = torch.zeros(len(self.edges))
         time_cost = []
-        for eta in range(self.N):
+        for i, edge in enumerate(self.edges):
+            PT = self.nodes[edge[0]]['com_P']
             d = (self.delta + self.d0) / 2
-            PR_bar = self.PT * self.phi * (self.d0 / d) ** self.alpha
+            PR_bar = PT * self.phi * (self.d0 / d) ** self.alpha
             omega = gamrnd(1 / (exp(self.sigma ** 2) - 1),
                            PR_bar * (exp(self.sigma ** 2) - 1) * exp(self.sigma ** 2 / 2))
             G = gamrnd(self.m, omega / self.m)
-            SNR = self.PT * G / self.N0
+            SNR = PT * G / self.N0
             Rate = self.B * log2(1 + SNR)
             Latency = self.S / Rate
             time_cost.append(Latency)
             if Latency > self.epsilon:
-                removed_edges[eta] = 1
+                removed_edges[i] = 1
 
         self.topo.report('time_cost', max(time_cost), 'plus')
 
@@ -99,5 +126,31 @@ class Channel(ChannelBase):
 
 
 class ChannelDemo(Channel):
-    def __init__(self, topo, N0=1, m=1, sigma=1, alpha=2, N=100, epsilon=1, d0=1, delta=100, B=1, S=1, PT=100, phi=1, *args, **kwargs):
-        super(ChannelDemo, self).__init__(topo, N0, m, sigma, alpha, N, epsilon, d0, delta, B, S, PT, phi, *args, **kwargs)
+    def __init__(self, topo, **kwargs):
+        """
+        :param topo:
+        :param kwargs: It left an input interface for the self-defined channel params
+                    The channel params should wirte like as following:
+                    {'B': 312.5e3, 'T': 300, 'm': 1, 'sigma': 3.5,
+                    'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100,
+                    'S': 1, 'phi': 1}
+                    You can give an dict.items() as input.
+        """
+        super(ChannelDemo, self).__init__(topo)
+
+class ChannelDemo_Perfect(Channel):
+    """
+        This is a Channel class, which doesn't care about the wireless loss
+        and thus return 0 removed nodes and 0 removed edges.
+        You can compare the results with that of ChannelDemo.
+    """
+    def __init__(self, topo):
+        super(ChannelDemo_Perfect, self).__init__(topo)
+
+    def remove_edges(self):
+        removed_edges = torch.zeros(len(self.edges))
+        return removed_edges
+
+    def remove_nodes(self):
+        removed_nodes = torch.zeros(len(self.topo.nodes))
+        return removed_nodes

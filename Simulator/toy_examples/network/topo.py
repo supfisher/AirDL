@@ -29,14 +29,14 @@ class StandardReport:
     def keys(self):
         return self.__dict__.keys()
 
-    def __call__(self, key, value, method='plus'):
-        assert method in ['minus', 'plus', 'reset']
+    def __call__(self, key, value, operation='plus'):
+        assert operation in ['minus', 'plus', 'reset']
         if key in self.keys:
-            if method == 'reset':
+            if operation == 'reset':
                 self.__dict__[key] = value
-            elif method == 'minus':
+            elif operation == 'minus':
                 self.__dict__[key] -= value
-            elif method == 'plus':
+            elif operation == 'plus':
                 self.__dict__[key] += value
         else:
             self.__dict__.update({key: value})
@@ -162,8 +162,7 @@ class Topo(nx.DiGraph):
     def defaults_data_dict(self):
         data = {
             'type': 'client',
-            'send_P': 1e-4,
-            'recv_P': 1e-4,
+            'com_P': 1e-2,
             'cal_P': 1e-4,
             'energy': 30,
             'energy_cost': 0,

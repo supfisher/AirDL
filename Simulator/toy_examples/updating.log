@@ -1,0 +1,14 @@
+This is a log file to record the updating functions.
+
+1). Updated ChannelParams module in channel.py for users to easily input channel parameters.
+Remove duplicate parameters initialization in Channel class by using self.__dict__.update(params).
+All channel related parameters should be changed in ChannelParams class, and give
+Channel class through a dictionary.
+Or you can give it through the input kwargs in ChannelDemo class.
+
+2). Updated simple_graph.yaml, change recv_P and send_P to com_P. Because, in the wireless model,
+it seems only consider about communication power.
+Corrspondingly, some changes have happened in topo.py and channel.py.parameters
+
+3). Updated ChannelDemo_Perfect class in channel.py. It doesn't consider about wireless loss.
+Thus, it can be treated as a baseline for checking the correctness of the simulator.

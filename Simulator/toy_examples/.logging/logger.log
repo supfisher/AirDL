@@ -1002,3 +1002,206 @@ I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5']
 2020-02-25 13:16:36,589 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c1'), ('c0', 'c4'), ('c5', 'c0')]
 2020-02-25 13:16:37,353 - Simulator - INFO - My rank is 0, removed_nodes: []
 2020-02-25 13:16:37,354 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c3'), ('c0', 'c4'), ('c4', 'c0')]
+2020-02-25 15:50:47,976 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'send_P': 0.0001, 'recv_P': 0.0001, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-25 15:50:48,253 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-25 15:50:48,254 - Simulator - INFO - My rank is 0, removed_edges: [('c0', 'c4'), ('c0', 'c5'), ('c4', 'c0')]
+2020-02-26 06:05:16,865 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:05:28,708 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:05:49,442 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:05:56,779 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:06:07,992 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:06:30,431 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:07:04,697 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:07:04,814 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-26 06:07:42,889 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:07:43,004 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-26 06:07:55,512 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:07:55,755 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-26 06:10:00,652 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:10:00,903 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-26 06:17:57,557 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:17:57,832 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-26 06:53:20,876 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2', 'c3', 'c4', 'c5'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy_cost': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}, 'c3': {'channel': 'Gaussian'}, 'c4': {'channel': 'Gaussian'}, 'c5': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c3, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c4, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c5, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.01, 'cal_P': 0.0001, 'energy': 30, 'energy_cost': 0, 'movable': False} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-26 06:53:21,132 - Simulator - INFO - My rank is 0, removed_nodes: []

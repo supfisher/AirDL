@@ -2,12 +2,10 @@ c0:
   type: server
   energy: !!float
           inf
-  send_P: !!float
-          1e-1
-  recv_P: !!float
-          1e-1
+  com_P: !!float
+          1.5e-1
   cal_P:  !!float
-          1e-1
+          1e-4
   adj:
     c1:
       channel: Gaussian
@@ -17,34 +15,28 @@ c0:
       channel: Gaussian
 c1:
   energy: 10
-  send_P: !!float
-          1e-1
-  recv_P: !!float
-          1e-1
+  com_P: !!float
+          1e-2
   cal_P:  !!float
-          1e-1
+          1e-4
   adj: ## adj: the out-links of adjacent nodes.
     c0:
       channel: Gaussian
 c2:
   energy: 20
-  send_P: !!float
-          1e-1
-  recv_P: !!float
-          1e-1
+  com_P: !!float
+          1e-2
   cal_P:  !!float
-          1e-1
+          1e-4
   adj:
     c0:
       channel: Gaussian
 c3:
   energy: 20
-  send_P: !!float
-          1e-1
-  recv_P: !!float
-          1e-1
+  com_P: !!float
+          1e-2
   cal_P:  !!float
-          1e-1
+          1e-4
   adj:
     c0:
       channel: Gaussian

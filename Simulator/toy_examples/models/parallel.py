@@ -49,7 +49,8 @@ class ModelParallel(ObjectParallel):
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
-    def __init__(self, topo, QoS, debug=True):
+    def __init__(self, topo, QoS, async_flag=False, debug=True):
+        self.async_flag = async_flag
         self.debug = debug
         self.len_client = len(topo.clients_on_device)
 
@@ -69,7 +70,7 @@ class ModelParallel(ObjectParallel):
 
     def __call__(self, data, *args, **kwargs):
 
-        self.distributed.gather_scatter(async_flag=True)
+        self.distributed.gather_scatter(async_flag=self.async_flag)
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
 

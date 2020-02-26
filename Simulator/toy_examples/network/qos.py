@@ -87,7 +87,7 @@ class QoS:
 
 class QoSDemo(QoS):
     def __init__(self, topo):
-        self.channel = ChannelDemo(topo, N=len(topo.edges))
+        self.channel = ChannelDemo(topo)
         super(QoSDemo, self).__init__(topo)
 
     def remove_nodes(self):
@@ -95,3 +95,4 @@ class QoSDemo(QoS):
 
     def remove_edges(self):
         return self.channel.remove_edges()
+
