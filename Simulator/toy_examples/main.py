@@ -52,11 +52,10 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
             optimizer.step()
             if batch_idx % args.log_interval == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]'.format(
-                    epoch, batch_idx * len(data), len(train_loader.dataset),
+                    epoch, batch_idx * len(data[0]), len(train_loader),
                     100. * batch_idx / len(train_loader)))
                 print("loss: ", list(loss.item()))
                 print("report: ", args.topo.report)
-
 
 
 def test(args, model, criterion, device, test_loader):
@@ -101,7 +100,7 @@ def main():
         For using None, it is running on a single CPU. 
     """
     topo = RandTopo(model, backend='none', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
-                    rand_method=('static', 5))
+                    rand_method=('static', 2))
     args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}

@@ -1,4 +1,5 @@
 import networkx as nx
+
 import torch.distributed as dist
 import numpy as np
 import sys
@@ -46,7 +47,7 @@ class StandardReport:
             It gives out the standard report by print function
             The running_time means the total time used by the simulator
         """
-        msg = '\nrunning_time: %s \n'%(time.time() - self.start_time)
+        msg = '\nSimulator running_time: %s \n'%(time.time() - self.start_time)
         for k, v in self.__dict__.items():
             if k != 'start_time':
                 msg += '%s: %s\n' % (k, v)
@@ -166,7 +167,8 @@ class Topo(nx.DiGraph):
             'cal_P': 1e-4,
             'energy': 30,
             'energy_cost': 0,
-            'movable': False
+            'movable': False,
+            'running_time': 0
         }
         return data.items()
 
@@ -305,12 +307,12 @@ class Topo(nx.DiGraph):
     def servers_on_device(self):
         return [node for node in self.nodes_on_device if self.nodes[node]['type'] == 'server']
 
-    def set_node(self, node, attr):
+    def set_node(self, node, **kwargs):
         """
             Update the node property given the node id and the attr,
             where attr is a dict.
         """
-        for k, v in attr.items():
+        for k, v in kwargs.items():
             self.nodes[node][k] = v
 
     @property
@@ -323,7 +325,7 @@ class RandTopo(Topo):
     """
         This is a class inherient from Topo,
     """
-    def __init__(self, model, backend=None, rank=0, size=1, dist_url=None, rand_method=('static', 5), *args, **kwargs):
+    def __init__(self, model, backend=None, rank=0, size=1, dist_url=None, rand_method=('static', 2), *args, **kwargs):
         super(RandTopo, self).__init__(model, backend, rank, size, dist_url, *args, **kwargs)
         self.rand_method = rand_method
         self.load_from_dict(self.load_dict[rand_method[0]])

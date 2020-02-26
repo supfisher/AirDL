@@ -59,17 +59,24 @@ class DataParallel:
 
         self.dataloaders = [DataLoader(dataset, *args, **kwargs) for dataset in self.datasets]
 
+
     def __iter__(self):
+        self.itera_time = 0
         return self
 
     def __next__(self):
-        xs = []
-        ys = []
-        for d in self.dataloaders:
-            x,y = iter(d).__next__()
-            xs.append(x)
-            ys.append(y)
-        return torch.stack(xs), torch.stack(ys)
+        if self.itera_time < self.__len__():
+            self.itera_time+=1
+            xs = []
+            ys = []
+            for d in self.dataloaders:
+                x,y = iter(d).__next__()
+                xs.append(x)
+                ys.append(y)
+
+            return torch.stack(xs), torch.stack(ys)
+        else:
+            raise StopIteration
 
     def __len__(self):
-        return sum(len(d) for d in self.dataloaders)
+        return len(self.dataloaders[0])

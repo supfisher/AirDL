@@ -67,8 +67,10 @@ class ChannelBase:
         """
             It calculates the energy consumed given the node and the reason
         """
+        assert 'running_time' in self.nodes[node].keys()
+
         energy = self.nodes[node]['energy']
-        energy_cost = self.nodes[node][key]*self.model_size
+        energy_cost = self.nodes[node][key]*self.nodes[node]['running_time']
         energy -= energy_cost
         energy_cost += self.nodes[node]['energy_cost']
         return {'energy': energy, 'energy_cost': energy_cost}
@@ -100,11 +102,13 @@ class Channel(ChannelBase):
 
         super(Channel, self).__init__(topo)
 
+
     def remove_edges(self):
         removed_edges = torch.zeros(len(self.edges))
         time_cost = []
         for i, edge in enumerate(self.edges):
-            PT = self.nodes[edge[0]]['com_P']
+            node = edge[0]
+            PT = self.nodes[node]['com_P']
             d = (self.delta + self.d0) / 2
             PR_bar = PT * self.phi * (self.d0 / d) ** self.alpha
             omega = gamrnd(1 / (exp(self.sigma ** 2) - 1),
@@ -116,6 +120,8 @@ class Channel(ChannelBase):
             time_cost.append(Latency)
             if Latency > self.epsilon:
                 removed_edges[i] = 1
+
+            self.topo.set_node(node=node, running_time=Latency)
 
         self.topo.report('time_cost', max(time_cost), 'plus')
 
@@ -133,6 +139,7 @@ class ChannelDemo(Channel):
                     You can give an dict.items() as input.
         """
         super(ChannelDemo, self).__init__(topo)
+
 
 class ChannelDemo_Perfect(Channel):
     """
