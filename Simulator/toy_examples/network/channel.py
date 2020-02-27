@@ -26,12 +26,12 @@ class ChannelParams:
     """
 
     def __init__(self, **kwargs):
-        self.kb = 1.380649e-23  ## Boltzmann constant
+        self.kb = 1.3807e-23  ## Boltzmann constant
         self.T = 300  ## Temperatur in Kelvin
         self.B = 312.5e3
         self.N0 = self.kb * self.B * self.T
         self.m = 1
-        self.sigma = 3.5
+        self.sigma = 2
         self.alpha = 3
         self.epsilon = 0.1
         self.d0 = 3.5
@@ -45,7 +45,7 @@ class ChannelParams:
     @property
     def gaussian_params(self):
         param_dict = {
-            'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 3.5,
+            'B': 312.5e3, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
             'alpha': 3, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
         return param_dict.items()
@@ -106,6 +106,7 @@ class Channel(ChannelBase):
     def remove_edges(self):
         removed_edges = torch.zeros(len(self.edges))
         time_cost = []
+        throughput = 0
         for i, edge in enumerate(self.edges):
             node = edge[0]
             PT = self.nodes[node]['com_P']
@@ -117,13 +118,17 @@ class Channel(ChannelBase):
             SNR = PT * G / self.N0
             Rate = self.B * log2(1 + SNR)
             Latency = self.model_size / Rate
-            time_cost.append(Latency)
+            self.topo.set_node(node=node, running_time=Latency)
             if Latency > self.epsilon:
                 removed_edges[i] = 1
 
-            self.topo.set_node(node=node, running_time=Latency)
+            throughput += Rate
+            time_cost.append(Latency)
 
+        packet_loss = sum(removed_edges)/len(self.edges)
         self.topo.report('time_cost', max(time_cost), 'plus')
+        self.topo.report('throughput', throughput, 'reset')
+        self.topo.report('packet_loss', packet_loss, 'reset')
 
         return removed_edges
 

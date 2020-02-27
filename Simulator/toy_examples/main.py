@@ -119,7 +119,8 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
-    model_p = ModelParallel(topo=topo, QoS=QoSDemo)
+    qos = QoSDemo(topo)
+    model_p = ModelParallel(qos=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)
 

@@ -49,9 +49,13 @@ class ModelParallel(ObjectParallel):
         This is a DataParallel override based on torch.nn.Moule,
         the gather and scatter function is re-writen with QoS constraints
     """
-    def __init__(self, topo, QoS, async_flag=False, debug=True):
+    def __init__(self, qos, async_flag=False, debug=True):
         self.async_flag = async_flag
         self.debug = debug
+
+        self.qos = qos
+        topo = self.qos.topo
+
         self.len_client = len(topo.clients_on_device)
 
         self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.clients_on_device)}
@@ -61,7 +65,8 @@ class ModelParallel(ObjectParallel):
         for server in topo.servers_on_device:
             data_dict[server] = list(torch.zeros_like(param.data) for param in topo.model.parameters())
 
-        self.qos = QoS(topo=topo)
+        # self.qos = QoS(topo=topo)
+
         self.buff = Buffer(data_dict, self.qos)
 
         self.distributed = Distributed(self.buff)

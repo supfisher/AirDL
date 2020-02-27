@@ -4,42 +4,43 @@ from torch.utils.data import Dataset
 from models import *
 from network import *
 import torch
+import numpy as np
 
 
 class Partition(Dataset):
     """ Dataset-like object, but only access a subset of it. """
 
     def __init__(self, data, index):
-        self.data = data
         self.index = index
 
+        xs, ys = [], []
+        for i in self.index:
+            x, y = data[i]
+            xs.append(x)
+            ys.append(y)
+
+        self.xs, self.ys = np.vstack(xs), np.vstack(ys)
+
     def __len__(self):
-        return len(self.index)
+        return len(self.xs)
 
     def __getitem__(self, index):
-        data_idx = self.index[index]
-        return self.data[data_idx]
+        return (self.xs[index], self.ys[index])
 
 
 class DataPartitioner(object):
     """ Partitions a dataset into different chuncks. """
 
     def __init__(self, data, partition_clients, seed=1234):
-
         self.data = data
         self.partitions = []
-
-        data_len = len(data)
-        indexes = [x for x in range(0, data_len)]
-
-        rng = Random()
-        rng.seed(seed)
-        rng.shuffle(indexes)
+        if type(data) is dict:
+            indexes = list(data.keys())
 
         partition_sizes = [len(clients) for clients in partition_clients]
-        part_len = int(data_len/sum(partition_sizes))
-        assert part_len > 0
 
+        part_len = int(len(indexes)/sum(partition_sizes))
+        assert part_len > 0
         for frac in partition_sizes:
             self.partitions.append([indexes[i*part_len:(i+1)*part_len] for i in range(frac)])
             indexes = indexes[part_len*frac:]
@@ -56,6 +57,7 @@ class DataParallel:
 
     def __init__(self, dataset, topo, *args, **kwargs):
         self.dataset = dataset
+
         partition = DataPartitioner(self.dataset, topo.clients_partitioned, seed=topo.seed)
         self.datasets = partition.on(topo.rank)
 
@@ -68,7 +70,7 @@ class DataParallel:
 
     def __next__(self):
         if self.itera_time < self.__len__():
-            self.itera_time += 1
+            self.itera_time+=1
             xs = []
             ys = []
             for d in self.dataloaders:

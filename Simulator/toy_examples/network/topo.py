@@ -9,7 +9,7 @@ import random
 
 
 class StandardReport:
-    def __init__(self, energy_cost=0, time_cost=0, **kwargs):
+    def __init__(self, energy_cost=0, time_cost=0, packet_loss=0, thoughput=0, **kwargs):
         """
         :param energy_cost: Total energy cost by clients
         :param time_cost: Total time cost by communication
@@ -19,6 +19,8 @@ class StandardReport:
         self.global_initializer(**kwargs)
         self.energy_cost = energy_cost
         self.time_cost = time_cost
+        self.packet_loss = packet_loss
+        self.thoughput = thoughput
 
     def global_initializer(self, **kwargs):
         """
@@ -77,8 +79,8 @@ class Topo(nx.DiGraph):
             msg += "  --adjcency: %s \n" % (self.adj[node])
         return msg
 
-    def count_parameters_in_MB(self, model):
-        return np.sum(np.prod(v.size()) for name, v in model.named_parameters() if "auxiliary" not in name) / 1e6
+    def count_parameters(self, model):
+        return np.sum(np.prod(v.size()) for name, v in model.named_parameters() if "auxiliary" not in name)
 
     def init_process_group(self, backend=None, rank=0, size=1, dist_url=None):
         """
@@ -131,7 +133,7 @@ class Topo(nx.DiGraph):
 
     @property
     def model_size(self):
-        return self.count_parameters_in_MB(self.model)
+        return self.count_parameters(self.model)
 
     def load_from_dict(self, dict):
         """
