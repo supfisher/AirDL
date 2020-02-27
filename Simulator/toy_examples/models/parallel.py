@@ -61,7 +61,8 @@ class ModelParallel(ObjectParallel):
         for server in topo.servers_on_device:
             data_dict[server] = list(torch.zeros_like(param.data) for param in topo.model.parameters())
 
-        self.qos = QoS(topo=topo)
+        # self.qos = QoS(topo=topo)
+        self.qos = QoS
         self.buff = Buffer(data_dict, self.qos)
 
         self.distributed = Distributed(self.buff)

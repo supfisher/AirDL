@@ -58,7 +58,7 @@ class QoS:
         self.removed_nodes = torch.zeros(len(self.topo.nodes))
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_nodes = self.remove_nodes()
-        self.broadcast(self.removed_nodes, src=self.topo.monitor_rank)
+        # self.broadcast(self.removed_nodes, src=self.topo.monitor_rank)
         removed_nodes = list(self.nodes_from(self.removed_nodes))
 
         logger.info("My rank is %d, removed_nodes: %s" % (self.topo.rank, str(removed_nodes)))
@@ -71,7 +71,7 @@ class QoS:
         self.removed_edges = torch.zeros(len(self.topo.edges))
         if self.topo.rank == self.topo.monitor_rank:
             self.removed_edges = self.remove_edges()
-        self.broadcast(self.removed_edges, src=self.topo.monitor_rank)
+        # self.broadcast(self.removed_edges, src=self.topo.monitor_rank)
         removed_edges = list(self.edges_from(self.removed_edges))
 
         logger.info("My rank is %d, removed_edges: %s" % (self.topo.rank, str(removed_edges)))
