@@ -269,7 +269,7 @@ def main():
 
     df_exp = pd.DataFrame(exp_results, columns=['epsilon', 'down_link', 'up_link', 'test_mse',
                                                 'test_mae', 'energy', 'time'])
-    file_name = 'exp_epsilon={}'.format(args.epsilon)
+    file_name = './data/exp_epsilon={}'.format(args.epsilon)
     df_exp.to_csv(file_name + '_acc.csv', index=False, float_format='%.4f')
 
     df_train_loss = pd.DataFrame(train_loss_history)
