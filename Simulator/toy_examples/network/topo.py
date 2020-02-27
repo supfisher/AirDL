@@ -20,7 +20,7 @@ class StandardReport:
         self.energy_cost = energy_cost
         self.time_cost = time_cost
         self.packet_loss = packet_loss
-        self.thoughput = thoughput
+        self.throughput = thoughput
 
     def global_initializer(self, **kwargs):
         """
