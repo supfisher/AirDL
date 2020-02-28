@@ -95,6 +95,7 @@ class ChannelParams:
 
     def update(self, kwargs):
         self.__dict__.update(kwargs)
+        return self.__dict__
 
     @property
     def gaussian_params(self):
@@ -102,9 +103,7 @@ class ChannelParams:
             'B': (self.f_u - self.f_l)/self.N, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
             'alpha': 2.5, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
-        self.update(param_dict)
-        return self.__dict__
-
+        return self.update(param_dict)
 
 
 class ChannelBase:
@@ -185,7 +184,7 @@ class Channel(ChannelBase):
 
         packet_loss = sum(removed_edges)/len(self.edges)
 
-        max_time_cost = max(time_cost) if len(time_cost)> 0 else self.epsilon
+        max_time_cost = max(time_cost) if len(time_cost) > 0 else self.epsilon
         self.topo.report('time_cost', max_time_cost, 'plus')
         self.topo.report('throughput', throughput, 'reset')
         self.topo.report('packet_loss', packet_loss, 'reset')
