@@ -189,6 +189,7 @@ def main():
         # u_link_history.append(u_link)
 
         # Test model performance
+        model_p.aggregate()
         test_loss, acc = test(args, model_p, criterion, device, test_loader, epoch)
         test_loss_history.append(test_loss)
         # test_acc.append(acc)

@@ -151,7 +151,8 @@ class Topo(nx.DiGraph):
             It checks whether uses a multiprocess method
         """
         ##TODO: should check whether use multiprocess
-        return dist.is_initialized()
+        return None
+        # return dist.is_initialized()
 
     @property
     def model_size(self):
@@ -244,10 +245,11 @@ class Topo(nx.DiGraph):
         """
             In a distributed task, it returns the rank id of current computing machine
         """
-        if dist.is_initialized():
-            return dist.get_rank()
-        else:
-            return 0
+        # if dist.is_initialized():
+        #     return dist.get_rank()
+        # else:
+        #     return 0
+        return 0
 
     @property
     def time(self):

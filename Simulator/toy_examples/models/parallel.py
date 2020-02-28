@@ -59,7 +59,8 @@ class ModelParallel(ObjectParallel):
         self.buff = Buffer(self.qos)
         self.distributed = Distributed(self.buff)
 
-        self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
+        # self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
+        self.module = {key: self.buff.models[key] for key in topo.nodes_on_device}
 
         super(ModelParallel, self).__init__(list(self.module.values()))
 
