@@ -116,6 +116,8 @@ class ChannelBase:
         self.topo = topo
         self.nodes = self.topo.nodes
         self.edges = self.topo.edges
+        self.idea_nodes = []
+        self.idea_edges = []
         self.model_size = self.topo.model_size
 
     def _cal_E(self, node, key):
@@ -152,19 +154,20 @@ class Channel(ChannelBase):
 
     def __init__(self, topo, **kwargs):
         super(Channel, self).__init__(topo)
-        self.idea_nodes = []
+
+
         params = ChannelParams(N=len(self.edges)).gaussian_params
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
 
     def remove_edges(self):
-        removed_edges = torch.zeros(self.N)
+        removed_edges = torch.zeros(len(self.edges))
         time_cost = []
         throughput = 0
 
         for i, edge in enumerate(self.edges):
             node = edge[0]
-            if node in self.idea_nodes:
+            if node in self.idea_nodes or edge in self.idea_edges:
                 continue
             PT = self.nodes[node]['com_P']
             f = self.f_l + (i - 1 / 2) * self.B
@@ -174,15 +177,15 @@ class Channel(ChannelBase):
                            PR_bar * (exp(self.sigma ** 2) - 1) * exp(self.sigma ** 2 / 2))
             G = gamrnd(self.m, omega / self.m)
             SNR = G / self.N0
-            Rate = self.B * log2(1 + SNR)
-            Latency = self.model_size / Rate
+            Rate = self.B * log2(1 + SNR)+0.001 ## Here we add a small value in case of Rate to be 0
+            Latency = 1000 / Rate ##TODO: Here we temporaly assume the packet size is 1000
 
             if Latency > self.epsilon:
                 removed_edges[i] = 1
                 Latency = self.epsilon
             else:
                 throughput += Rate*1e-6
-            time_cost.append(Latency)
+            time_cost.append(self.model_size/Rate)
             self.topo.set_node(node=node, running_time=Latency)
 
         packet_loss = sum(removed_edges).item()/len(self.edges)

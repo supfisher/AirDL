@@ -106,9 +106,9 @@ class Buffer(DataBase):
 
 
 class Distributed:
-    def __init__(self, buff):
+    def __init__(self, buff=None):
         self.buff = buff
-        self.register()
+        # self.register()
 
     def register(self):
         self.buff.register()
@@ -194,5 +194,5 @@ class Distributed:
         for w in client_worker:
             w.wait()
         ## must have it to update temporary values and update qos
-        self.register()
+        # self.register()
 

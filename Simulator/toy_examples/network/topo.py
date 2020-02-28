@@ -187,8 +187,8 @@ class Topo(nx.DiGraph):
     def defaults_data_dict(self):
         data = {
             'type': 'client',
-            'com_P': 1e-2,
-            'cal_P': 1e-4,
+            'com_P': 1e-1,
+            'cal_P': 1e-2,
             'energy': 30,
             'energy_cost': 0,
             'movable': False,

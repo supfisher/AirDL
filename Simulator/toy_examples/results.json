@@ -140,3 +140,10 @@
 {'start_time': 1582862823.100579, 'energy_cost': 0.0012981979815041335, 'time_cost': 7.871928967563691, 'packet_loss': 0.25, 'throughput': 62.619207433919634, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
 {'start_time': 1582862823.100579, 'energy_cost': 0.0014530000983308034, 'time_cost': 8.823950026065821, 'packet_loss': 0.25, 'throughput': 50.831638017198046, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
 {'start_time': 1582862884.944414, 'energy_cost': 1.2000800249687764e-05, 'time_cost': 0.18858096554600942, 'packet_loss': 0.25, 'throughput': 71.67022814981263, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582870739.852648, 'energy_cost': 0.0013341143023899238, 'time_cost': inf, 'packet_loss': 0.25, 'throughput': 94.62520906947955, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
+{'start_time': 1582870806.546975, 'energy_cost': 0.0011962075170112644, 'time_cost': 2399764023.5256133, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582870875.632363, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582870985.807484, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582871046.9931479, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582871119.57682, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582871239.105988, 'energy_cost': 0.0010000763911356125, 'time_cost': 1199882000.0095105, 'packet_loss': 0.0, 'throughput': 266.64727770216075, 'removed_nodes': [], 'removed_edges': []}

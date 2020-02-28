@@ -29,7 +29,8 @@ parser.add_argument('--log-interval', type=int, default=10, metavar='N',
 parser.add_argument('--save-model', action='store_true', default=False,
                     help='For Saving the current Model')
 
-
+parser.add_argument('--backend', default=None, type=str,
+                    help="The backend used for the distributed system.")
 parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
                     help='For Saving the current Model')
 parser.add_argument('--rank', default=1, type=int,
@@ -59,6 +60,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                 print("loss: ", list(loss.item()))
                 print("report: ", args.topo.report)
                 args.topo.report.write('results.json')
+                model_a = model.aggregate()
 
 
 def test(args, model, criterion, device, test_loader):
@@ -102,8 +104,9 @@ def main():
         For using 'gloo', you need to follow the guideline in run.sh
         For using None, it is running on a single CPU. 
     """
-    topo = RandTopo(model, backend=None, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
+    topo = RandTopo(model, backend=args.backend, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
                     rand_method=('static', args.clients))
+    print(topo)
     args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}

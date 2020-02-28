@@ -54,30 +54,42 @@ class ModelParallel(ObjectParallel):
         self.debug = debug
 
         self.qos = qos
-        topo = self.qos.topo
+        self.topo = self.qos.topo
 
-        self.len_client = len(topo.clients_on_device)
+        self.len_client = len(self.topo.clients_on_device)
 
-        self.module = {node: copy.deepcopy(topo.model) for _, node in enumerate(topo.clients_on_device)}
+        self.module = {node: copy.deepcopy(self.topo.model) for _, node in enumerate(self.topo.clients_on_device)}
 
-        data_dict = {node: list(param.data for param in m.parameters())
-                     for node, m in self.module.items()}
-        for server in topo.servers_on_device:
-            data_dict[server] = list(torch.zeros_like(param.data) for param in topo.model.parameters())
-
-        # self.qos = QoS(topo=topo)
-
-        self.buff = Buffer(data_dict, self.qos)
-
-        self.distributed = Distributed(self.buff)
-
+        self.distributed = Distributed()
+        self.register()
         super(ModelParallel, self).__init__(list(self.module.values()))
 
     def __call__(self, data, *args, **kwargs):
+        self.register()
 
         self.distributed.gather_scatter(async_flag=self.async_flag)
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
+
+    def register(self):
+        self.data_dict = {node: list(param.data for param in m.parameters())
+                          for node, m in self.module.items()}
+
+        for server in self.topo.servers_on_device:
+            self.data_dict[server] = list(torch.zeros_like(param.data) for param in self.topo.model.parameters())
+
+        self.buff = Buffer(self.data_dict, self.qos)
+        self.distributed.buff = self.buff
+        self.distributed.register()
+
+    def aggregate(self):
+        if self.topo.rank == self.topo.monitor_rank:
+            for server in self.topo.servers_on_device:
+                for param, data in zip(self.topo.model.parameters(), self.buff.mem[server]):
+                    param.data = data
+            return self.topo.model
+        else:
+            return None
 
     def stop_condition(self):
         """

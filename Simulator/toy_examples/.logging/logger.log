@@ -14255,3 +14255,229 @@ I have nodes on my device: ['c0', 'c1', 'c2']
 2020-02-28 07:08:09,411 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
 2020-02-28 07:09:23,250 - Simulator - INFO - My rank is 0, removed_nodes: []
 2020-02-28 07:09:23,251 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 08:17:37,213 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 08:17:49,216 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 08:18:33,625 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 08:18:45,514 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 08:38:33,965 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 08:38:50,962 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 09:15:16,615 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 09:15:58,925 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 09:17:04,227 - Simulator - ERROR - MPI seems not implemented...
+ Code will break down...
+2020-02-28 09:17:41,394 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:18:40,020 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:18:40,253 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:18:59,852 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:19:00,099 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:00,100 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:19:00,163 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:00,164 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:19:00,173 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:00,174 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:19:19,247 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:19,248 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:19:19,260 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:19,261 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:19:23,711 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:23,712 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:19:23,723 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:23,724 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:19:27,824 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:27,824 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:19:27,836 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:27,837 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:19:31,946 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:31,947 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:19:31,957 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:31,958 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:19:41,820 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:41,821 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:19:41,833 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:19:41,834 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:20:06,547 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:20:06,777 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:06,778 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:06,831 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:06,832 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:20:06,841 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:06,842 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:29,731 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:29,732 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:20:29,745 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:29,746 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:32,984 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:32,985 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:20:32,997 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:32,998 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:36,247 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:36,248 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:36,259 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:36,259 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:41,857 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:41,858 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:20:41,868 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:41,868 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:45,127 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:45,128 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:45,141 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:45,141 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:48,883 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:48,884 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0'), ('c2', 'c0')]
+2020-02-28 09:20:48,896 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:48,897 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:52,542 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:52,542 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:52,552 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:52,553 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:55,912 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:55,912 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:20:55,923 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:20:55,923 - Simulator - INFO - My rank is 0, removed_edges: [('c2', 'c0')]
+2020-02-28 09:21:15,632 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:21:15,862 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:15,863 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:15,924 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:15,925 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:15,933 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:15,934 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:39,088 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:39,089 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:39,098 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:39,098 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:43,699 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:43,699 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:21:43,708 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:21:43,709 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:22:01,299 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:22:01,524 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:22:01,524 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:22:01,569 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:22:01,569 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:22:01,591 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:22:01,591 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:22:18,413 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:22:18,643 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:22:18,643 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:23:05,807 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:23:06,035 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:23:06,035 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:23:06,040 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:23:06,040 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:23:06,082 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:23:06,082 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:23:23,571 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:23:23,571 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:23:28,139 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:23:28,140 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:24:06,993 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:24:07,232 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:24:07,232 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:24:07,280 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:24:07,280 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:25:19,577 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:25:19,825 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:25:19,825 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:25:19,868 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:25:19,869 - Simulator - INFO - My rank is 0, removed_edges: []
+2020-02-28 09:27:19,106 - Simulator - INFO - My rank is 0 
+I have nodes on my device: ['c0', 'c1', 'c2'] 
+  --name: c0, --attrs: {'type': 'server', 'energy': inf, 'com_P': 0.15, 'movable': False, 'adj': {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}}, 'rank': 0, 'cal_P': 0.01, 'energy_cost': 0, 'running_time': 0} 
+  --adjcency: {'c1': {'channel': 'Gaussian'}, 'c2': {'channel': 'Gaussian'}} 
+  --name: c1, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+  --name: c2, --attrs: {'type': 'client', 'adj': {'c0': {'channel': 'Gaussian'}}, 'rank': 0, 'com_P': 0.1, 'cal_P': 0.01, 'energy': 30, 'energy_cost': 0, 'movable': False, 'running_time': 0} 
+  --adjcency: {'c0': {'channel': 'Gaussian'}} 
+
+2020-02-28 09:27:19,359 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:27:19,360 - Simulator - INFO - My rank is 0, removed_edges: [('c1', 'c0')]
+2020-02-28 09:27:19,407 - Simulator - INFO - My rank is 0, removed_nodes: []
+2020-02-28 09:27:19,408 - Simulator - INFO - My rank is 0, removed_edges: []
