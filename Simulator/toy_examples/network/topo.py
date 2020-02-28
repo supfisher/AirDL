@@ -342,6 +342,7 @@ class RandTopo(Topo):
         dict = {'c0':{
                         'type': 'server',
                         'energy': float('inf'),
+                        'com_P': 1.5e-1,
                         'movable': False,
                         'adj': {}
                         }
