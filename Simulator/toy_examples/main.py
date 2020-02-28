@@ -38,6 +38,8 @@ parser.add_argument('--rank', default=1, type=int,
                          "on your master process.")
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
+parser.add_argument('--clients', default=2, type=int,
+                    help="The total number of processes.")
 
 
 def train(args, model, criterion, device, train_loader, optimizer, epoch):
@@ -56,6 +58,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                     100. * batch_idx / len(train_loader)))
                 print("loss: ", list(loss.item()))
                 print("report: ", args.topo.report)
+                args.topo.report.write('results.json')
 
 
 def test(args, model, criterion, device, test_loader):
@@ -99,8 +102,8 @@ def main():
         For using 'gloo', you need to follow the guideline in run.sh
         For using None, it is running on a single CPU. 
     """
-    topo = RandTopo(model, backend='none', rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
-                    rand_method=('static', 2))
+    topo = RandTopo(model, backend=None, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
+                    rand_method=('static', args.clients))
     args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}

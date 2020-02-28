@@ -152,17 +152,20 @@ class Channel(ChannelBase):
 
     def __init__(self, topo, **kwargs):
         super(Channel, self).__init__(topo)
+        self.idea_nodes = []
         params = ChannelParams(N=len(self.edges)).gaussian_params
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
 
     def remove_edges(self):
-        removed_edges = torch.zeros(len(self.edges))
+        removed_edges = torch.zeros(self.N)
         time_cost = []
         throughput = 0
 
         for i, edge in enumerate(self.edges):
             node = edge[0]
+            if node in self.idea_nodes:
+                continue
             PT = self.nodes[node]['com_P']
             f = self.f_l + (i - 1 / 2) * self.B
             d = (self.delta + self.d0) / 2
@@ -182,8 +185,7 @@ class Channel(ChannelBase):
             time_cost.append(Latency)
             self.topo.set_node(node=node, running_time=Latency)
 
-        packet_loss = sum(removed_edges)/len(self.edges)
-
+        packet_loss = sum(removed_edges).item()/len(self.edges)
         max_time_cost = max(time_cost) if len(time_cost) > 0 else self.epsilon
         self.topo.report('time_cost', max_time_cost, 'plus')
         self.topo.report('throughput', throughput, 'reset')
@@ -221,3 +223,10 @@ class ChannelDemo_Perfect(Channel):
     def remove_nodes(self):
         removed_nodes = torch.zeros(len(self.topo.nodes))
         return removed_nodes
+
+
+class ChannelDemo_ideaDownlink(Channel):
+    def __init__(self, topo, **kwargs):
+        super(ChannelDemo_ideaDownlink, self).__init__(topo)
+        self.idea_nodes = ['c0']
+

@@ -7,6 +7,9 @@ import time
 from .logging import logger
 import random
 
+import pickle
+import torch
+
 
 class StandardReport:
     def __init__(self, energy_cost=0, time_cost=0, packet_loss=0, thoughput=0, **kwargs):
@@ -32,6 +35,17 @@ class StandardReport:
     def keys(self):
         return self.__dict__.keys()
 
+    def write(self, file_path):
+        """
+            It stores a dict in the file_path using a human reading mode
+        """
+        with open(file_path, 'a') as f:
+            f.write(str(self.__dict__) + '\n')
+
+    def dump(self, file_path):
+        with open(file_path, 'ab') as f:
+            pickle.dump(self.__dict__, f)
+
     def __call__(self, key, value, operation='plus'):
         assert operation in ['minus', 'plus', 'reset']
         if key in self.keys:
@@ -54,6 +68,7 @@ class StandardReport:
             if k != 'start_time':
                 msg += '%s: %s\n' % (k, v)
         return msg
+
 
 
 ##TODO: We should consider about multiple cells, but only one FL server.
@@ -122,6 +137,13 @@ class Topo(nx.DiGraph):
                 else:
                     logger.error("GLOO seems not implemented...\n Code will break down...")
                     sys.exit()
+
+            else:
+                return None
+        else:
+            return None
+
+
 
     @property
     def is_multiprocess(self):
