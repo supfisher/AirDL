@@ -127,6 +127,8 @@ def main():
     print(use_cuda)
 
     torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    np.random.seed(args.seed)
 
     # device = torch.device("cuda" if use_cuda else "cpu")
     device = torch.device("cpu")
