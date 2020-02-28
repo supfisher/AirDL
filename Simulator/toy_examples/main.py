@@ -14,7 +14,7 @@ parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 64)')
 parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=14, metavar='N',
+parser.add_argument('--epochs', type=int, default=50, metavar='N',
                     help='number of epochs to train (default: 14)')
 parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
                     help='learning rate (default: 1.0)')
@@ -29,7 +29,7 @@ parser.add_argument('--log-interval', type=int, default=10, metavar='N',
 parser.add_argument('--save-model', action='store_true', default=False,
                     help='For Saving the current Model')
 
-parser.add_argument('--backend', default='mpi', type=str,
+parser.add_argument('--backend', default=None, type=str,
                     help="The backend used for the distributed system.")
 parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
                     help='For Saving the current Model')
@@ -39,8 +39,9 @@ parser.add_argument('--rank', default=1, type=int,
                          "on your master process.")
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
-parser.add_argument('--clients', default=2, type=int,
+parser.add_argument('--clients', default=10, type=int,
                     help="The total number of processes.")
+
 
 
 def train(args, model, criterion, device, train_loader, optimizer, epoch):
@@ -55,11 +56,13 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
             optimizer.step()
             if batch_idx % args.log_interval == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]'.format(
-                    epoch, batch_idx * len(data[0]), len(train_loader),
+                    epoch, batch_idx * len(data[0]), len(train_loader.datasets[0]),
                     100. * batch_idx / len(train_loader)))
-                print("loss: ", list(loss.item()))
+
+                args.topo.report('rank', args.topo.rank, 'reset')
+                args.topo.report('loss', list(loss.item()), 'reset')
                 print("report: ", args.topo.report)
-                args.topo.report.write('results.json')
+                args.topo.report.write('results_'+str(args.clients)+'.json')
 
 
 def test(args, model, criterion, device, test_loader):
@@ -84,6 +87,7 @@ def test(args, model, criterion, device, test_loader):
 def main():
     # Training settings
     args = parser.parse_args()
+    args.batch_size = int(640/args.clients)
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
     torch.manual_seed(args.seed)
@@ -105,7 +109,8 @@ def main():
     """
     topo = RandTopo(model, backend=args.backend, rank=args.rank, size=args.world_size+1, dist_url=args.dist_url,
                     rand_method=('static', args.clients))
-    print(topo)
+    if topo.rank == 0:
+        print(topo)
     args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}

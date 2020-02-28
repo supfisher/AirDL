@@ -89,7 +89,7 @@ class QoS:
 
 class QoSDemo(QoS):
     def __init__(self, topo):
-        self.channel = ChannelDemo_Perfect(topo)
+        self.channel = ChannelDemo_ideaDownlink(topo)
         super(QoSDemo, self).__init__(topo)
 
     def remove_nodes(self):

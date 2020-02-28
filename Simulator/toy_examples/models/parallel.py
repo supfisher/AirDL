@@ -65,7 +65,24 @@ class ModelParallel(ObjectParallel):
 
     def __call__(self, data, *args, **kwargs):
 
+        # for c in self.qos.topo_origin.clients_on_device:
+        #     check1 = [(b - param.data).sum() for b, param in zip(self.buff.data[c], self.module[c].parameters())]
+        #     print('rank: ', self.qos.topo_origin.rank, c, 'check: ', sum(check1))
+        #
+        # c0 = self.qos.topo_origin.clients_on_device[0]
+        # c1 = self.qos.topo_origin.clients_on_device[1]
+        #
+        # check01 = [(a - b).sum() for a, b in zip(self.buff.data[c0], self.buff.data[c1])]
+        # print('rank: ', self.buff.topo.rank, "before check01: ", sum(check01))
+
         self.distributed.gather_scatter(async_flag=self.async_flag)
+
+        # c0 = self.qos.topo_origin.clients_on_device[0]
+        # c1 = self.qos.topo_origin.clients_on_device[1]
+        #
+        # check01 = [(a-b).sum() for a, b in zip(self.buff.data[c0], self.buff.data[c1])]
+        # print('rank: ', self.qos.topo_origin.rank, "check01: ", sum(check01))
+        #
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
 

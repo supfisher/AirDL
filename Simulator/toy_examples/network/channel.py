@@ -100,7 +100,7 @@ class ChannelParams:
     @property
     def gaussian_params(self):
         param_dict = {
-            'B': (self.f_u - self.f_l)/self.N, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
+            'B': (self.f_u - self.f_l)/20, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
             'alpha': 2.5, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
         return self.update(param_dict)
@@ -164,6 +164,7 @@ class Channel(ChannelBase):
         removed_edges = torch.zeros(len(self.edges))
         time_cost = []
         throughput = 0
+        goodput = 0
 
         for i, edge in enumerate(self.edges):
             node = edge[0]
@@ -184,7 +185,8 @@ class Channel(ChannelBase):
                 removed_edges[i] = 1
                 Latency = self.epsilon
             else:
-                throughput += Rate*1e-6
+                goodput += (Rate-0.001)*1e-6
+            throughput += (Rate-0.001)*1e-6
             time_cost.append(self.model_size/Rate)
             self.topo.set_node(node=node, running_time=Latency)
 
@@ -192,6 +194,7 @@ class Channel(ChannelBase):
         max_time_cost = max(time_cost) if len(time_cost) > 0 else self.epsilon
         self.topo.report('time_cost', max_time_cost, 'plus')
         self.topo.report('throughput', throughput, 'reset')
+        self.topo.report('goodput', goodput, 'reset')
         self.topo.report('packet_loss', packet_loss, 'reset')
 
         return removed_edges
@@ -220,11 +223,11 @@ class ChannelDemo_Perfect(Channel):
         super(ChannelDemo_Perfect, self).__init__(topo)
 
     def remove_edges(self):
-        removed_edges = torch.zeros(len(self.edges))
+        removed_edges = torch.ones(len(self.edges))
         return removed_edges
 
     def remove_nodes(self):
-        removed_nodes = torch.zeros(len(self.topo.nodes))
+        removed_nodes = torch.ones(len(self.topo.nodes))
         return removed_nodes
 
 
