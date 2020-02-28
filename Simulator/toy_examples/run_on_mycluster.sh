@@ -11,4 +11,4 @@
 #OpenMP settings:
 
 
-mpirun -np 1 --mca btl_tcp_if_include enp97s0f1 python ./main.py --clients=20 --backend='mpi'
+mpirun -np 2 --mca btl_tcp_if_include enp97s0f1 python ./main.py --clients=4 --backend='mpi'

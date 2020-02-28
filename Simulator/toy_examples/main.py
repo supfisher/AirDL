@@ -29,7 +29,7 @@ parser.add_argument('--log-interval', type=int, default=10, metavar='N',
 parser.add_argument('--save-model', action='store_true', default=False,
                     help='For Saving the current Model')
 
-parser.add_argument('--backend', default=None, type=str,
+parser.add_argument('--backend', default='mpi', type=str,
                     help="The backend used for the distributed system.")
 parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
                     help='For Saving the current Model')

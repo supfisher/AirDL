@@ -26,11 +26,13 @@ class PackData:
 
 
 class DataBase:
-    def __init__(self, data=None, qos=None):
+    def __init__(self, qos=None):
         self.qos = qos
-        self._data = data
-        self._mem = copy.deepcopy(self._data) ## maintains a history of data
-        # self.register()
+        model = self.qos.topo.model
+        self.models = {node: copy.deepcopy(model) for _, node in enumerate(self.qos.topo.nodes_on_device)}
+        self._data = {node: list(param.data for param in m.parameters())
+                          for node, m in self.models.items()}
+        self._mem = copy.deepcopy(self.data) ## maintains a history of data
 
     @property
     def topo(self):
@@ -43,7 +45,7 @@ class DataBase:
     @data.setter
     def data(self, value):
         (data, id) = value
-        for b, d in zip(self._data[id], data):# TODO should maintain the localtion while changeing the vale
+        for b, d in zip(self.data[id], data):
             b -= b
             b += d
 
@@ -86,8 +88,8 @@ class DataBase:
 
 
 class Buffer(DataBase):
-    def __init__(self, data, qos):
-        super(Buffer, self).__init__(data, qos)
+    def __init__(self, qos):
+        super(Buffer, self).__init__(qos)
 
     def register(self):
         self.qos()
@@ -108,69 +110,66 @@ class Buffer(DataBase):
 class Distributed:
     def __init__(self, buff=None):
         self.buff = buff
-        # self.register()
+        self.register()
 
     def register(self):
         self.buff.register()
         self.topo = self.buff.topo
         self.nodes = self.topo.nodes
-        self.nodes_on_device = self.topo.nodes_on_device
-        self.clients_on_device = self.topo.clients_on_device
-        self.servers_on_device = self.topo.servers_on_device
         self.rank = self.topo.rank
 
-    def isend(self, data_dict, socket, **kwargs):
+    def isend(self, socket, **kwargs):
         (self_rank, self_node, dst_rank, dst_node) = socket
         worker = []
         if not self_rank == dst_rank:
             worker += [dist.isend(data, dst=dst_rank, **kwargs)
-                       for data in data_dict[self_node]]
+                       for data in self.buff.data[self_node]]
         else:
-            data_dict[dst_node] = copy.deepcopy(data_dict[self_node])
+            self.buff.data = (self.buff.data[self_node], dst_node)
         return worker
 
-    def irecv(self, data_dict, socket, **kwargs):
+    def irecv(self, socket, **kwargs):
         (self_rank, self_node, src_rank, src_node) = socket
         worker = []
         if not self_rank == src_rank:
             worker += [dist.irecv(data, src=src_rank, **kwargs)
-                       for data in data_dict[self_node]]
+                       for data in self.buff.data[self_node]]
         else:
-            data_dict[self_node] = copy.deepcopy(data_dict[src_node])
+            self.buff.data = (self.buff.data[src_node], self_node)
         return worker
 
-    def send(self, data_dict, socket, **kwargs):
-        worker = self.isend(data_dict, socket, **kwargs)
+    def send(self, socket, **kwargs):
+        worker = self.isend(socket, **kwargs)
         for w in worker:
             w.wait()
 
-    def recv(self, data_dict, socket, **kwargs):
-        worker = self.irecv(data_dict, socket, **kwargs)
+    def recv(self, socket, **kwargs):
+        worker = self.irecv(socket, **kwargs)
         for w in worker:
             w.wait()
 
-    def clients_work(self, data, clients):
+    def clients_work(self, clients):
         client_worker = []
         for client in clients:
             for adj in self.topo.out_links(client):
                 socket = (self.nodes[client]['rank'], client,
                           self.nodes[adj]['rank'], adj)
-                client_worker += self.isend(data, socket=socket)
+                client_worker += self.isend(socket=socket)
             for adj in self.topo.in_links(client):
                 socket = (self.nodes[client]['rank'], client,
                           self.nodes[adj]['rank'], adj)
-                client_worker += self.irecv(data, socket=socket)
+                client_worker += self.irecv(socket=socket)
         return client_worker
 
-    def servers_work(self, data, servers, async_flag, gather_fn):
+    def servers_work(self, servers, async_flag, gather_fn):
         for server in servers:
             for adj in self.topo.in_links(server):
                 socket = (self.nodes[server]['rank'], server,
                           self.nodes[adj]['rank'], adj)
-                self.recv(data, socket=socket)
+                self.recv(socket=socket)
                 gather_fn(server)
                 if async_flag and adj in self.topo.out_links(server):
-                    self.send(data, socket=socket)
+                    self.send(socket=socket)
 
         ## for those clients donot send data to server successfully,
         ## we broadcast it with the final averaged data
@@ -179,20 +178,20 @@ class Distributed:
                 for adj in set(self.topo.out_links(server)).difference(set(self.topo.in_links(server))):
                     socket = (self.nodes[server]['rank'], server,
                               self.nodes[adj]['rank'], adj)
-                    self.send(data, socket=socket)
+                    self.send(socket=socket)
 
         if not async_flag:
             for server in servers:
                 for adj in self.topo.out_links(server):
                     socket = (self.nodes[server]['rank'], server,
                               self.nodes[adj]['rank'], adj)
-                    self.send(data, socket=socket)
+                    self.send(socket=socket)
 
     def gather_scatter(self, async_flag):
-        client_worker = self.clients_work(self.buff.data, self.clients_on_device)
-        self.servers_work(self.buff.data, self.servers_on_device, async_flag, self.buff.gather_fn)
+        client_worker = self.clients_work(self.topo.clients_on_device)
+        self.servers_work(self.topo.servers_on_device, async_flag, self.buff.gather_fn)
         for w in client_worker:
             w.wait()
         ## must have it to update temporary values and update qos
-        # self.register()
+        self.register()
 

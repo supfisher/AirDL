@@ -41,7 +41,7 @@ class CriterionParallel(ObjectParallel):
         return ObjectParallel(loss_list)
 
 
-from .distributed_v2 import Distributed, Buffer
+from .distributed import Distributed, Buffer
 
 
 class ModelParallel(ObjectParallel):
@@ -54,15 +54,12 @@ class ModelParallel(ObjectParallel):
         self.debug = debug
 
         self.qos = qos
-        self.topo = self.qos.topo
-
-        self.len_client = len(self.topo.clients_on_device)
+        topo = self.qos.topo
 
         self.buff = Buffer(self.qos)
         self.distributed = Distributed(self.buff)
-        self.distributed.register()
 
-        self.module = {key: self.buff.models[key] for key in self.topo.clients_on_device}
+        self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
 
         super(ModelParallel, self).__init__(list(self.module.values()))
 
@@ -73,11 +70,8 @@ class ModelParallel(ObjectParallel):
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
 
     def aggregate(self):
-        if self.topo.rank == self.topo.monitor_rank:
-            for server in self.topo.servers_on_device:
-                for param, data in zip(self.topo.model.parameters(), self.buff.mem[server]):
-                    param.data = data
-            return self.topo.model
+        if self.qos.topo.rank == self.qos.topo.monitor_rank:
+            return self.module[self.qos.topo.servers_on_device[0]]
         else:
             return None
 
