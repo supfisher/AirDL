@@ -180,7 +180,7 @@ class Channel(ChannelBase):
             Latency = 1000 / Rate ##TODO: Here we temporaly assume the packet size is 1000
 
             if Latency > self.epsilon:
-                removed_edges[i] = 1
+                # removed_edges[i] = 1
                 Latency = self.epsilon
             else:
                 goodput += (Rate-0.001)*1e-6

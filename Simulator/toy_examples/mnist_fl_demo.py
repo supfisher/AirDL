@@ -189,8 +189,8 @@ def main():
         # u_link_history.append(u_link)
 
         # Test model performance
-        model_p.aggregate()
-        test_loss, acc = test(args, model_p, criterion, device, test_loader, epoch)
+        avg_model = AvgParallel(model_p.aggregate(), args)
+        test_loss, acc = test(args, avg_model, criterion, device, test_loader, epoch)
         test_loss_history.append(test_loss)
         # test_acc.append(acc)
         exp_results.append((args.epsilon, d_link, u_link, acc, consumed_energy, used_time, goodput, packe_tloss))
