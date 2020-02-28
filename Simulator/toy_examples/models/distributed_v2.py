@@ -26,10 +26,12 @@ class PackData:
 
 
 class DataBase:
-    def __init__(self, data=None, qos=None):
+    def __init__(self, qos=None):
         self.qos = qos
-        self._data = data
-        self._mem = copy.deepcopy(self._data) ## maintains a history of data
+        self.model = self.qos.topo_origin.model
+        self.models = {node: copy.deepcopy(self.model) for _, node in enumerate(self.qos.topo_origin.nodes_on_device)}
+
+        self._mem = copy.deepcopy(self.data) ## maintains a history of data
         # self.register()
 
     @property
@@ -38,14 +40,15 @@ class DataBase:
 
     @property
     def data(self):
-        return self._data
+        data_dict = {node: list(param.data for param in m.parameters())
+                          for node, m in self.models.items()}
+        return data_dict
 
     @data.setter
     def data(self, value):
         (data, id) = value
-        for b, d in zip(self._data[id], data):# TODO should maintain the localtion while changeing the vale
-            b -= b
-            b += d
+        for param, d in zip(self.models[id].parameters(), data):
+            param.data = copy.deepcopy(d)
 
     @property
     def mem(self):
@@ -86,8 +89,8 @@ class DataBase:
 
 
 class Buffer(DataBase):
-    def __init__(self, data, qos):
-        super(Buffer, self).__init__(data, qos)
+    def __init__(self, qos):
+        super(Buffer, self).__init__(qos)
 
     def register(self):
         self.qos()
@@ -126,7 +129,7 @@ class Distributed:
             worker += [dist.isend(data, dst=dst_rank, **kwargs)
                        for data in data_dict[self_node]]
         else:
-            data_dict[dst_node] = copy.deepcopy(data_dict[self_node])
+            self.buff.data = (self.buff.data[self_node], dst_node)
         return worker
 
     def irecv(self, data_dict, socket, **kwargs):
@@ -136,7 +139,7 @@ class Distributed:
             worker += [dist.irecv(data, src=src_rank, **kwargs)
                        for data in data_dict[self_node]]
         else:
-            data_dict[self_node] = copy.deepcopy(data_dict[src_node])
+            self.buff.data = (self.buff.data[src_node], self_node)
         return worker
 
     def send(self, data_dict, socket, **kwargs):
@@ -194,5 +197,5 @@ class Distributed:
         for w in client_worker:
             w.wait()
         ## must have it to update temporary values and update qos
-        # self.register()
+        self.register()
 

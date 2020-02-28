@@ -147,3 +147,108 @@
 {'start_time': 1582871046.9931479, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
 {'start_time': 1582871119.57682, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
 {'start_time': 1582871239.105988, 'energy_cost': 0.0010000763911356125, 'time_cost': 1199882000.0095105, 'packet_loss': 0.0, 'throughput': 266.64727770216075, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.002, 'time_cost': 1242441117.2457573, 'packet_loss': 0.25, 'throughput': 0.37792815530082063, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.015251569529261592, 'time_cost': 10885249561.040545, 'packet_loss': 0.25, 'throughput': 117.84179327841669, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.025923839233562652, 'time_cost': 19000501427.07599, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.03493564726941723, 'time_cost': 24438939195.47479, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.05093674593403158, 'time_cost': 33323053180.261776, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.06552024838236613, 'time_cost': 42926916614.1042, 'packet_loss': 0.0, 'throughput': 160.9567908862737, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.078523037283928, 'time_cost': 52525973513.96599, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.09281707344507158, 'time_cost': 63282081565.81481, 'packet_loss': 0.25, 'throughput': 211.66525667737614, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.10784545131199878, 'time_cost': 74342848920.83977, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.12129394295299901, 'time_cost': 82199407908.02141, 'packet_loss': 0.25, 'throughput': 48.49036961097779, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.13431476369317924, 'time_cost': 90487918765.71217, 'packet_loss': 0.25, 'throughput': 0.040769663424917876, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.14846083905567423, 'time_cost': 98886611082.80167, 'packet_loss': 0.0, 'throughput': 165.6272518162345, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.15949708891776268, 'time_cost': 107198568226.00026, 'packet_loss': 0.25, 'throughput': 172.11384997245347, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.17352193690091078, 'time_cost': 115171404717.02776, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.18557372600233335, 'time_cost': 124770460717.23541, 'packet_loss': 0.25, 'throughput': 22.073576465673778, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.19945782324811923, 'time_cost': 134331863766.38834, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.20796581578509638, 'time_cost': 140330977919.50912, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.220991803596221, 'time_cost': 148724129349.85324, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.23601838667506972, 'time_cost': 155925383722.17, 'packet_loss': 0.0, 'throughput': 190.37514982804203, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.24523238432073036, 'time_cost': 161969188804.04303, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.2583176523426409, 'time_cost': 167909126051.15967, 'packet_loss': 0.0, 'throughput': 267.2790437730566, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.26963171888401277, 'time_cost': 177504941911.69064, 'packet_loss': 0.25, 'throughput': 157.10282578122076, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582874936.0620658, 'energy_cost': 0.28139507655141455, 'time_cost': 181191951718.6533, 'packet_loss': 0.25, 'throughput': 186.72585016757048, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.0010937857429597132, 'time_cost': 2399764000.0, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.01525834705816257, 'time_cost': 14398584000.0, 'packet_loss': 0.25, 'throughput': 0.13920452025390748, 'removed_nodes': [], 'removed_edges': [('c2', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.03063579291514606, 'time_cost': 22915458752.147358, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.048636062257761, 'time_cost': 33424882094.34923, 'packet_loss': 0.25, 'throughput': 107.85445363835184, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.06164741136601737, 'time_cost': 40681973230.055504, 'packet_loss': 0.5, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [('c1', 'c0'), ('c2', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.07464892661256914, 'time_cost': 50236805396.81182, 'packet_loss': 0.25, 'throughput': 0.05418219622461766, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.08386886575674925, 'time_cost': 56291551189.62221, 'packet_loss': 0.25, 'throughput': 24.325630133565575, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.09487050257537517, 'time_cost': 64662043728.230896, 'packet_loss': 0.25, 'throughput': 69.53291092440871, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878203.951249, 'energy_cost': 0.11087103804659398, 'time_cost': 73062416261.81133, 'packet_loss': 0.25, 'throughput': 203.95602220625426, 'removed_nodes': [], 'removed_edges': [('c1', 'c0')]}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878285.489891, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878424.598494, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878835.527319, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582878955.591719, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880392.4686458, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880392.4686458, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880392.4686458, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880392.4686458, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880392.4686458, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880559.4740531, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880559.4740531, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880559.4740531, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880559.4740531, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880559.4740531, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880637.144686, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880808.600737, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880982.8348749, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880982.8348749, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582880982.8348749, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582881113.412961, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582881113.412961, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582881113.412961, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582881113.412961, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882003.690519, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882003.690519, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882003.690519, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882003.690519, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882231.4449909, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582882407.2262468, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883120.1625159, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883120.1625159, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883120.1625159, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883120.1625159, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883120.1625159, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883536.545005, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883536.545005, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883536.545005, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883536.545005, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}
+{'start_time': 1582883766.499316, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': []}

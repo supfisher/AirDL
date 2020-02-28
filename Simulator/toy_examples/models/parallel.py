@@ -41,7 +41,7 @@ class CriterionParallel(ObjectParallel):
         return ObjectParallel(loss_list)
 
 
-from .distributed import Distributed, Buffer
+from .distributed_v2 import Distributed, Buffer
 
 
 class ModelParallel(ObjectParallel):
@@ -58,29 +58,19 @@ class ModelParallel(ObjectParallel):
 
         self.len_client = len(self.topo.clients_on_device)
 
-        self.module = {node: copy.deepcopy(self.topo.model) for _, node in enumerate(self.topo.clients_on_device)}
+        self.buff = Buffer(self.qos)
+        self.distributed = Distributed(self.buff)
+        self.distributed.register()
 
-        self.distributed = Distributed()
-        self.register()
+        self.module = {key: self.buff.models[key] for key in self.topo.clients_on_device}
+
         super(ModelParallel, self).__init__(list(self.module.values()))
 
     def __call__(self, data, *args, **kwargs):
-        self.register()
 
         self.distributed.gather_scatter(async_flag=self.async_flag)
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
-
-    def register(self):
-        self.data_dict = {node: list(param.data for param in m.parameters())
-                          for node, m in self.module.items()}
-
-        for server in self.topo.servers_on_device:
-            self.data_dict[server] = list(torch.zeros_like(param.data) for param in self.topo.model.parameters())
-
-        self.buff = Buffer(self.data_dict, self.qos)
-        self.distributed.buff = self.buff
-        self.distributed.register()
 
     def aggregate(self):
         if self.topo.rank == self.topo.monitor_rank:

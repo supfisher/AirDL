@@ -60,7 +60,6 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                 print("loss: ", list(loss.item()))
                 print("report: ", args.topo.report)
                 args.topo.report.write('results.json')
-                model_a = model.aggregate()
 
 
 def test(args, model, criterion, device, test_loader):
