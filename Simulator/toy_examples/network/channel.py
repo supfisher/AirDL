@@ -100,7 +100,7 @@ class ChannelParams:
     @property
     def gaussian_params(self):
         param_dict = {
-            'B': (self.f_u - self.f_l)/20, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
+            'B': (self.f_u - self.f_l)/self.N, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
             'alpha': 2.5, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
         return self.update(param_dict)
@@ -155,7 +155,6 @@ class Channel(ChannelBase):
     def __init__(self, topo, **kwargs):
         super(Channel, self).__init__(topo)
 
-
         params = ChannelParams(N=len(self.edges)).gaussian_params
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
@@ -179,19 +178,22 @@ class Channel(ChannelBase):
             G = gamrnd(self.m, omega / self.m)
             SNR = G / self.N0
             Rate = self.B * log2(1 + SNR)+0.001 ## Here we add a small value in case of Rate to be 0
-            Latency = 1000 / Rate ##TODO: Here we temporaly assume the packet size is 1000
+            Latency = 128000 / Rate ##TODO: Here we temporaly assume the packet size is 100
 
             if Latency > self.epsilon:
                 removed_edges[i] = 1
                 Latency = self.epsilon
+                time_cost.append(self.model_size / 128000 * Latency)
             else:
                 goodput += (Rate-0.001)*1e-6
+                time_cost.append(self.model_size / Rate)
+
             throughput += (Rate-0.001)*1e-6
-            time_cost.append(self.model_size/Rate)
+
             self.topo.set_node(node=node, running_time=Latency)
 
         packet_loss = sum(removed_edges).item()/len(self.edges)
-        max_time_cost = max(time_cost) if len(time_cost) > 0 else self.epsilon
+        max_time_cost = max(time_cost)
         self.topo.report('time_cost', max_time_cost, 'plus')
         self.topo.report('throughput', throughput, 'reset')
         self.topo.report('goodput', goodput, 'reset')
@@ -210,7 +212,7 @@ class ChannelDemo(Channel):
                     'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1}
                     You can give an dict.items() as input.
         """
-        super(ChannelDemo, self).__init__(topo)
+        super(ChannelDemo, self).__init__(topo, **kwargs)
 
 
 class ChannelDemo_Perfect(Channel):
@@ -233,6 +235,6 @@ class ChannelDemo_Perfect(Channel):
 
 class ChannelDemo_ideaDownlink(Channel):
     def __init__(self, topo, **kwargs):
-        super(ChannelDemo_ideaDownlink, self).__init__(topo)
+        super(ChannelDemo_ideaDownlink, self).__init__(topo, **kwargs)
         self.idea_nodes = ['c0']
 

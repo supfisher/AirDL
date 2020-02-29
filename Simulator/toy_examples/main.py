@@ -39,9 +39,12 @@ parser.add_argument('--rank', default=1, type=int,
                          "on your master process.")
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
-parser.add_argument('--clients', default=10, type=int,
+parser.add_argument('--clients', default=2, type=int,
                     help="The total number of processes.")
 
+
+parser.add_argument('--epsilon', default=0.2, type=float,
+                    help="Chanel sensitive paramters: delay criterion.")
 
 
 def train(args, model, criterion, device, train_loader, optimizer, epoch):
@@ -55,6 +58,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
             loss.backward()
             optimizer.step()
             if batch_idx % args.log_interval == 0:
+
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]'.format(
                     epoch, batch_idx * len(data[0]), len(train_loader.datasets[0]),
                     100. * batch_idx / len(train_loader)))
@@ -62,7 +66,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                 args.topo.report('rank', args.topo.rank, 'reset')
                 args.topo.report('loss', list(loss.item()), 'reset')
                 print("report: ", args.topo.report)
-                args.topo.report.write('results_'+str(args.clients)+'.json')
+                args.topo.report.write('results_'+str(args.clients)+'_epsilon_'+str(args.epsilon)+'.json')
 
 
 def test(args, model, criterion, device, test_loader):
@@ -111,6 +115,7 @@ def main():
                     rand_method=('static', args.clients))
     if topo.rank == 0:
         print(topo)
+
     args.topo = topo
 
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
@@ -129,7 +134,7 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
-    qos = QoSDemo(topo)
+    qos = QoSDemo(topo, epsilon=args.epsilon)
     model_p = ModelParallel(qos=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)

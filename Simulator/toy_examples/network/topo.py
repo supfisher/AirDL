@@ -63,7 +63,7 @@ class StandardReport:
             It gives out the standard report by print function
             The running_time means the total time used by the simulator
         """
-        msg = '\nSimulator running_time: %s \n'%(time.time() - self.start_time)
+        msg = '\nSimulator running_time: %s \n' % (time.time() - self.start_time)
         for k, v in self.__dict__.items():
             if k != 'start_time':
                 msg += '%s: %s\n' % (k, v)
@@ -92,6 +92,7 @@ class Topo(nx.DiGraph):
         for node in self.nodes_on_device:
             msg += "  --name: %s, --attrs: %s \n" % (str(node), self.nodes[node])
             msg += "  --adjcency: %s \n" % (self.adj[node])
+        msg += 'model size: %s\n' % self.model_size
         return msg
 
     def count_parameters(self, model):
