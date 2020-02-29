@@ -20,7 +20,7 @@ parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
                     help='learning rate (default: 1.0)')
 parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
                     help='Learning rate step gamma (default: 0.7)')
-parser.add_argument('--no-cuda', action='store_true', default=False,
+parser.add_argument('--no-cuda', action='store_true', default=True,
                     help='disables CUDA training')
 parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
@@ -39,8 +39,9 @@ parser.add_argument('--rank', default=1, type=int,
                          "on your master process.")
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
-parser.add_argument('--clients', default=2, type=int,
+parser.add_argument('--clients', default=10, type=int,
                     help="The total number of processes.")
+parser.add_argument('--epsilon', type=float, default=1.0, help='time window')
 
 
 parser.add_argument('--epsilon', default=0.2, type=float,
@@ -98,7 +99,7 @@ def main():
 
     device = torch.device("cuda" if use_cuda else "cpu")
 
-    model = Net()
+    model = Net().to(device)
 
     # topo = Topo(model)
     # with open('./data/simple_graph.yaml', 'r') as f:
@@ -134,7 +135,11 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
+<<<<<<< HEAD
     qos = QoSDemo(topo, epsilon=args.epsilon)
+=======
+    qos = QoSDemo(topo, args)
+>>>>>>> 173760c8b9648140e8fe4e645757b8417c9c22fe
     model_p = ModelParallel(qos=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)
@@ -142,6 +147,7 @@ def main():
     # scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
     for epoch in range(1, args.epochs + 1):
         train(args, model_p, criterion, device, train_loader, optimizer, epoch)
+        model_p.aggregate()
         # test(args, model_p, criterion, device, test_loader)
         # scheduler.step()
 

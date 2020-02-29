@@ -36,9 +36,20 @@ class CriterionParallel(ObjectParallel):
 
     def __call__(self, output, target, *args, **kwargs):
         loss_list = list(map(lambda d, t, criterion: criterion(d, t, *args, **kwargs), output, target, self.criterion))
+        # loss_list = []
         # for d, t, criterion in zip(output, target, self.criterion):
         #     loss_list.append(criterion(d, t, *args, **kwargs))
         return ObjectParallel(loss_list)
+
+
+class AvgParallel(ObjectParallel):
+    def __init__(self, avg_model, args):
+        self.len_client = args.clients
+        self.model = [copy.deepcopy(avg_model) for _ in range(self.len_client)]
+        super(AvgParallel, self).__init__(self.model)
+
+    def __call__(self, data, *args, **kwargs):
+        return [model(d) for d, model in zip(data, self.model)]
 
 
 from .distributed import Distributed, Buffer
@@ -59,7 +70,8 @@ class ModelParallel(ObjectParallel):
         self.buff = Buffer(self.qos)
         self.distributed = Distributed(self.buff)
 
-        self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
+        # self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
+        self.module = {key: self.buff.models[key] for key in topo.nodes_on_device}
 
         super(ModelParallel, self).__init__(list(self.module.values()))
 
