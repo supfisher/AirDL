@@ -54,7 +54,7 @@ parser.add_argument('--world_size', default=0, type=int,
                     help="The total number of processes.")
 parser.add_argument('--clients', type=int, default=10, help='number of clients')
 parser.add_argument('--epsilon', type=float, default=0.1, help='time window')
-parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
+parser.add_argument('--mode', type=str, default='no_wireless', help='channel mode')
 parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
 parser.add_argument('--condition', type=float, default=95, help='stop condition value')
 

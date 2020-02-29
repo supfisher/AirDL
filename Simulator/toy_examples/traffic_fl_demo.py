@@ -50,10 +50,10 @@ parser.add_argument('--rank', default=1, type=int,
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
 parser.add_argument('--clients', type=int, default=10, help='number of clients')
-parser.add_argument('--epsilon', type=float, default=1.0, help='decay threshold')
-parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
+parser.add_argument('--epsilon', type=float, default=0.1, help='decay threshold')
+parser.add_argument('--mode', type=str, default='no_wireless', help='channel mode')
 parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
-parser.add_argument('--condition', type=float, default=95, help='stop condition value')
+parser.add_argument('--condition', type=float, default=0.5, help='stop condition value')
 
 parser.add_argument('--close_size', type=int, default=3,
                     help='how many time slots before target are used to model closeness')
@@ -274,7 +274,7 @@ def main():
 
     df_exp = pd.DataFrame(exp_results, columns=['epsilon', 'down_link', 'up_link', 'test_mse',
                                                 'test_mae', 'energy', 'time', 'goodput', 'packet_loss'])
-    file_name = './data/traffic_exp_epsilon={}_clients={}'.format(args.epsilon, args.clients)
+    file_name = './data/traffic_exp_epsilon={}_clients={}_channel={}'.format(args.epsilon, args.clients, args.mode)
     df_exp.to_csv(file_name + '_acc.csv', index=False, float_format='%.4f')
 
     df_train_loss = pd.DataFrame(train_loss_history)
