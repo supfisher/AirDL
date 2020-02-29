@@ -155,6 +155,7 @@ class Channel(ChannelBase):
     def __init__(self, topo, **kwargs):
         super(Channel, self).__init__(topo)
 
+
         params = ChannelParams(N=len(self.edges)).gaussian_params
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
@@ -221,15 +222,15 @@ class ChannelDemo_Perfect(Channel):
         and thus return 0 removed nodes and 0 removed edges.
         You can compare the results with that of ChannelDemo.
     """
-    def __init__(self, topo, **kwargs):
-        super(ChannelDemo_Perfect, self).__init__(topo, **kwargs)
+    def __init__(self, topo):
+        super(ChannelDemo_Perfect, self).__init__(topo)
 
     def remove_edges(self):
-        removed_edges = torch.zeros(len(self.edges))
+        removed_edges = torch.ones(len(self.edges))
         return removed_edges
 
     def remove_nodes(self):
-        removed_nodes = torch.zeros(len(self.topo.nodes))
+        removed_nodes = torch.ones(len(self.topo.nodes))
         return removed_nodes
 
 

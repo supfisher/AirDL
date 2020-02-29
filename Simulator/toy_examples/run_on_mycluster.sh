@@ -4,7 +4,7 @@
 #SBATCH -J 0.01toy
 #SBATCH -o toy_40_epsilon_0.01.out
 #SBATCH -e toy_40_epsilon_0.01.err
-#SBATCH --time=12:35:00
+#SBATCH --time=23:59:00
 
 
 #run the application:
