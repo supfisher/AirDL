@@ -29,7 +29,7 @@ parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
 parser.add_argument('--epochs', type=int, default=50, metavar='N',
                     help='number of epochs to train (default: 14)')
-parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
+parser.add_argument('--lr', type=float, default=0.1, metavar='LR',
                     help='learning rate (default: 1.0)')
 parser.add_argument('--num_channels', type=int, default=1, help='input channels')
 parser.add_argument('--num_classes', type=int, default=10, help='number of classes')
@@ -46,14 +46,14 @@ parser.add_argument('--save-model', action='store_true', default=False,
 
 parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
                     help='For Saving the current Model')
-parser.add_argument('--rank', default=1, type=int,
+parser.add_argument('--rank', default=0, type=int,
                     help="Currently, we only support the backend of mpi and gloo,You don't need "
                          "to care about it if using mpi. However, you have to assert it to be 0"
                          "on your master process.")
-parser.add_argument('--world_size', default=2, type=int,
+parser.add_argument('--world_size', default=0, type=int,
                     help="The total number of processes.")
 parser.add_argument('--clients', type=int, default=10, help='number of clients')
-parser.add_argument('--epsilon', type=float, default=1.0, help='time window')
+parser.add_argument('--epsilon', type=float, default=0.1, help='time window')
 parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
 parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
 parser.add_argument('--condition', type=float, default=95, help='stop condition value')
@@ -200,7 +200,7 @@ def main():
         avg_model = AvgParallel(model_p.aggregate(), args)
         test_loss, acc = test(args, avg_model, criterion, device, test_loader, epoch)
         test_acc_deque.append(acc)
-        if args.stop & np.mean(test_acc_deque) > args.condition:
+        if args.stop & (np.mean(test_acc_deque) > args.condition):
             break
         test_loss_history.append(test_loss)
         # test_acc.append(acc)
@@ -208,7 +208,7 @@ def main():
 
     df_exp = pd.DataFrame(exp_results, columns=['epsilon', 'down_link',
                                                 'up_link', 'test_acc', 'energy', 'time', 'goodput', 'packet_loss'])
-    file_name = './data/mnist_exp_epsilon={}_clients={}'.format(args.epsilon, args.clients)
+    file_name = './data/mnist_exp_epsilon={}_clients={}_channel={}'.format(args.epsilon, args.clients, args.mode)
     df_exp.to_csv(file_name + '_acc.csv', index=False, float_format='%.4f')
 
     df_train_loss = pd.DataFrame(train_loss_history)
