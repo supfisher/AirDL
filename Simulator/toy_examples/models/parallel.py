@@ -95,6 +95,8 @@ class ModelParallel(ObjectParallel):
         # check01 = [(a-b).sum() for a, b in zip(self.buff.data[c0], self.buff.data[c1])]
         # print('rank: ', self.qos.topo_origin.rank, "check01: ", sum(check01))
         #
+        # check01 = [(a.data - b.data).sum() for a, b in zip(self.module[c0].parameters(), self.module[c1].parameters())]
+        # print('rank: ', self.qos.topo_origin.rank, "check02: ", sum(check01))
 
         return [model(d) for d, model in zip(data, iter(self.module.values()))]
 

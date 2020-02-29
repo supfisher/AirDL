@@ -74,7 +74,7 @@ class ChannelParams:
 
     """
 
-    def __init__(self, N, args, **kwargs):
+    def __init__(self, N, **kwargs):
         self.c = 3e8
         self.pi = 3.141592654
         self.kb = 1.3807e-23  ## Boltzmann constant
@@ -87,7 +87,7 @@ class ChannelParams:
         self.m = 1
         self.sigma = 2
         self.alpha = 2.5
-        self.epsilon = args.epsilon
+        self.epsilon = 0.1
         self.d0 = 3.5
         self.delta = 100
         self.phi = 1
@@ -100,13 +100,8 @@ class ChannelParams:
     @property
     def gaussian_params(self):
         param_dict = {
-<<<<<<< HEAD
             'B': (self.f_u - self.f_l)/self.N, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
             'alpha': 2.5, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
-=======
-            'B': (self.f_u - self.f_l)/20, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
-            'alpha': 2.5, 'epsilon': self.epsilon, 'd0': 3.5, 'delta': 100, 'phi': 1
->>>>>>> 173760c8b9648140e8fe4e645757b8417c9c22fe
         }
         return self.update(param_dict)
 
@@ -157,14 +152,10 @@ class ChannelBase:
 
 class Channel(ChannelBase):
 
-    def __init__(self, topo, args, **kwargs):
+    def __init__(self, topo, **kwargs):
         super(Channel, self).__init__(topo)
-<<<<<<< HEAD
 
         params = ChannelParams(N=len(self.edges)).gaussian_params
-=======
-        params = ChannelParams(N=len(self.edges), args=args).gaussian_params
->>>>>>> 173760c8b9648140e8fe4e645757b8417c9c22fe
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
 
@@ -190,7 +181,7 @@ class Channel(ChannelBase):
             Latency = 128000 / Rate ##TODO: Here we temporaly assume the packet size is 100
 
             if Latency > self.epsilon:
-                # removed_edges[i] = 1
+                removed_edges[i] = 1
                 Latency = self.epsilon
                 time_cost.append(self.model_size / 128000 * Latency)
             else:
@@ -230,25 +221,20 @@ class ChannelDemo_Perfect(Channel):
         and thus return 0 removed nodes and 0 removed edges.
         You can compare the results with that of ChannelDemo.
     """
-    def __init__(self, topo):
-        super(ChannelDemo_Perfect, self).__init__(topo)
+    def __init__(self, topo, **kwargs):
+        super(ChannelDemo_Perfect, self).__init__(topo, **kwargs)
 
     def remove_edges(self):
-        removed_edges = torch.ones(len(self.edges))
+        removed_edges = torch.zeros(len(self.edges))
         return removed_edges
 
     def remove_nodes(self):
-        removed_nodes = torch.ones(len(self.topo.nodes))
+        removed_nodes = torch.zeros(len(self.topo.nodes))
         return removed_nodes
 
 
 class ChannelDemo_ideaDownlink(Channel):
-<<<<<<< HEAD
     def __init__(self, topo, **kwargs):
         super(ChannelDemo_ideaDownlink, self).__init__(topo, **kwargs)
-=======
-    def __init__(self, topo, args, **kwargs):
-        super(ChannelDemo_ideaDownlink, self).__init__(topo, args)
->>>>>>> 173760c8b9648140e8fe4e645757b8417c9c22fe
         self.idea_nodes = ['c0']
 

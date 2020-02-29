@@ -39,10 +39,8 @@ parser.add_argument('--rank', default=1, type=int,
                          "on your master process.")
 parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
-parser.add_argument('--clients', default=10, type=int,
+parser.add_argument('--clients', default=2, type=int,
                     help="The total number of processes.")
-parser.add_argument('--epsilon', type=float, default=1.0, help='time window')
-
 
 parser.add_argument('--epsilon', default=0.2, type=float,
                     help="Chanel sensitive paramters: delay criterion.")
@@ -135,11 +133,7 @@ def main():
                        ])), topo=topo,
         batch_size=args.test_batch_size, shuffle=True, **kwargs)
 
-<<<<<<< HEAD
     qos = QoSDemo(topo, epsilon=args.epsilon)
-=======
-    qos = QoSDemo(topo, args)
->>>>>>> 173760c8b9648140e8fe4e645757b8417c9c22fe
     model_p = ModelParallel(qos=qos)
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)

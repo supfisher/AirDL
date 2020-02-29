@@ -1,0 +1,2 @@
+{'start_time': 1582965446.78338, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [], 'rank': 0, 'loss': [2.3126044273376465, 2.318394422531128]}
+{'start_time': 1582965622.401, 'energy_cost': 0, 'time_cost': 0, 'packet_loss': 0, 'throughput': 0, 'removed_nodes': [], 'removed_edges': [], 'rank': 0, 'loss': [2.309483289718628, 2.309096097946167]}
