@@ -74,7 +74,7 @@ class ChannelParams:
 
     """
 
-    def __init__(self, N, **kwargs):
+    def __init__(self, N, args, **kwargs):
         self.c = 3e8
         self.pi = 3.141592654
         self.kb = 1.3807e-23  ## Boltzmann constant
@@ -87,7 +87,7 @@ class ChannelParams:
         self.m = 1
         self.sigma = 2
         self.alpha = 2.5
-        self.epsilon = 0.1
+        self.epsilon = args.epsilon
         self.d0 = 3.5
         self.delta = 100
         self.phi = 1
@@ -101,7 +101,7 @@ class ChannelParams:
     def gaussian_params(self):
         param_dict = {
             'B': (self.f_u - self.f_l)/self.N, 'N0': self.kb * self.B * self.T, 'm': 1, 'sigma': 2,
-            'alpha': 2.5, 'epsilon': 0.1, 'd0': 3.5, 'delta': 100, 'phi': 1
+            'alpha': 2.5, 'epsilon': self.epsilon, 'd0': 3.5, 'delta': 100, 'phi': 1
         }
         return self.update(param_dict)
 
@@ -152,10 +152,10 @@ class ChannelBase:
 
 class Channel(ChannelBase):
 
-    def __init__(self, topo, **kwargs):
+    def __init__(self, topo, args, **kwargs):
         super(Channel, self).__init__(topo)
 
-        params = ChannelParams(N=len(self.edges)).gaussian_params
+        params = ChannelParams(N=len(self.edges), args=args).gaussian_params
         self.__dict__.update(params)
         self.__dict__.update(kwargs)
 
@@ -221,8 +221,8 @@ class ChannelDemo_Perfect(Channel):
         and thus return 0 removed nodes and 0 removed edges.
         You can compare the results with that of ChannelDemo.
     """
-    def __init__(self, topo, **kwargs):
-        super(ChannelDemo_Perfect, self).__init__(topo, **kwargs)
+    def __init__(self, topo, args, **kwargs):
+        super(ChannelDemo_Perfect, self).__init__(topo, args, **kwargs)
 
     def remove_edges(self):
         removed_edges = torch.zeros(len(self.edges))
@@ -234,7 +234,7 @@ class ChannelDemo_Perfect(Channel):
 
 
 class ChannelDemo_ideaDownlink(Channel):
-    def __init__(self, topo, **kwargs):
-        super(ChannelDemo_ideaDownlink, self).__init__(topo, **kwargs)
+    def __init__(self, topo, args, **kwargs):
+        super(ChannelDemo_ideaDownlink, self).__init__(topo, args, **kwargs)
         self.idea_nodes = ['c0']
 

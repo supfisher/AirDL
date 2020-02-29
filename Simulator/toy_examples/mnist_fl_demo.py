@@ -20,13 +20,14 @@ from torch.optim.lr_scheduler import StepLR
 from time import time
 import numpy as np
 import pandas as pd
+from collections import deque
 
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
 parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 64)')
 parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=30, metavar='N',
+parser.add_argument('--epochs', type=int, default=50, metavar='N',
                     help='number of epochs to train (default: 14)')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                     help='learning rate (default: 1.0)')
@@ -53,6 +54,9 @@ parser.add_argument('--world_size', default=2, type=int,
                     help="The total number of processes.")
 parser.add_argument('--clients', type=int, default=10, help='number of clients')
 parser.add_argument('--epsilon', type=float, default=1.0, help='time window')
+parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
+parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
+parser.add_argument('--condition', type=float, default=95, help='stop condition value')
 
 
 def train(args, model, criterion, device, train_loader, optimizer, epoch):
@@ -179,6 +183,8 @@ def main():
     train_loss_history, d_link_history, u_link_history = [], [], []
     test_loss_history, test_acc, test_auc = [], [], []
     exp_results = []
+    queue_len = 5
+    test_acc_deque = deque([90.0]*queue_len, maxlen=queue_len)
     for epoch in range(1, args.epochs + 1):
         # Training the model for one epoch and get the results
         train_loss, d_link, u_link, consumed_energy, used_time, goodput, packe_tloss = train(args, model_p,
@@ -193,6 +199,9 @@ def main():
         # Test model performance
         avg_model = AvgParallel(model_p.aggregate(), args)
         test_loss, acc = test(args, avg_model, criterion, device, test_loader, epoch)
+        test_acc_deque.append(acc)
+        if args.stop & np.mean(test_acc_deque) > args.condition:
+            break
         test_loss_history.append(test_loss)
         # test_acc.append(acc)
         exp_results.append((args.epsilon, d_link, u_link, acc, consumed_energy, used_time, goodput, packe_tloss))

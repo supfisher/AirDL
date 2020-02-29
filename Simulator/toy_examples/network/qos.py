@@ -88,8 +88,12 @@ class QoS:
 
 
 class QoSDemo(QoS):
-    def __init__(self, topo, **kwargs):
-        self.channel = ChannelDemo_Perfect(topo, **kwargs)
+    def __init__(self, topo, args, **kwargs):
+        if args.mode == 'wireless':
+            self.channel = ChannelDemo_ideaDownlink(topo, args, **kwargs)
+        else:
+            self.channel = ChannelDemo_Perfect(topo, args, **kwargs)
+
         super(QoSDemo, self).__init__(topo)
 
     def remove_nodes(self):
