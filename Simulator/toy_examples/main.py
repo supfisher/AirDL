@@ -65,7 +65,7 @@ def train(args, model, criterion, device, train_loader, optimizer, epoch):
                 args.topo.report('rank', args.topo.rank, 'reset')
                 args.topo.report('loss', list(loss.item()), 'reset')
                 print("report: ", args.topo.report)
-                args.topo.report.write('results_'+str(args.clients)+'_epsilon_'+str(args.epsilon)+'.json')
+                args.topo.report.write('results_'+str(args.clients)+'_bs_'+str(args.batch_size)+'.json')
 
 
 def test(args, model, criterion, device, test_loader):
@@ -90,7 +90,7 @@ def test(args, model, criterion, device, test_loader):
 def main():
     # Training settings
     args = parser.parse_args()
-    args.batch_size = int(640/args.clients)
+    args.batch_size = 64
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
     torch.manual_seed(args.seed)
@@ -138,12 +138,8 @@ def main():
     optimizer = OptimizerParallel(optim.Adadelta, model_p.parameters(), lr=args.lr)
     criterion = CriterionParallel(F.nll_loss, topo=topo)
 
-    # scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
     for epoch in range(1, args.epochs + 1):
         train(args, model_p, criterion, device, train_loader, optimizer, epoch)
-        model_p.aggregate()
-        # test(args, model_p, criterion, device, test_loader)
-        # scheduler.step()
 
     if args.save_model:
         torch.save(model_p.state_dict(), "mnist_cnn.pt")

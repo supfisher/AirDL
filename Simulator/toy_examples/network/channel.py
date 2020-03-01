@@ -127,7 +127,11 @@ class ChannelBase:
         assert 'running_time' in self.nodes[node].keys()
 
         energy = self.nodes[node]['energy']
-        energy_cost = self.nodes[node][key]*self.nodes[node]['running_time']
+        energy_cost = 0
+        if key == 'com_P':
+            energy_cost = self.nodes[node][key] * self.nodes[node]['running_time']
+        elif key == 'cal_P':
+            energy_cost = self.nodes[node][key] * self.model_size * 1e-6
         energy -= energy_cost
         energy_cost += self.nodes[node]['energy_cost']
         return {'energy': energy, 'energy_cost': energy_cost}

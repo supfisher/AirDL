@@ -70,10 +70,8 @@ class ModelParallel(ObjectParallel):
         self.buff = Buffer(self.qos)
         self.distributed = Distributed(self.buff)
 
-        # self.module = {key: self.buff.models[key] for key in topo.clients_on_device}
-        self.module = {key: self.buff.models[key] for key in topo.nodes_on_device}
-
-        super(ModelParallel, self).__init__(list(self.module.values()))
+        self.models = {key: self.buff.models[key] for key in topo.clients_on_device}
+        super(ModelParallel, self).__init__(list(self.models.values()))
 
     def __call__(self, data, *args, **kwargs):
 
@@ -98,11 +96,11 @@ class ModelParallel(ObjectParallel):
         # check01 = [(a.data - b.data).sum() for a, b in zip(self.module[c0].parameters(), self.module[c1].parameters())]
         # print('rank: ', self.qos.topo_origin.rank, "check02: ", sum(check01))
 
-        return [model(d) for d, model in zip(data, iter(self.module.values()))]
+        return [model(d) for d, model in zip(data, iter(self.models.values()))]
 
     def aggregate(self):
         if self.qos.topo.rank == self.qos.topo.monitor_rank:
-            return self.module[self.qos.topo.servers_on_device[0]]
+            return self.buff.models[self.qos.topo.servers_on_device[0]]
         else:
             return None
 

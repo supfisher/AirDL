@@ -37,13 +37,30 @@ def analyze_one_file(file_path, loss_threshold, max_tolerance):
     return throughput, goodput, energy_cost, time_cost, pakcet_loss, avg_loss
 
 
-def myplot(x, y, title):
-    plt.plot(x, y[0], 'r')
-    plt.plot(x, y[1], 'g')
-    plt.plot(x, y[2], 'b')
+def myplot(x, y, title, xlabel, ylabel, lengend):
+    plt.semilogx(x, y[0], 'r', linestyle="--", marker="*", linewidth=1.0)
+    plt.semilogx(x, y[1], 'g', linestyle="--", marker="^", linewidth=1.0)
+    plt.semilogx(x, y[2], 'b', linestyle="--", marker="o", linewidth=1.0)
+    plt.xticks(x, [str(xx) for xx in x])
     plt.title(title)
-    plt.show()
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.legend(lengend)
+    plt.grid(color="k", linestyle=":")
 
+
+def mymultiplot(fig_id, x, data_dict, xlabel, lengend):
+    plt.figure(fig_id)
+    plt.subplot(221)
+    myplot(x, data_dict['throughput'], 'throughput', xlabel, 'Mb/s', lengend)
+    plt.subplot(222)
+    myplot(x, data_dict['energy_cost'], 'energy_cost', xlabel, 'energy: J', lengend)
+    plt.subplot(223)
+    myplot(x, data_dict['time_cost'], 'time_cost', xlabel, 'time: s', lengend)
+    plt.subplot(224)
+    myplot(x, data_dict['pakcet_loss'], 'pakcet_loss', xlabel, 'ratio', lengend)
+    # plt.title(title)
+    plt.show()
 
 def analyze_loss(file_path):
     avg_loss = []
@@ -56,9 +73,7 @@ def analyze_loss(file_path):
 
 
 if __name__ == '__main__':
-    # epsilon = [0.01, 0.05, 0.1, 0.2, 0.3, 0.4]
     epsilon = [0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2]
-    clients = [10, 20, 40, 80, 160]
     loss_threshold = [0.1, 0.05, 0.01]
     throughputs, goodputs, energy_costs, time_costs, pakcet_losss = \
         [[], [], []], [[], [], []], [[], [], []], [[], [], []], [[], [], []]
@@ -75,22 +90,20 @@ if __name__ == '__main__':
             time_costs[i].append(time_cost)
             pakcet_losss[i].append(pakcet_loss)
 
-    myplot(epsilon, throughputs, 'epsilon: throughput')
-    myplot(epsilon, goodputs, 'epsilon: goodput')
-    myplot(epsilon, energy_costs, 'epsilon: energy_cost')
-    myplot(epsilon, time_costs, 'epsilon: time_cost')
-    myplot(epsilon, pakcet_losss, 'epsilon: pakcet_loss')
-
-    data_frame = pd.DataFrame({'throughput': throughputs,
+    epsilon_data_dict = {'throughput': throughputs,
                                'goodput': goodputs,
                                'energy_cost': energy_costs,
                                'time_cost': time_costs,
                                'pakcet_loss': pakcet_losss,
-                               'loss_threshold': loss_threshold})
+                               'loss_threshold': loss_threshold}
+
+    data_frame = pd.DataFrame(epsilon_data_dict)
     data_frame.to_csv('different_epsilon.csv')
 
+    mymultiplot(1, epsilon, epsilon_data_dict, 'epsilon value', ['loss<0.1', 'loss<0.05', 'loss<0.01'])
 
 
+    clients = [10, 20, 40, 80, 160]
     loss_threshold = [0.2, 0.15, 0.1]
     throughputs, goodputs, energy_costs, time_costs, pakcet_losss = \
         [[], [], []], [[], [], []], [[], [], []], [[], [], []], [[], [], []]
@@ -107,16 +120,42 @@ if __name__ == '__main__':
             time_costs[i].append(time_cost)
             pakcet_losss[i].append(pakcet_loss)
 
-    myplot(clients, throughputs, 'clients: throughput')
-    myplot(clients, goodputs, 'clients: goodput')
-    myplot(clients, energy_costs, 'clients: energy_cost')
-    myplot(clients, time_costs, 'clients: time_cost')
-    myplot(clients, pakcet_losss, 'clients: pakcet_loss')
-
-    data_frame = pd.DataFrame({'throughput': throughputs,
+    clients_data_dict = {'throughput': throughputs,
                                'goodput': goodputs,
                                'energy_cost': energy_costs,
                                'time_cost': time_costs,
                                'pakcet_loss': pakcet_losss,
-                               'loss_threshold': loss_threshold})
+                               'loss_threshold': loss_threshold}
+
+    data_frame = pd.DataFrame(clients_data_dict)
     data_frame.to_csv('different_clients.csv')
+    mymultiplot(2, clients, clients_data_dict, 'number of clients', ['loss<0.2', 'loss<0.15', 'loss<0.1'])
+
+
+    clients = [10, 20, 40, 80, 160]
+    loss_threshold = [0.2, 0.15, 0.1]
+    throughputs, goodputs, energy_costs, time_costs, pakcet_losss = \
+        [[], [], []], [[], [], []], [[], [], []], [[], [], []], [[], [], []]
+    for i, l in enumerate(loss_threshold):
+        for c in clients:
+            file_path = 'results_%s_bs_64.json'%c
+            throughput, goodput, energy_cost, time_cost, pakcet_loss, avg_loss = analyze_one_file(file_path, l, 10)
+            print(file_path, '---throughput: ', throughput, 'goodput: ', goodput,
+              'energy_cost: ', energy_cost, 'time_cost: ', time_cost, 'average_pakcet_loss: ', pakcet_loss)
+
+            throughputs[i].append(throughput)
+            goodputs[i].append(goodput)
+            energy_costs[i].append(energy_cost)
+            time_costs[i].append(time_cost)
+            pakcet_losss[i].append(pakcet_loss)
+
+    clients_data_dict = {'throughput': throughputs,
+                               'goodput': goodputs,
+                               'energy_cost': energy_costs,
+                               'time_cost': time_costs,
+                               'pakcet_loss': pakcet_losss,
+                               'loss_threshold': loss_threshold}
+
+    data_frame = pd.DataFrame(clients_data_dict)
+    data_frame.to_csv('different_batch_size.csv')
+    mymultiplot(3, clients, clients_data_dict, 'number of clients', ['loss<0.2', 'loss<0.15', 'loss<0.1'])
