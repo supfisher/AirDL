@@ -39,26 +39,26 @@ def analyze_one_file(file_path, loss_threshold, max_tolerance):
 
 def myplot(x, y, title, xlabel, ylabel, lengend):
     plt.semilogx(x, y[0], 'r', linestyle="--", marker="*", linewidth=1.0)
-    plt.semilogx(x, y[1], 'g', linestyle="--", marker="^", linewidth=1.0)
-    plt.semilogx(x, y[2], 'b', linestyle="--", marker="o", linewidth=1.0)
+    plt.semilogx(x, y[1], 'b', linestyle="--", marker="^", linewidth=1.0)
+    plt.semilogx(x, y[2], 'k', linestyle="--", marker="o", linewidth=1.0)
     plt.xticks(x, [str(xx) for xx in x])
-    plt.title(title)
+    # plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend(lengend)
-    plt.grid(color="k", linestyle=":")
+    plt.grid(color="0.9", linestyle="-")
 
 
 def mymultiplot(fig_id, x, data_dict, xlabel, lengend):
     plt.figure(fig_id)
     plt.subplot(221)
-    myplot(x, data_dict['throughput'], 'throughput', xlabel, 'Mb/s', lengend)
+    myplot(x, data_dict['throughput'], 'throughput', xlabel, 'Throughput (Mb/s)', lengend)
     plt.subplot(222)
-    myplot(x, data_dict['energy_cost'], 'energy_cost', xlabel, 'energy: J', lengend)
+    myplot(x, data_dict['energy_cost'], 'energy_cost', xlabel, 'Energy (J)', lengend)
     plt.subplot(223)
-    myplot(x, data_dict['time_cost'], 'time_cost', xlabel, 'time: s', lengend)
+    myplot(x, data_dict['time_cost'], 'time_cost', xlabel, 'Time (s)', lengend)
     plt.subplot(224)
-    myplot(x, data_dict['pakcet_loss'], 'pakcet_loss', xlabel, 'ratio', lengend)
+    myplot(x, data_dict['pakcet_loss'], 'pakcet_loss', xlabel, 'Packet loss ratio', lengend)
     # plt.title(title)
     plt.show()
 
