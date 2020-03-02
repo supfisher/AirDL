@@ -29,7 +29,7 @@ parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
 parser.add_argument('--epochs', type=int, default=50, metavar='N',
                     help='number of epochs to train (default: 14)')
-parser.add_argument('--lr', type=float, default=0.1, metavar='LR',
+parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                     help='learning rate (default: 1.0)')
 parser.add_argument('--num_channels', type=int, default=1, help='input channels')
 parser.add_argument('--num_classes', type=int, default=10, help='number of classes')
@@ -37,7 +37,7 @@ parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
                     help='Learning rate step gamma (default: 0.7)')
 parser.add_argument('--no-cuda', action='store_true', default=True,
                     help='disables CUDA training')
-parser.add_argument('--seed', type=int, default=1, metavar='S',
+parser.add_argument('--seed', type=int, default=2020, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before .logging training status')
@@ -54,7 +54,7 @@ parser.add_argument('--world_size', default=0, type=int,
                     help="The total number of processes.")
 parser.add_argument('--clients', type=int, default=10, help='number of clients')
 parser.add_argument('--epsilon', type=float, default=0.1, help='time window')
-parser.add_argument('--mode', type=str, default='no_wireless', help='channel mode')
+parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
 parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
 parser.add_argument('--condition', type=float, default=95, help='stop condition value')
 
@@ -210,7 +210,7 @@ def main():
 
     df_exp = pd.DataFrame(exp_results, columns=['epsilon', 'down_link',
                                                 'up_link', 'test_acc', 'energy', 'time', 'goodput', 'packet_loss'])
-    file_name = './data/mnist_exp_epsilon={}_clients={}_channel={}'.format(args.epsilon, args.clients, args.mode)
+    file_name = './data/mnist_exp_epsilon={}_clients={}_channel={}_seed=20'.format(args.epsilon, args.clients, args.mode)
     df_exp.to_csv(file_name + '_acc.csv', index=False, float_format='%.4f')
 
     df_train_loss = pd.DataFrame(train_loss_history)

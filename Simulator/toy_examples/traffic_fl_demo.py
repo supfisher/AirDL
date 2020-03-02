@@ -28,13 +28,13 @@ parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 64)')
 parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=100, metavar='N',
+parser.add_argument('--epochs', type=int, default=200, metavar='N',
                     help='number of epochs to train (default: 14)')
-parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
+parser.add_argument('--lr', type=float, default=1e-2, metavar='LR',
                     help='learning rate (default: 1.0)')
 parser.add_argument('--no-cuda', action='store_true', default=True,
                     help='disables CUDA training')
-parser.add_argument('--seed', type=int, default=1, metavar='S',
+parser.add_argument('--seed', type=int, default=2020, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before .logging training status')
@@ -43,17 +43,17 @@ parser.add_argument('--save-model', action='store_true', default=False,
 
 parser.add_argument('--dist_url', default='tcp://127.0.0.1:8001', type=str,
                     help='For Saving the current Model')
-parser.add_argument('--rank', default=1, type=int,
+parser.add_argument('--rank', default=0, type=int,
                     help="Currently, we only support the backend of mpi and gloo,You don't need "
                          "to care about it if using mpi. However, you have to assert it to be 0"
                          "on your master process.")
-parser.add_argument('--world_size', default=2, type=int,
+parser.add_argument('--world_size', default=0, type=int,
                     help="The total number of processes.")
-parser.add_argument('--clients', type=int, default=10, help='number of clients')
-parser.add_argument('--epsilon', type=float, default=0.1, help='decay threshold')
-parser.add_argument('--mode', type=str, default='no_wireless', help='channel mode')
-parser.add_argument('--stop', type=bool, default=False, help='set a stop condition or not')
-parser.add_argument('--condition', type=float, default=0.5, help='stop condition value')
+parser.add_argument('--clients', type=int, default=40, help='number of clients')
+parser.add_argument('--epsilon', type=float, default=1.0, help='decay threshold')
+parser.add_argument('--mode', type=str, default='wireless', help='channel mode')
+parser.add_argument('--stop', type=bool, default=True, help='set a stop condition or not')
+parser.add_argument('--condition', type=float, default=0.3, help='stop condition value')
 
 parser.add_argument('--close_size', type=int, default=3,
                     help='how many time slots before target are used to model closeness')
@@ -231,6 +231,7 @@ def main():
 
     data, df_ori, selected_cells, mean, std = get_data(args)
     selected_cells = data.columns
+    print(selected_cells)
     train_data, val_data, test_data = process_isolated(args, data)
 
     train_loader = DataParallel(train_data, topo=topo,
@@ -241,7 +242,7 @@ def main():
     qos = QoSDemo(topo, args)
     model_p = ModelParallel(qos=qos)
     print(model_p.qos.channel.epsilon)
-    optimizer = OptimizerParallel(optim.SGD, model_p.parameters(), lr=args.lr)
+    optimizer = OptimizerParallel(optim.SGD, model_p.parameters(), lr=args.lr, momentum=0.9)
     criterion = CriterionParallel(F.mse_loss, topo=topo)
 
     # scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
@@ -258,13 +259,14 @@ def main():
                                                                                              optimizer, epoch)
 
         train_loss_history.append(train_loss)
+        flag = np.mean(train_loss)
         # d_link_history.append(d_link)
         # u_link_history.append(u_link)
 
         # Test model performance
         avg_model = AvgParallel(model_p.aggregate(), args)
         test_loss, mse, mae = test(args, avg_model, criterion, device, test_loader, epoch)
-        test_mse_deque.append(mse)
+        test_mse_deque.append(flag)
         test_loss_history.append(test_loss)
         # # test_acc.append(acc)
         exp_results.append((args.epsilon, d_link, u_link, mse, mae, consumed_energy, used_time, goodput, packet_loss))
@@ -274,7 +276,11 @@ def main():
 
     df_exp = pd.DataFrame(exp_results, columns=['epsilon', 'down_link', 'up_link', 'test_mse',
                                                 'test_mae', 'energy', 'time', 'goodput', 'packet_loss'])
-    file_name = './data/traffic_exp_epsilon={}_clients={}_channel={}'.format(args.epsilon, args.clients, args.mode)
+    file_name = './data/traffic_exp_epsilon={}_clients={}_channel={}_stop={}_condition={}'.format(args.epsilon,
+                                                                                                  args.clients,
+                                                                                                  args.mode,
+                                                                                                  args.stop,
+                                                                                                  args.condition)
     df_exp.to_csv(file_name + '_acc.csv', index=False, float_format='%.4f')
 
     df_train_loss = pd.DataFrame(train_loss_history)

@@ -15,6 +15,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from models.pytorch import CNNMnist
+import random
+import numpy as np
 
 
 def train(args, model, device, train_loader, optimizer, epoch):
@@ -71,7 +73,7 @@ def main():
                         help='input batch size for testing (default: 1000)')
     parser.add_argument('--epochs', type=int, default=50, metavar='N',
                         help='number of epochs to train (default: 14)')
-    parser.add_argument('--lr', type=float, default=0.1, metavar='LR',
+    parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                         help='learning rate (default: 1.0)')
     parser.add_argument('--num_channels', type=int, default=1, help='input channels')
     parser.add_argument('--num_classes', type=int, default=10, help='number of classes')
@@ -79,7 +81,7 @@ def main():
                         help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--no-cuda', action='store_true', default=True,
                         help='disables CUDA training')
-    parser.add_argument('--seed', type=int, default=1, metavar='S',
+    parser.add_argument('--seed', type=int, default=2020, metavar='S',
                         help='random seed (default: 1)')
     parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                         help='how many batches to wait before logging training status')
@@ -90,6 +92,8 @@ def main():
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
     torch.manual_seed(args.seed)
+    random.seed(args.seed)
+    np.random.seed(args.seed)
 
     device = torch.device("cuda" if use_cuda else "cpu")
 
@@ -116,7 +120,7 @@ def main():
         test_acc = test(args, model, device, test_loader)
         results.append((epoch, train_loss, test_acc))
     import pandas as pd
-    file_name = './data/mnist_exp_centralized.csv'
+    file_name = './data/mnist_exp_centralized_seed=20.csv'
     df_results = pd.DataFrame(results, columns=['epoch', 'train_loss', 'test_acc'])
     df_results.to_csv(file_name, index=False, float_format='%.4f')
 

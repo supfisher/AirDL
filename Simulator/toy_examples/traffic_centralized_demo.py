@@ -26,13 +26,13 @@ parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                     help='input batch size for training (default: 64)')
 parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=100, metavar='N',
+parser.add_argument('--epochs', type=int, default=50, metavar='N',
                     help='number of epochs to train (default: 14)')
-parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
+parser.add_argument('--lr', type=float, default=1e-3, metavar='LR',
                     help='learning rate (default: 1.0)')
 parser.add_argument('--no-cuda', action='store_true', default=True,
                     help='disables CUDA training')
-parser.add_argument('--seed', type=int, default=1, metavar='S',
+parser.add_argument('--seed', type=int, default=2020, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before .logging training status')
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     train_loader = torch.utils.data.DataLoader(train_data, shuffle=False, batch_size=args.batch_size)
     test_loader = torch.utils.data.DataLoader(test_data, shuffle=False, batch_size=args.batch_size)
 
-    optimizer = torch.optim.SGD(params=model.parameters(), lr=args.lr)
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=args.lr)
     criterion = torch.nn.MSELoss()
 
     train_loss = []
