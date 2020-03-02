@@ -38,9 +38,9 @@ def analyze_one_file(file_path, loss_threshold, max_tolerance):
 
 
 def myplot(x, y, title, xlabel, ylabel, lengend):
-    plt.semilogx(x, y[0], 'r', linestyle="--", marker="*", linewidth=1.0)
-    plt.semilogx(x, y[1], 'b', linestyle="--", marker="^", linewidth=1.0)
-    plt.semilogx(x, y[2], 'k', linestyle="--", marker="o", linewidth=1.0)
+    plt.semilogx(x, y[0], 'r', linestyle="--", marker="^", markersize=4, linewidth=1.0)
+    plt.semilogx(x, y[1], 'b', linestyle="--", marker="s", markersize=4, linewidth=1.0)
+    plt.semilogx(x, y[2], 'k', linestyle="--", marker="o", markersize=4, linewidth=1.0)
     plt.xticks(x, [str(xx) for xx in x])
     # plt.title(title)
     plt.xlabel(xlabel)
@@ -149,13 +149,13 @@ if __name__ == '__main__':
             time_costs[i].append(time_cost)
             pakcet_losss[i].append(pakcet_loss)
 
-    clients_data_dict = {'throughput': throughputs,
+    bs_data_dict = {'throughput': throughputs,
                                'goodput': goodputs,
                                'energy_cost': energy_costs,
                                'time_cost': time_costs,
                                'pakcet_loss': pakcet_losss,
                                'loss_threshold': loss_threshold}
 
-    data_frame = pd.DataFrame(clients_data_dict)
+    data_frame = pd.DataFrame(bs_data_dict)
     data_frame.to_csv('different_batch_size.csv')
-    mymultiplot(3, clients, clients_data_dict, 'number of clients', ['loss<0.2', 'loss<0.15', 'loss<0.1'])
+    mymultiplot(3, clients, bs_data_dict, 'number of clients', ['loss<0.2', 'loss<0.15', 'loss<0.1'])
