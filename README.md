@@ -8,3 +8,5 @@ In practical, we will make effort to realize the follwing requirements:
   4): A handbook-like paper organizes and concludes all the afforementioned functions.
   
 The overleaf link: https://www.overleaf.com/2693635288sktkdkjbwjgd
+
+NS-3 beginner's link: https://www.nsnam.org/docs/tutorial/html/getting-started.html#downloading-ns-3-using-git
