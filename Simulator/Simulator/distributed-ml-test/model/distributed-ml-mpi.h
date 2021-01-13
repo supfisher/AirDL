@@ -1,0 +1,32 @@
+#ifndef DISTRIBUTED_ML_MPI_H
+#define DISTRIBUTED_ML_MPI_H
+
+#include "ns3/command-line.h"
+#include "ns3/mpi-interface.h"
+#include <vector>
+#include <string>
+#include <iostream>
+
+namespace ns3 {
+
+class Custom
+{ 
+    public:
+        int metric,nX,nY;
+    private:
+
+};
+
+class MpiHelper: MpiInterface{
+public:
+	// void Enable(int argc, std::string arg);
+
+	void Enable(std::vector<char*> argv);
+};
+
+
+
+}
+
+
+#endif
