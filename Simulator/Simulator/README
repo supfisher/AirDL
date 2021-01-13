@@ -1,3 +1,6 @@
 This is the federated learning simulator under wireless environment.
 The code is built on CPP and wrappd by PybindGen into Python interface.
 The Simulator is built based on the framework of Pytorch and NS-3.
+
+NOTICE: This is only the source codes. The examples currently MUST be runnng under the environment of NS-3.
+        In the future, we will either wrap the NS-3 as a python module or recompile the source codes without the requirements of NS-3.
