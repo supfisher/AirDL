@@ -1,0 +1,77 @@
+S0:
+  role: server
+  adj:
+    Ap1:
+      channel:
+        P2PChannel: 
+          dataRate: 500Mbps
+          delay: 2ms
+    Ap2:
+      channel: 
+        P2PChannel:
+          dataRate: 500Mbps
+          delay: 2ms
+    Ap3:
+      channel: 
+        P2PChannel:
+          dataRate: 500Mbps
+          delay: 2ms
+Ap1:
+  addrBase: 10.1.1.0
+  mobility: ConstantPositionMobilityModel
+  adj: ## adj: the out-links of adjacent nodes.
+    Sta1-1:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+    Sta2-1:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+
+Ap2:
+  addrBase: 10.1.2.0
+  mobility: ConstantPositionMobilityModel
+  adj: ## adj: the out-links of adjacent nodes.
+    Sta1-2:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+    Sta2-2:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+
+Ap3:
+  addrBase: 10.1.3.0
+  mobility: ConstantPositionMobilityModel
+  adj: ## adj: the out-links of adjacent nodes.
+    Sta1-3:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+    Sta2-3:
+      channel: YansWifiChannel
+      mobility: RandomWalk2dMobilityModel
+
+Sta1-1:
+  mobility: RandomWalk2dMobilityModel
+
+Sta2-1:
+  mobility: RandomWalk2dMobilityModel
+
+Sta1-2:
+  mobility: RandomWalk2dMobilityModel
+
+Sta2-2:
+  mobility: RandomWalk2dMobilityModel
+
+Sta1-3:
+  mobility: RandomWalk2dMobilityModel
+
+Sta2-3:
+  mobility: RandomWalk2dMobilityModel
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,0 @@
-mpi4py
-networkx
-scipy
-pyyaml
-torch
-torchvision
