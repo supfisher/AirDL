@@ -4,10 +4,10 @@ We build this simulator AirDL, which is compatible with Pytorch and Tensorflow. 
 
 
 In practice, we will make an effort to realize the following requirements:
-  1): Build a system model on the mobile edge network and wireless communication in the context of the current development of 5G and 6G.
-  2): Realize the training of federated learning methods and algorithms.
-  3): Evaluate our system by verifying the state-of-art of some typical applications.
-  4): A handbook-like paper organizes and concludes all the aforementioned functions.
+  1): Build a system model on the mobile edge network and wireless communication in the context of the current development of 5G and 6G.\\
+  2): Realize the training of federated learning methods and algorithms.\\
+  3): Evaluate our system by verifying the state-of-art of some typical applications.\\
+  4): A handbook-like paper organizes and concludes all the aforementioned functions.\\
   
 
 We are currently building the simulator with the NS-3. In the future, we will update it and isolate it from outside resources. 
