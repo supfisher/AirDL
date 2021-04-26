@@ -11,7 +11,7 @@ In practice, we will make an effort to realize the following requirements:
   
 
 We are currently building the simulator with the NS-3. In the future, we will update it and isolate it from outside resources. 
-In order to use it, you need to download the NS-3 at first https://www.nsnam.org/docs/tutorial/html/getting-started.html#downloading-ns-3-using-git. 
-Move the files in model and helper into the contrib or src directory in NS-3. 
-Move the files in demo into the scratch directory in NS-3.
+1): In order to use it, you need to download the NS-3 at first https://www.nsnam.org/docs/tutorial/html/getting-started.html#downloading-ns-3-using-git. 
+2): Move the files in Air into the contrib or src directory in NS-3. 
+3): Move the files in demo into the scratch directory in NS-3.
 
