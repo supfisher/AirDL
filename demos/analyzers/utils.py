@@ -35,7 +35,7 @@ def plot_xs_ys(xs, ys, xlabel=None, ylabel=None, title=None, legends=None, save_
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.legend(legends, loc=loc)
+    plt.legend(legends, loc=loc, fontsize='xx-small')
     plt.minorticks_on()
     plt.grid(axis='both', alpha=0.2, linestyle='--', which='minor')
     # plt.xlim(0, 25)

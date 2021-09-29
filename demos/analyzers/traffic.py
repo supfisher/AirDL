@@ -15,8 +15,8 @@ plot_2 = False
 plot_error1 = False
 plot_error2 = False
 
-plot_naughty1 = True
-plot_naughty2 = True
+plot_naughty1 = False
+plot_naughty2 = False
 
 plot_activeratio1 = False
 plot_activeratio2 = False
@@ -30,7 +30,7 @@ plot_bs2 = False
 plot_all1 = False
 plot_all2 = False
 
-plot_partition = False
+plot_partition = True
 
 global_time_w = {}
 global_loss_w = {}
@@ -93,10 +93,13 @@ if __name__=="__main__":
 
                     iters += 1
 
+        plt.figure(figsize=[6.4, 2.4])
         plt.subplot(121)
+        # plt.figure(1)
         plot_xs_ys(epoch_w.values(), loss_w.values(), xlabel='Communication Round', ylabel="MSE Loss", loc=1,
                    legends=legends, show=False)
         plt.subplot(122)
+        # plt.figure(2)
         plot_xs_ys(epoch_w.values(), time_w.values(), xlabel='Communication Round', ylabel="Elapsed Time (s)", loc=4,
                    legends=legends, logy=True, show=False)
 
@@ -299,7 +302,7 @@ if __name__=="__main__":
 
 
     if plot_naughty1:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         noise_character = {'add': "NIS_a", 'multi': 'NIS_m'}
 
         noise_type_ratio = {'add': [1e-2, 5e-2, 1e-1, 0.15],
@@ -739,7 +742,7 @@ if __name__=="__main__":
 
 
     if plot_all1:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         for i, (time_w, loss_w) in enumerate(zip(global_time_w.values(), global_loss_w.values())):
             plt.subplot(221+i)
             plot_xs_ys(time_w, loss_w, xlabel="Elapsed Time (s)", ylabel="MSE Loss", markersize=0, colors=global_colors[i], show=False, legends=global_legends[i], loc=1)
@@ -749,7 +752,7 @@ if __name__=="__main__":
 
 
     if plot_all2:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         for i, (energy_w, loss_w) in enumerate(zip(global_energy_w.values(), global_loss1_w.values())):
             energy_w, loss_w = process_loss_energy(energy_w, loss_w)
             plt.subplot(221+i)
@@ -792,7 +795,7 @@ if __name__=="__main__":
             tf_dir = os.path.join(dir_, "tf" + record_prefix)
 
             if os.path.exists(tf_dir):
-                legends.append("partition ratio: " + str(part_ratio))
+                legends.append("partition ratio: {}".format(part_ratio))
 
                 time_acc_loss_path = os.path.join(tf_dir, "time-acc-loss.txt")
 

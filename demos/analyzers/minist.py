@@ -14,8 +14,8 @@ plot_error2 = True
 plot_naughty1 = False
 plot_naughty2 = False
 
-plot_activeratio1=False
-plot_activeratio2=True
+plot_activeratio1 = False
+plot_activeratio2 = True
 
 plot_epoch1 = False
 plot_epoch2 = True
@@ -81,10 +81,13 @@ if __name__=="__main__":
 
                     iters += 1
 
+        plt.figure(figsize=[6.4, 2.4])
         plt.subplot(121)
+        # plt.figure(1)
         plot_xs_ys(epoch_w.values(), acc_w.values(), xlabel='Communication Round', ylabel="Acc (\%)", loc=4, show=False,
                    legends=legends)
         plt.subplot(122)
+        # plt.figure(2)
         plot_xs_ys(epoch_w.values(), time_w.values(), xlabel='Communication Round', ylabel="Elapsed Time (s)", loc=4, show=False,
                    legends=legends, logy=True)
 
@@ -247,7 +250,7 @@ if __name__=="__main__":
 
 
     if plot_naughty1:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         noise_type_ratio = {'add': [2e-2, 4e-2, 8e-2, 1e-1],
                             'multi': [1e-1, 2e-1, 5e-1, 8e-1]}
         noise_character = {'add': "NIS_a", 'multi': 'NIS_m'}
@@ -685,7 +688,7 @@ if __name__=="__main__":
 
 
     if plot_all1:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         for i, (time_w, acc_w) in enumerate(zip(global_time_w.values(), global_acc_w.values())):
             plt.subplot(221+i)
             plot_xs_ys(time_w, acc_w, xlabel="Elapsed Time (s)", ylabel="Acc (\%)", markersize=0, colors=global_colors[i], show=False, legends=global_legends[i])
@@ -696,7 +699,7 @@ if __name__=="__main__":
 
 
     if plot_all2:
-        plt.figure(figsize=(5, 5))
+        plt.figure(figsize=[6.4, 4.8])
         for i, (energy_w, acc_w) in enumerate(zip(global_energy_w.values(), global_acc1_w.values())):
             energy_w, acc_w = process_acc_energy(energy_w, acc_w)
             plt.subplot(221+i)
